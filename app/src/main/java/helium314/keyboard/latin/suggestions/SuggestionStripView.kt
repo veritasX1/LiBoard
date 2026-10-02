@@ -170,6 +170,21 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             if (pinnedKeyInToolbar != null && Settings.getValues().mQuickPinToolbarKeys)
                 pinnedKeyInToolbar.background = enabledToolKeyBackground
         }
+        // LiBoard: "Fertig" at the right end, as above the iPhone keyboard – hides the keyboard.
+        // Needed since the system's own hide button below the keyboard is gone (no empty strip).
+        val done = android.widget.TextView(context).apply {
+            text = context.getString(R.string.liboard_done)
+            setTextColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
+            textSize = 16f
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+            gravity = android.view.Gravity.CENTER
+            val side = (12 * resources.displayMetrics.density).toInt()
+            setPadding(side, 0, side, 0)
+            contentDescription = context.getString(R.string.liboard_done_description)
+            isHapticFeedbackEnabled = false
+            setOnClickListener { (listener as? helium314.keyboard.latin.LatinIME)?.requestHideSelf(0) }
+        }
+        (pinnedKeys.parent as ViewGroup).addView(done, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT))
         toolbarContainer.doOnNextLayout {
             // set min with of the toolbar so the weight of the toolbar keys actually does something
             // todo: results in requestLayout() improperly called by android.widget.LinearLayout during layout: running second layout pass

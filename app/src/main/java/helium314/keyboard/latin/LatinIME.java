@@ -1008,6 +1008,16 @@ public class LatinIME extends InputMethodService implements
             setNavigationBarColor();
             workaroundForHuaweiStatusBarIssue();
         }
+        hideSystemImeNavigationBar();
+    }
+
+    /** LiBoard: no empty strip below the space bar. Android 16 lets a keyboard hide the system's
+     *  own bar there (back arrow and keyboard switcher); the keyboard then reaches the bottom edge. */
+    private void hideSystemImeNavigationBar() {
+        if (Build.VERSION.SDK_INT >= 36 && getWindow() != null && getWindow().getWindow() != null) {
+            final android.view.WindowInsetsController controller = getWindow().getWindow().getInsetsController();
+            if (controller != null) controller.hide(android.view.WindowInsets.Type.captionBar());
+        }
     }
 
     @Override
@@ -1019,6 +1029,10 @@ public class LatinIME extends InputMethodService implements
             mainKeyboardView.closing();
         }
         clearNavigationBarColor();
+        if (Build.VERSION.SDK_INT >= 36 && getWindow() != null && getWindow().getWindow() != null) {
+            final android.view.WindowInsetsController controller = getWindow().getWindow().getInsetsController();
+            if (controller != null) controller.show(android.view.WindowInsets.Type.captionBar());
+        }
     }
 
     void onFinishInputInternal() {
