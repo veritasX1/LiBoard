@@ -416,7 +416,13 @@ sealed interface KeyData : AbstractKeyData {
             KeyLabel.COM, KeyLabel.LANGUAGE_SWITCH, KeyLabel.NUMPAD, KeyLabel.DPAD, KeyLabel.CTRL, KeyLabel.ALT,
             KeyLabel.FN, KeyLabel.META, KeyLabel.EMOJI_SEARCH, toolbarKeyStrings[ToolbarKey.EMOJI] -> return Key.BACKGROUND_TYPE_FUNCTIONAL
             KeyLabel.SPACE, KeyLabel.ZWNJ -> return Key.BACKGROUND_TYPE_SPACEBAR
-            KeyLabel.ACTION -> return Key.BACKGROUND_TYPE_ACTION
+            // LiBoard: only real actions are blue (Suchen, Senden, Los, Fertig), return and
+            // "Weiter" are grey function keys – as on iOS.
+            KeyLabel.ACTION -> return when (params.mId.imeAction) {
+                android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH, android.view.inputmethod.EditorInfo.IME_ACTION_SEND,
+                android.view.inputmethod.EditorInfo.IME_ACTION_GO, android.view.inputmethod.EditorInfo.IME_ACTION_DONE -> Key.BACKGROUND_TYPE_ACTION
+                else -> Key.BACKGROUND_TYPE_FUNCTIONAL
+            }
             KeyLabel.SHIFT -> return Key.BACKGROUND_TYPE_FUNCTIONAL
         }
         if (type == KeyType.PLACEHOLDER) return Key.BACKGROUND_TYPE_EMPTY

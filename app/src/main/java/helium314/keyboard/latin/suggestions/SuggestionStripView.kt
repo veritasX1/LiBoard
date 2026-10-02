@@ -115,14 +115,15 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
 
     private val scriptButtons = mutableListOf<ImageButton>()
 
-    /** Grey surface like a function key; active: system blue with a white symbol – the state is
-     *  always visible, as Apple's HIG asks for toggles. */
+    /** Plain symbol when off; active: system blue with a white symbol – the state is always
+     *  visible, as Apple's HIG asks for toggles. */
     fun updateScriptButtons() {
         val colors = Settings.getValues().mColors
         for (button in scriptButtons) {
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
-            button.background = GradientDrawable().apply {
-                setColor(colors.get(if (active) ColorType.ACTION_KEY_BACKGROUND else ColorType.FUNCTIONAL_KEY_BACKGROUND))
+            // Quiet like iOS toolbar symbols: no surface when off, system blue underlay when on.
+            button.background = if (!active) null else GradientDrawable().apply {
+                setColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
                 cornerRadius = 6 * resources.displayMetrics.density
             }
             button.setColorFilter(if (active) Color.WHITE else colors.get(ColorType.KEY_TEXT))
