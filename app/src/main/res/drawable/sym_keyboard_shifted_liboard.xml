@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LiBoard: filled upward arrow (shift on), own drawing. GPL-3.0-only -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M12,3.2 L20.6,12.4 L15.8,12.4 L15.8,19.6 L8.2,19.6 L8.2,12.4 L3.4,12.4 Z" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.7"
+        android:strokeLineJoin="round" android:fillColor="#FFFFFFFF" />
+</vector>

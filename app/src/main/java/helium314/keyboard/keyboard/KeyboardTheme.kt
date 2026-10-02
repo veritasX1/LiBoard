@@ -50,6 +50,8 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
 
         // new themes that are just colors
         const val THEME_LIGHT = "light"
+        const val THEME_LIBOARD_LIGHT = "liboard_light"
+        const val THEME_LIBOARD_DARK = "liboard_dark"
         const val THEME_HOLO_WHITE = "holo_white"
         const val THEME_DARK = "dark"
         const val THEME_DARKER = "darker"
@@ -66,6 +68,7 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
         const val THEME_SAND = "sand"
         const val THEME_VIOLETTE = "violette"
         fun getAvailableDefaultColors(prefs: SharedPreferences, isNight: Boolean) = listOfNotNull(
+            if (!isNight) THEME_LIBOARD_LIGHT else null, THEME_LIBOARD_DARK,
             if (!isNight) THEME_LIGHT else null, THEME_DARK,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) THEME_DYNAMIC else null,
             if (prefs.getString(Settings.PREF_THEME_STYLE, Defaults.PREF_THEME_STYLE) == STYLE_HOLO) THEME_HOLO_WHITE else null,
@@ -152,6 +155,34 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) DynamicColors(context, themeStyle, hasBorders, backgroundImage)
                     else getThemeColors(THEME_LIGHT, themeStyle, context, prefs, isNight)
                 }
+                // LiBoard: the colour scheme of the iOS keyboard (values measured, nothing copied):
+                // grey tray, white letter keys, darker function keys, system blue for actions.
+                THEME_LIBOARD_LIGHT -> DefaultColors(
+                    themeStyle,
+                    hasBorders,
+                    "#007AFF".toColorInt(),     // accent: action key, like iOS system blue
+                    "#D1D4DA".toColorInt(),     // keyboard tray
+                    "#FFFFFF".toColorInt(),     // letter keys
+                    "#ABB0BB".toColorInt(),     // shift, delete, 123 …
+                    "#FFFFFF".toColorInt(),     // space bar
+                    "#000000".toColorInt(),     // key labels
+                    "#6E727A".toColorInt(),     // hints
+                    spaceBarText = "#000000".toColorInt(),
+                    keyboardBackground = backgroundImage
+                )
+                THEME_LIBOARD_DARK -> DefaultColors(
+                    themeStyle,
+                    hasBorders,
+                    "#0A84FF".toColorInt(),
+                    "#2A2A2C".toColorInt(),
+                    "#6B6B6F".toColorInt(),
+                    "#47474B".toColorInt(),
+                    "#6B6B6F".toColorInt(),
+                    "#FFFFFF".toColorInt(),
+                    "#B0B0B5".toColorInt(),
+                    spaceBarText = "#FFFFFF".toColorInt(),
+                    keyboardBackground = backgroundImage
+                )
                 THEME_LIGHT -> DefaultColors(
                     themeStyle,
                     hasBorders,

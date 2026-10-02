@@ -226,9 +226,10 @@ class KeyboardIconsSet private constructor() {
         } }
 
         private val keyboardIconsRounded by lazy { hashMapOf(
-            NAME_SHIFT_KEY to                   R.drawable.sym_keyboard_shift_rounded,
-            NAME_SHIFT_KEY_SHIFTED to           R.drawable.sym_keyboard_shift_rounded,
-            NAME_SHIFT_KEY_LOCKED to            R.drawable.sym_keyboard_shift_lock_rounded,
+            // LiBoard: outlined arrow, filled when on, with a bar for caps lock (as on iOS)
+            NAME_SHIFT_KEY to                   R.drawable.sym_keyboard_shift_liboard,
+            NAME_SHIFT_KEY_SHIFTED to           R.drawable.sym_keyboard_shifted_liboard,
+            NAME_SHIFT_KEY_LOCKED to            R.drawable.sym_keyboard_shift_lock_liboard,
             NAME_DELETE_KEY to                  R.drawable.sym_keyboard_delete_rounded,
 //            NAME_SPACE_KEY to                   null,
             NAME_ENTER_KEY to                   R.drawable.sym_keyboard_return_rounded,

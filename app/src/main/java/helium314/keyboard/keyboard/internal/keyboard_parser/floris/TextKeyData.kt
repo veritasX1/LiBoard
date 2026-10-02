@@ -227,6 +227,8 @@ sealed interface KeyData : AbstractKeyData {
             return SimplePopups(popupKeys)
         }
 
+        fun actionText(id: Int, params: KeyboardParams): String = getStringInLocale(id, params)
+
         fun String.replaceIconWithLabelIfNoDrawable(params: KeyboardParams): String {
             if (params.mIconsSet.getIconDrawable(this) != null) return this
             if (params.mId.width == AndroidSpellCheckerService.SPELLCHECKER_DUMMY_KEYBOARD_WIDTH

@@ -1309,4 +1309,7 @@ New dictionary:
     <!-- new strings should go above the section for gesture data gathering -->
     <string name="liboard_done">Done</string>
     <string name="liboard_done_description">Hide keyboard</string>
+    <string name="liboard_space">space</string>
+    <string name="theme_name_liboard_light" tools:keep="@string/theme_name_liboard_light">LiBoard light</string>
+    <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard dark</string>
 </resources>

@@ -186,6 +186,9 @@ object KeyLabel {
             InputTypeUtils.IME_ACTION_CUSTOM_LABEL -> params.mId.customActionLabel?.let { return it } ?: "!icon/enter_key"
             else                                   -> return "!icon/enter_key"
         }
+        // LiBoard: the action is written out – "Suchen", "Senden", "Los", "Weiter", "Fertig" – as on iOS.
+        val labelId = helium314.keyboard.latin.settings.Settings.getInstance().getStringResIdByName("label_$iconName")
+        if (labelId != 0) return KeyData.actionText(labelId, params)
         val replacement = iconName.replaceIconWithLabelIfNoDrawable(params)
         return if (iconName == replacement) // i.e. icon exists
             "!icon/$iconName"

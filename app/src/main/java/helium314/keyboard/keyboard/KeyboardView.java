@@ -340,8 +340,11 @@ public class KeyboardView extends View {
         params.mAnimAlpha = Constants.Color.ALPHA_OPAQUE;
 
         if (!key.isSpacer()) {
-            final Drawable background = key.selectBackgroundDrawable(
+            Drawable background = key.selectBackgroundDrawable(
                     mKeyBackground, mFunctionalKeyBackground, mSpacebarBackground, mActionKeyBackground);
+            // LiBoard: an active shift key turns white like a letter key, as on iOS.
+            if (key.isShift() && mKeyboard != null && mKeyboard.mId.getElement().isAlphabetShifted())
+                background = mKeyBackground;
             onDrawKeyBackground(key, canvas, background);
         }
         onDrawKeyTopVisuals(key, canvas, paint, params);
@@ -641,10 +644,8 @@ public class KeyboardView extends View {
         if (key.hasActionKeyBackground()) {
             mColors.setColor(icon, ColorType.ACTION_KEY_ICON);
         } else if (key.isShift() && keyboard != null) {
-            if (keyboard.mId.getElement().isAlphabetShifted())
-                mColors.setColor(icon, ColorType.SHIFT_KEY_ICON);
-            else
-                mColors.setColor(icon, ColorType.KEY_ICON); // normal key if not shifted
+            // LiBoard: black arrow in both states (filled when on), as on iOS – no accent colour.
+            mColors.setColor(icon, ColorType.KEY_ICON);
         } else if (key.getBackgroundType() != Key.BACKGROUND_TYPE_NORMAL) {
             mColors.setColor(icon, ColorType.KEY_ICON);
         } else if (this instanceof PopupKeysKeyboardView) {

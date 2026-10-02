@@ -548,4 +548,7 @@
     <string name="gesture_data_swipe_o_scope">Werkzeug zur Visualisierung von Gestendaten: &lt;a href=%s&gt;Swipe-O-Scope&lt;/a&gt;</string>
     <string name="liboard_done">Fertig</string>
     <string name="liboard_done_description">Tastatur ausblenden</string>
+    <string name="liboard_space">Leerzeichen</string>
+    <string name="theme_name_liboard_light" tools:keep="@string/theme_name_liboard_light">LiBoard hell</string>
+    <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard dunkel</string>
 </resources>
