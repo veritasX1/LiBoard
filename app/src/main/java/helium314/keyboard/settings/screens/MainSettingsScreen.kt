@@ -81,8 +81,8 @@ fun MainSettingsScreen(
                         onClick = onClickGestureTyping,
                         icon = R.drawable.ic_settings_gesture
                     ) { NextScreenIcon() }
-                // we don't even show the menu if data gathering phase ended more than 2 weeks ago
-                if (JniUtils.sHaveGestureLib && System.currentTimeMillis() < END_DATE_EPOCH_MILLIS + TWO_WEEKS_IN_MILLIS)
+                // LiBoard: privacy first – no gesture data gathering, not even opt-in.
+                if (false && JniUtils.sHaveGestureLib && System.currentTimeMillis() < END_DATE_EPOCH_MILLIS + TWO_WEEKS_IN_MILLIS)
                     Preference(
                         name = stringResource(R.string.gesture_data_screen),
                         onClick = onClickDataGathering,

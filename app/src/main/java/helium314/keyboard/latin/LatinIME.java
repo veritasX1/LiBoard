@@ -1860,7 +1860,14 @@ public class LatinIME extends InputMethodService implements
     }
 
     public void setGestureDataGatheringMode(EditorInfo editorInfo, boolean restarting) {
-        // only for gesture data gathering, remove when data gathering phase is done (end of 2026 latest)
+        // LiBoard: privacy first – typed gestures are never gathered, not even in the background.
+        if (true) {
+            mDictionaryFacilitator = mOriginalDictionaryFacilitator;
+            GestureDataGatheringKt.useBackgroundGathering = false;
+            mKeyboardSwitcher.setBackgroundGatheringIndicator(false, false, false);
+            mInputLogic.setFacilitator(mDictionaryFacilitator);
+            return;
+        }
         if (GestureDataGatheringSettings.INSTANCE.isInActiveGatheringMode(editorInfo)) {
             mDictionaryFacilitator = GestureDataGatheringKt.getGestureDataActiveFacilitator();
             GestureDataGatheringKt.useBackgroundGathering = false;

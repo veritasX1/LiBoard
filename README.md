@@ -1,3 +1,18 @@
+# LiBoard
+
+Eine Android-Tastatur von Olaf Winkler, die sich wie iOS anfühlen soll – komplett offline,
+ohne Internet-Berechtigung, ohne Datensammlung. Passend zu LiNotes.
+
+LiBoard basiert auf **HeliBoard** (https://github.com/Helium314/HeliBoard) und damit auf der
+AOSP-Tastatur (LatinIME). Danke an alle Beteiligten! Lizenz wie das Original: GNU GPL 3.0
+(Teile Apache 2.0, siehe LICENSE-Dateien).
+
+Änderungen gegenüber HeliBoard (Auswahl):
+- Name und Paket (io.github.veritasx1.liboard)
+- Keine Gestendaten-Sammlung, auch nicht freiwillig
+
+---
+
 # HeliBoard
 HeliBoard is a privacy-conscious and customizable open-source keyboard, based on AOSP / OpenBoard.
 Does not use internet permission, and thus is 100% offline.
