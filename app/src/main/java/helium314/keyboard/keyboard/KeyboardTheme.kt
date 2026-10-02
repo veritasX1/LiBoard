@@ -161,7 +161,7 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
                     themeStyle,
                     hasBorders,
                     "#007AFF".toColorInt(),     // accent: action key, like iOS system blue
-                    "#D1D4DA".toColorInt(),     // keyboard tray
+                    "#D1D4DA".toColorInt(),     // keyboard tray (opaque: Android blurs the whole IME window, i.e. the whole screen)
                     "#FFFFFF".toColorInt(),     // letter keys
                     "#ABB0BB".toColorInt(),     // shift, delete, 123 …
                     "#FFFFFF".toColorInt(),     // space bar

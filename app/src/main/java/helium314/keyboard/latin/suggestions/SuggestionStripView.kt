@@ -113,19 +113,19 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         DEBUG_SUGGESTIONS = context.prefs().getBoolean(DebugSettings.PREF_SHOW_SUGGESTION_INFOS, Defaults.PREF_SHOW_SUGGESTION_INFOS)
     }
 
-    private val scriptButtons = mutableListOf<android.widget.TextView>()
+    private val scriptButtons = mutableListOf<ImageButton>()
 
-    /** Active mode: accent-coloured pill (state is always visible, as Apple's HIG asks). */
+    /** Grey surface like a function key; active: system blue with a white symbol – the state is
+     *  always visible, as Apple's HIG asks for toggles. */
     fun updateScriptButtons() {
         val colors = Settings.getValues().mColors
-        val accent = colors.get(ColorType.ACTION_KEY_BACKGROUND)
         for (button in scriptButtons) {
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
-            button.setTextColor(if (active) Color.WHITE else colors.get(ColorType.KEY_TEXT))
-            button.background = if (!active) null else GradientDrawable().apply {
-                setColor(accent)
-                cornerRadius = 8 * resources.displayMetrics.density
+            button.background = GradientDrawable().apply {
+                setColor(colors.get(if (active) ColorType.ACTION_KEY_BACKGROUND else ColorType.FUNCTIONAL_KEY_BACKGROUND))
+                cornerRadius = 6 * resources.displayMetrics.density
             }
+            button.setColorFilter(if (active) Color.WHITE else colors.get(ColorType.KEY_TEXT))
             button.isSelected = active
         }
     }
@@ -201,26 +201,33 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             isHapticFeedbackEnabled = false
             setOnClickListener { (listener as? helium314.keyboard.latin.LatinIME)?.requestHideSelf(0) }
         }
-        // LiBoard: x² and x₂ – raised / lowered characters (chemistry, maths …), see ScriptMode.
-        for ((label, target, description) in listOf(
-            Triple("x²", helium314.keyboard.latin.ScriptMode.Mode.SUPER, R.string.liboard_superscript),
-            Triple("x₂", helium314.keyboard.latin.ScriptMode.Mode.SUB, R.string.liboard_subscript),
+        // LiBoard: switches for raised / lowered characters (see ScriptMode) – real buttons with a
+        // surface and a symbol, so they do not look like letters you would type.
+        for ((icon, target, description) in listOf(
+            Triple(R.drawable.ic_liboard_super, helium314.keyboard.latin.ScriptMode.Mode.SUPER, R.string.liboard_superscript),
+            Triple(R.drawable.ic_liboard_sub, helium314.keyboard.latin.ScriptMode.Mode.SUB, R.string.liboard_subscript),
         )) {
-            val button = android.widget.TextView(context).apply {
-                text = label
-                textSize = 16f
-                gravity = android.view.Gravity.CENTER
-                val side = (10 * resources.displayMetrics.density).toInt()
-                setPadding(side, 0, side, 0)
+            val density = resources.displayMetrics.density
+            val button = ImageButton(context).apply {
+                setImageResource(icon)
+                scaleType = android.widget.ImageView.ScaleType.CENTER_INSIDE
+                val inner = (4 * density).toInt()
+                setPadding(inner, inner, inner, inner)
                 contentDescription = context.getString(description)
+                tooltipText = context.getString(description)
                 tag = target
+                isHapticFeedbackEnabled = false
                 setOnClickListener {
                     helium314.keyboard.latin.ScriptMode.toggle(target)
                     updateScriptButtons()
                 }
             }
             scriptButtons.add(button)
-            (pinnedKeys.parent as ViewGroup).addView(button, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT))
+            val params = LinearLayout.LayoutParams((44 * density).toInt(), (34 * density).toInt()).apply {
+                gravity = android.view.Gravity.CENTER_VERTICAL
+                marginStart = (6 * density).toInt()
+            }
+            (pinnedKeys.parent as ViewGroup).addView(button, params)
         }
         updateScriptButtons()
         (pinnedKeys.parent as ViewGroup).addView(done, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT))
