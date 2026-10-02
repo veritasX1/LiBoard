@@ -21,22 +21,24 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.MotionEvent;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import helium314.keyboard.event.HapticEvent;
 import helium314.keyboard.keyboard.Key;
-import helium314.keyboard.keyboard.Keyboard;
 import helium314.keyboard.keyboard.KeyboardActionListener;
-import helium314.keyboard.keyboard.KeyboardElement;
 import helium314.keyboard.keyboard.KeyboardLayoutSet;
-import helium314.keyboard.keyboard.KeyboardSwitcher;
-import helium314.keyboard.keyboard.KeyboardView;
-import helium314.keyboard.keyboard.MainKeyboardView;
-import helium314.keyboard.keyboard.PointerTracker;
-import helium314.keyboard.keyboard.internal.KeyDrawParams;
 import helium314.keyboard.keyboard.internal.KeyVisualAttributes;
 import helium314.keyboard.keyboard.internal.keyboard_parser.EmojiParserKt;
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode;
@@ -57,136 +59,58 @@ import helium314.keyboard.latin.utils.ResourceUtils;
 import static helium314.keyboard.latin.common.Constants.NOT_A_COORDINATE;
 
 /**
- * View class to implement Emoji palettes.
- * The Emoji keyboard consists of group of views layout/emoji_palettes_view.
+ * View class to implement Emoji palettes, laid out like the iOS emoji keyboard (LiBoard):
  * <ol>
- * <li> Emoji category tabs.
- * <li> Delete button.
- * <li> Emoji keyboard pages that can be scrolled by swiping horizontally or by selecting a tab.
- * <li> Back to main keyboard button and enter button.
+ * <li> Search field, opening the emoji search.
+ * <li> Title of the category currently in view.
+ * <li> One horizontally scrolling band with the pages of all categories in a row.
+ * <li> Bottom bar: ABC (back to the main keyboard), category tabs, delete.
  * </ol>
  * Because of the above reasons, this class doesn't extend {@link KeyboardView}.
  */
 public final class EmojiPalettesView extends LinearLayout
         implements View.OnClickListener, EmojiViewCallback {
-    private static final class PagerViewHolder extends RecyclerView.ViewHolder {
-        private long mCategoryId;
+    private static final int DELETE_REPEAT_START_DELAY = 400;
+    private static final int DELETE_REPEAT_INTERVAL = 50;
 
-        private PagerViewHolder(View itemView) {
-            super(itemView);
+    /** One page of one category in the emoji band. */
+    private record PageRef(EmojiCategory.Category category, int page) {}
+
+    private static final class PageViewHolder extends RecyclerView.ViewHolder {
+        private final EmojiPageKeyboardView mKeyboardView;
+
+        private PageViewHolder(EmojiPageKeyboardView view) {
+            super(view);
+            mKeyboardView = view;
         }
     }
 
-    private final class PagerAdapter extends RecyclerView.Adapter<PagerViewHolder> {
-        private boolean mInitialized;
-        private final Map<Integer, RecyclerView> mViews = new HashMap<>(mEmojiCategory.getShownCategories().size());
-
-        private PagerAdapter(ViewPager2 pager) {
-            setHasStableIds(true);
-            pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                @Override
-                public void onPageSelected(int position) {
-                    var categoryId = (int) getItemId(position);
-                    setCurrentCategory(EmojiCategory.Category.getEntries().get(categoryId), false);
-                    var recyclerView = mViews.get(position);
-                    if (recyclerView != null) {
-                        updateState(recyclerView, categoryId);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-            recyclerView.setItemViewCacheSize(mEmojiCategory.getShownCategories().size());
-        }
-
+    /** All pages of all shown categories, side by side. */
+    private final class BandAdapter extends RecyclerView.Adapter<PageViewHolder> {
         @NonNull
         @Override
-        public PagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            var view = LayoutInflater.from(parent.getContext()).inflate(R.layout.emoji_category_view, parent, false);
-            var viewHolder = new PagerViewHolder(view);
-            var emojiRecyclerView = getRecyclerView(view);
-
-            emojiRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    // Ignore this message. Only want the actual page selected.
-                }
-
-                @Override
-                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                    updateState(recyclerView, viewHolder.mCategoryId);
-                }
-            });
-
-            emojiRecyclerView.setPersistentDrawingCache(PERSISTENT_NO_CACHE);
-            return viewHolder;
+        public PageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            final EmojiPageKeyboardView view = (EmojiPageKeyboardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.emoji_keyboard_page, parent, false);
+            view.setEmojiViewCallback(EmojiPalettesView.this);
+            return new PageViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(PagerViewHolder holder, int position) {
-            holder.mCategoryId = getItemId(position);
-            var recyclerView = getRecyclerView(holder.itemView);
-            mViews.put(position, recyclerView);
-            recyclerView.setAdapter(new EmojiPalettesAdapter(
-                mEmojiCategory,
-                EmojiCategory.Category.getEntries().get((int) holder.mCategoryId),
-                EmojiPalettesView.this
-            ));
+        public void onBindViewHolder(@NonNull PageViewHolder holder, int position) {
+            final PageRef ref = mPages.get(position);
+            holder.mKeyboardView.setKeyboard(mEmojiCategory.getKeyboardFromAdapterPosition(ref.category(), ref.page()));
+        }
 
-            if (! mInitialized) {
-                recyclerView.scrollToPosition(mEmojiCategory.getCurrentCategoryPageId());
-                mInitialized = true;
-            }
+        @Override
+        public void onViewDetachedFromWindow(@NonNull PageViewHolder holder) {
+            holder.mKeyboardView.releaseCurrentKey(false);
+            holder.mKeyboardView.deallocateMemory();
         }
 
         @Override
         public int getItemCount() {
-            return mEmojiCategory.getShownCategories().size();
-        }
-
-        @Override
-        public void onViewDetachedFromWindow(PagerViewHolder holder) {
-            if (holder.mCategoryId == EmojiCategory.Category.RECENTS.ordinal()) {
-                // Needs to save pending updates for recent keys when we get out of the recents
-                // category because we don't want to move the recent emojis around while the user
-                // is in the recents category.
-                getRecentsKeyboard().flushPendingRecentKeys();
-                getRecyclerView(holder.itemView).getAdapter().notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return mEmojiCategory.getShownCategories().get(position).getCategory().ordinal();
-        }
-
-        private static RecyclerView getRecyclerView(View view) {
-            return view.findViewById(R.id.emoji_keyboard_list);
-        }
-
-        private void updateState(@NonNull RecyclerView recyclerView, long categoryId) {
-            if (categoryId != mEmojiCategory.getCurrentCategory().ordinal()) {
-                return;
-            }
-
-            final int offset = recyclerView.computeVerticalScrollOffset();
-            final int extent = recyclerView.computeVerticalScrollExtent();
-            final int range = recyclerView.computeVerticalScrollRange();
-            final float percentage = offset / (float) (range - extent);
-
-            final int currentCategorySize = mEmojiCategory.getCurrentCategoryPageCount();
-            final int a = (int) (percentage * currentCategorySize);
-            final float b = percentage * currentCategorySize - a;
-            mEmojiCategoryPageIndicatorView.setCategoryPageId(currentCategorySize, a, b);
-
-            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            final int firstCompleteVisibleBoard = layoutManager.findFirstCompletelyVisibleItemPosition();
-            final int firstVisibleBoard = layoutManager.findFirstVisibleItemPosition();
-            mEmojiCategory.setCurrentCategoryPageId(
-                    firstCompleteVisibleBoard > 0 ? firstCompleteVisibleBoard : firstVisibleBoard);
+            return mPages.size();
         }
     }
 
@@ -195,11 +119,23 @@ public final class EmojiPalettesView extends LinearLayout
     private boolean initialized = false;
     private final Colors mColors;
     private final EmojiLayoutParams mEmojiLayoutParams;
-    private LinearLayout mTabStrip;
-    private EmojiCategoryPageIndicatorView mEmojiCategoryPageIndicatorView;
     private KeyboardActionListener mKeyboardActionListener = KeyboardActionListener.EMPTY_LISTENER;
     private final EmojiCategory mEmojiCategory;
-    private ViewPager2 mPager;
+    private final List<PageRef> mPages = new ArrayList<>();
+    private RecyclerView mBand;
+    private LinearLayoutManager mBandLayoutManager;
+    private TextView mSearchField;
+    private TextView mCategoryTitle;
+    private LinearLayout mTabs;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable mDeleteRepeat = new Runnable() {
+        @Override
+        public void run() {
+            mKeyboardActionListener.onPressKey(KeyCode.DELETE, 1, 1, HapticEvent.KEY_REPEAT);
+            mKeyboardActionListener.onCodeInput(KeyCode.DELETE, NOT_A_COORDINATE, NOT_A_COORDINATE, true);
+            mHandler.postDelayed(this, DELETE_REPEAT_INTERVAL);
+        }
+    };
 
     public EmojiPalettesView(final Context context, final AttributeSet attrs) {
         this(context, attrs, R.attr.emojiPalettesViewStyle);
@@ -218,26 +154,23 @@ public final class EmojiPalettesView extends LinearLayout
         final TypedArray emojiPalettesViewAttr = context.obtainStyledAttributes(attrs,
                 R.styleable.EmojiPalettesView, defStyle, R.style.EmojiPalettesView);
         mEmojiCategory = new EmojiCategory(context, layoutSet, emojiPalettesViewAttr);
+        mEmojiCategory.setGridHeight(mEmojiLayoutParams.getEmojiKeyboardHeight());
         emojiPalettesViewAttr.recycle();
         setFitsSystemWindows(true);
     }
 
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        final Resources res = getContext().getResources();
-        // The main keyboard expands to the entire this {@link KeyboardView}.
         final int width = ResourceUtils.getKeyboardWidth(getContext(), Settings.getValues())
                 + getPaddingLeft() + getPaddingRight();
-        final int height = ResourceUtils.getSecondaryKeyboardHeight(res, Settings.getValues())
+        final int height = new EmojiLayoutParams(getResources()).getTotalHeight()
                 + getPaddingTop() + getPaddingBottom();
-        mEmojiCategoryPageIndicatorView.mWidth = width;
-        setMeasuredDimension(width, height);
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
     }
 
     private void addTab(LinearLayout host, EmojiCategory.Category category) {
         final ImageView iconView = new ImageView(getContext());
-        mColors.setBackground(iconView, ColorType.STRIP_BACKGROUND);
         mColors.setColor(iconView, ColorType.EMOJI_CATEGORY);
         iconView.setScaleType(ImageView.ScaleType.CENTER);
         iconView.setImageResource(mEmojiCategory.getCategoryTabIcon(category));
@@ -248,25 +181,116 @@ public final class EmojiPalettesView extends LinearLayout
         iconView.setOnClickListener(this);
     }
 
+    private GradientDrawable roundedBackground(int color, float radiusDp) {
+        final GradientDrawable d = new GradientDrawable();
+        d.setColor(color);
+        d.setCornerRadius(radiusDp * getResources().getDisplayMetrics().density);
+        return d;
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    public void initialize() { // needs to be delayed for access to EmojiTabStrip, which is not a child of this view
+    public void initialize() {
         if (initialized) return;
         mEmojiCategory.initialize();
-        mTabStrip = (LinearLayout) KeyboardSwitcher.getInstance().getEmojiTabStrip();
-        if (Settings.getValues().isSecondaryStripVisible()) {
-            for (EmojiCategory.CategoryProperties properties : mEmojiCategory.getShownCategories()) {
-                addTab(mTabStrip, properties.getCategory());
-            }
+        mPages.clear();
+        for (EmojiCategory.CategoryProperties properties : mEmojiCategory.getShownCategories()) {
+            for (int i = 0; i < properties.getPageCount(); i++)
+                mPages.add(new PageRef(properties.getCategory(), i));
         }
 
-        mPager = findViewById(R.id.emoji_pager);
-        mPager.setAdapter(new PagerAdapter(mPager));
-        mEmojiLayoutParams.setEmojiListProperties(mPager);
-        mEmojiCategoryPageIndicatorView = findViewById(R.id.emoji_category_page_id_view);
-        mEmojiLayoutParams.setCategoryPageIdViewProperties(mEmojiCategoryPageIndicatorView);
+        mSearchField = findViewById(R.id.emoji_search_field);
+        mCategoryTitle = findViewById(R.id.emoji_category_title);
+        mTabs = findViewById(R.id.emoji_tabs);
+        mBand = findViewById(R.id.emoji_strip);
+        mEmojiLayoutParams.setHeight(mSearchField, mEmojiLayoutParams.getSearchFieldHeight());
+        mEmojiLayoutParams.setHeight(mCategoryTitle, mEmojiLayoutParams.getTitleHeight());
+        mEmojiLayoutParams.setHeight(mBand, mEmojiLayoutParams.getEmojiKeyboardHeight());
+        mEmojiLayoutParams.setHeight(findViewById(R.id.emoji_bottom_bar), mEmojiLayoutParams.getBottomRowKeyboardHeight());
+
+        // search field
+        final int keyText = mColors.get(ColorType.KEY_TEXT);
+        final int hintText = mColors.get(ColorType.KEY_HINT_TEXT);
+        mSearchField.setBackground(roundedBackground(mColors.get(ColorType.KEY_BACKGROUND), 10));
+        mSearchField.setTextColor(hintText);
+        final android.graphics.drawable.Drawable searchIcon = getContext().getDrawable(R.drawable.sym_keyboard_search_rounded);
+        if (searchIcon != null) {
+            final int size = (int) (18 * getResources().getDisplayMetrics().density);
+            searchIcon.setBounds(0, 0, size, size);
+            searchIcon.setTint(hintText);
+            mSearchField.setCompoundDrawablesRelative(searchIcon, null, null, null);
+        }
+        mSearchField.setOnClickListener(v -> {
+            AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, this, HapticEvent.KEY_PRESS);
+            mKeyboardActionListener.onCodeInput(KeyCode.EMOJI_SEARCH, NOT_A_COORDINATE, NOT_A_COORDINATE, false);
+        });
+        mCategoryTitle.setTextColor(hintText);
+
+        // emoji band
+        mBandLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mBand.setLayoutManager(mBandLayoutManager);
+        mBand.setItemViewCacheSize(4);
+        mBand.setAdapter(new BandAdapter());
+        mBand.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                updateCategoryFromScroll();
+            }
+        });
+
+        // bottom bar
+        final TextView abc = findViewById(R.id.emoji_abc);
+        abc.setTextColor(keyText);
+        abc.setOnClickListener(v -> {
+            AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, this, HapticEvent.KEY_PRESS);
+            mKeyboardActionListener.onCodeInput(KeyCode.ALPHA, NOT_A_COORDINATE, NOT_A_COORDINATE, false);
+        });
+        for (EmojiCategory.CategoryProperties properties : mEmojiCategory.getShownCategories()) {
+            addTab(mTabs, properties.getCategory());
+        }
+        final ImageView delete = findViewById(R.id.emoji_delete);
+        delete.setImageResource(R.drawable.sym_keyboard_delete_rounded);
+        mColors.setColor(delete, ColorType.KEY_ICON);
+        delete.setOnTouchListener((v, event) -> {
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN -> {
+                    v.setPressed(true);
+                    mKeyboardActionListener.onPressKey(KeyCode.DELETE, 0, 1, HapticEvent.KEY_PRESS);
+                    mKeyboardActionListener.onCodeInput(KeyCode.DELETE, NOT_A_COORDINATE, NOT_A_COORDINATE, false);
+                    mHandler.postDelayed(mDeleteRepeat, DELETE_REPEAT_START_DELAY);
+                }
+                case MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.setPressed(false);
+                    mHandler.removeCallbacks(mDeleteRepeat);
+                    mKeyboardActionListener.onReleaseKey(KeyCode.DELETE, false);
+                }
+            }
+            return true;
+        });
+
         setCurrentCategory(mEmojiCategory.getCurrentCategory(), true);
-        mEmojiCategoryPageIndicatorView.setColors(mColors.get(ColorType.EMOJI_CATEGORY_SELECTED), mColors.get(ColorType.STRIP_BACKGROUND));
         initialized = true;
+    }
+
+    private int firstPageOf(EmojiCategory.Category category) {
+        for (int i = 0; i < mPages.size(); i++) {
+            if (mPages.get(i).category() == category) return i;
+        }
+        return 0;
+    }
+
+    private void updateCategoryFromScroll() {
+        final int position = mBandLayoutManager.findFirstVisibleItemPosition();
+        if (position == RecyclerView.NO_POSITION) return;
+        // the category whose page covers the left half of the band is the current one
+        final View first = mBandLayoutManager.findViewByPosition(position);
+        final int shown = (first != null && first.getRight() < mBand.getWidth() / 2 && position + 1 < mPages.size())
+                ? position + 1 : position;
+        final PageRef ref = mPages.get(shown);
+        if (ref.category() != mEmojiCategory.getCurrentCategory()) {
+            if (mEmojiCategory.isInRecentTab()) getRecentsKeyboard().flushPendingRecentKeys();
+            showCategory(ref.category());
+        }
+        mEmojiCategory.setCurrentCategoryPageId(ref.page());
     }
 
     /**
@@ -279,10 +303,7 @@ public final class EmojiPalettesView extends LinearLayout
         final Object tag = v.getTag();
         if (tag instanceof EmojiCategory.Category category) {
             AudioAndHapticFeedbackManager.getInstance().performHapticAndAudioFeedback(KeyCode.NOT_SPECIFIED, this, HapticEvent.KEY_PRESS);
-            if (category != mEmojiCategory.getCurrentCategory()) {
-                setCurrentCategory(category, false);
-                updateEmojiCategoryPageIdView();
-            }
+            setCurrentCategory(category, true);
         }
     }
 
@@ -339,12 +360,8 @@ public final class EmojiPalettesView extends LinearLayout
 
     public void startEmojiPalettes(final KeyVisualAttributes keyVisualAttr,
                final EditorInfo editorInfo, final KeyboardActionListener keyboardActionListener) {
+        mKeyboardActionListener = keyboardActionListener;
         initialize();
-
-        setupBottomRowKeyboard(editorInfo, keyboardActionListener);
-        final KeyDrawParams params = new KeyDrawParams();
-        params.updateParams(mEmojiLayoutParams.getBottomRowKeyboardHeight(), keyVisualAttr);
-        new EmojiLayoutParams(getResources()).setEmojiListProperties(mPager); // necessary when floating
         setupSidePadding();
         initDictionaryFacilitator();
     }
@@ -355,21 +372,13 @@ public final class EmojiPalettesView extends LinearLayout
             return;
         }
         if (getVisibility() == VISIBLE && mEmojiCategory.isInRecentTab()) {
+            // don't move the recent emojis around while the user looks at them
             getRecentsKeyboard().addPendingKey(key);
             return;
         }
         getRecentsKeyboard().addKeyFirst(key);
         if (initialized)
-            mPager.getAdapter().notifyItemChanged(mEmojiCategory.getRecentTabId());
-    }
-
-    private void setupBottomRowKeyboard(EditorInfo editorInfo, KeyboardActionListener keyboardActionListener) {
-        MainKeyboardView keyboardView = findViewById(R.id.bottom_row_keyboard);
-        keyboardView.setKeyboardActionListener(keyboardActionListener);
-        PointerTracker.switchTo(keyboardView);
-        KeyboardLayoutSet kls = KeyboardLayoutSet.Builder.Companion.buildEmojiClipBottomRow(getContext(), editorInfo);
-        Keyboard keyboard = kls.getKeyboard(KeyboardElement.EMOJI_BOTTOM_ROW);
-        keyboardView.setKeyboard(keyboard);
+            mBand.getAdapter().notifyItemChanged(firstPageOf(EmojiCategory.Category.RECENTS));
     }
 
     private void setupSidePadding() {
@@ -382,24 +391,14 @@ public final class EmojiPalettesView extends LinearLayout
         final float rightPadding =  keyboardAttr.getFraction(R.styleable.Keyboard_keyboardRightPadding,
                 keyboardWidth, keyboardWidth, 0f) * sv.mSidePaddingScale;
         keyboardAttr.recycle();
-        mPager.setPadding(
-                (int) leftPadding,
-                mPager.getPaddingTop(),
-                (int) rightPadding,
-                mPager.getPaddingBottom()
-        );
-        mEmojiCategoryPageIndicatorView.setPadding(
-                (int) leftPadding,
-                mEmojiCategoryPageIndicatorView.getPaddingTop(),
-                (int) rightPadding,
-                mEmojiCategoryPageIndicatorView.getPaddingBottom()
-        );
-        // setting width does not do anything, so we have some workaround in EmojiCategoryPageIndicatorView
+        mBand.setPadding((int) leftPadding, mBand.getPaddingTop(), (int) rightPadding, mBand.getPaddingBottom());
     }
 
     public void stopEmojiPalettes() {
         if (!initialized) return;
+        mHandler.removeCallbacks(mDeleteRepeat);
         getRecentsKeyboard().flushPendingRecentKeys();
+        mBand.getAdapter().notifyItemChanged(firstPageOf(EmojiCategory.Category.RECENTS));
     }
 
     private DynamicGridKeyboard getRecentsKeyboard() {
@@ -410,41 +409,41 @@ public final class EmojiPalettesView extends LinearLayout
         mKeyboardActionListener = listener;
     }
 
-    private void updateEmojiCategoryPageIdView() {
-        if (mEmojiCategoryPageIndicatorView == null) {
-            return;
+    /** Jump to a category: scroll the band to its first page (or the remembered page on start). */
+    private void setCurrentCategory(EmojiCategory.Category category, boolean scroll) {
+        if (scroll) {
+            int position = firstPageOf(category);
+            if (!initialized && category == mEmojiCategory.getCurrentCategory())
+                position += mEmojiCategory.getCurrentCategoryPageId();
+            mBandLayoutManager.scrollToPositionWithOffset(Math.min(position, mPages.size() - 1), 0);
         }
-        mEmojiCategoryPageIndicatorView.setCategoryPageId(
-                mEmojiCategory.getCurrentCategoryPageCount(),
-                mEmojiCategory.getCurrentCategoryPageId(), 0.0f);
+        showCategory(category);
     }
 
-    private void setCurrentCategory(EmojiCategory.Category category, boolean initial) {
-        EmojiCategory.Category oldCategory = mEmojiCategory.getCurrentCategory();
-        if (initial || oldCategory != category) {
-            mEmojiCategory.setCurrentCategory(category);
-
-            if (mPager.getScrollState() != ViewPager2.SCROLL_STATE_DRAGGING) {
-                // Not swiping
-                mPager.setCurrentItem(mEmojiCategory.getTabIdFromCategoryId(
-                                mEmojiCategory.getCurrentCategory()), ! initial && ! isAnimationsDisabled());
+    /** Update title and tab highlight, without scrolling. */
+    private void showCategory(EmojiCategory.Category category) {
+        mEmojiCategory.setCurrentCategory(category);
+        mCategoryTitle.setText(mEmojiCategory.getAccessibilityDescription(category).toUpperCase(Locale.getDefault()));
+        final int selectedBackground = mColors.get(ColorType.FUNCTIONAL_KEY_BACKGROUND);
+        for (int i = 0; i < mTabs.getChildCount(); i++) {
+            final View tab = mTabs.getChildAt(i);
+            if (!(tab instanceof ImageView icon)) continue;
+            final boolean selected = tab.getTag() == category;
+            if (selected) {
+                final GradientDrawable circle = new GradientDrawable();
+                circle.setShape(GradientDrawable.OVAL);
+                circle.setColor(selectedBackground);
+                final int size = (int) (32 * getResources().getDisplayMetrics().density);
+                final android.graphics.drawable.LayerDrawable background =
+                        new android.graphics.drawable.LayerDrawable(new android.graphics.drawable.Drawable[] { circle });
+                background.setLayerSize(0, size, size);
+                background.setLayerGravity(0, android.view.Gravity.CENTER);
+                icon.setBackground(background);
+            } else {
+                icon.setBackground(null);
             }
-
-            if (Settings.getValues().isSecondaryStripVisible()) {
-                View old = mTabStrip.findViewWithTag(oldCategory);
-                View current = mTabStrip.findViewWithTag(category);
-
-                if (old instanceof ImageView)
-                    Settings.getValues().mColors.setColor((ImageView) old, ColorType.EMOJI_CATEGORY);
-                if (current instanceof ImageView)
-                    Settings.getValues().mColors.setColor((ImageView) current, ColorType.EMOJI_CATEGORY_SELECTED);
-            }
+            mColors.setColor(icon, selected ? ColorType.EMOJI_CATEGORY_SELECTED : ColorType.EMOJI_CATEGORY);
         }
-    }
-
-    private boolean isAnimationsDisabled() {
-        return android.provider.Settings.Global.getFloat(getContext().getContentResolver(),
-                                                         android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1.0f) == 0.0f;
     }
 
     public void clearKeyboardCache() {
@@ -453,7 +452,13 @@ public final class EmojiPalettesView extends LinearLayout
         }
 
         mEmojiCategory.clearKeyboardCache();
-        mPager.getAdapter().notifyDataSetChanged();
+        mEmojiCategory.setGridHeight(new EmojiLayoutParams(getResources()).getEmojiKeyboardHeight());
+        mPages.clear();
+        for (EmojiCategory.CategoryProperties properties : mEmojiCategory.getShownCategories()) {
+            for (int i = 0; i < properties.getPageCount(); i++)
+                mPages.add(new PageRef(properties.getCategory(), i));
+        }
+        mBand.getAdapter().notifyDataSetChanged();
         closeDictionaryFacilitator();
     }
 

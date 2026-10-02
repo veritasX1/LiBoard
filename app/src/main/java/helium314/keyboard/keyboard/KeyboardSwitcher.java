@@ -324,9 +324,10 @@ public final class KeyboardSwitcher implements KeyboardState.SwitchActions {
         // @see LatinIME#onComputeInset(android.inputmethodservice.InputMethodService.Insets)
         mKeyboardView.setVisibility(View.GONE);
         mSuggestionStripView.setVisibility(View.GONE);
-        mStripContainer.setVisibility(getSecondaryStripVisibility());
+        // LiBoard: categories live in the emoji view's own bottom bar (iOS), the view takes over the strip's height
+        mStripContainer.setVisibility(View.GONE);
         mClipboardStripScrollView.setVisibility(View.GONE);
-        mEmojiTabStripView.setVisibility(View.VISIBLE);
+        mEmojiTabStripView.setVisibility(View.GONE);
         mClipboardHistoryView.setVisibility(View.GONE);
         mEmojiPalettesView.startEmojiPalettes(mKeyboardView.getKeyVisualAttribute(),
                 mLatinIME.getCurrentInputEditorInfo(), mLatinIME.mKeyboardActionListener);

@@ -56,8 +56,25 @@ internal class EmojiCategory(private val context: Context, private val layoutSet
 
     private val categoryKeyboardMap = ConcurrentHashMap<Long, DynamicGridKeyboard>()
 
+    /** Height of the emoji grid; when set, pages get as many rows as fit (iOS-like), with rows stretched to fill it. */
+    var gridHeight = 0
+
+    private val columnCount get() = DynamicGridKeyboard.ofKeyCount(prefs,
+        layoutSet.getKeyboard(KeyboardElement.EMOJI_RECENTS),
+        0, true, ResourceUtils.getKeyboardWidth(context, Settings.getValues())
+    ).occupiedColumnCount
+
+    private val rowsPerPage: Int get() {
+        if (gridHeight <= 0) return MAX_LINE_COUNT_PER_PAGE
+        val cellWidth = ResourceUtils.getKeyboardWidth(context, Settings.getValues()) / columnCount
+        return maxOf(MAX_LINE_COUNT_PER_PAGE, (gridHeight / (cellWidth * 0.9f)).toInt())
+    }
+
+    private val rowHeight get() = if (gridHeight > 0) gridHeight / rowsPerPage else 0
+
     var currentCategory: Category = defaultCategory
         set(value) {
+            if (field == value) return
             field = value
             prefs.edit { putInt(Settings.PREF_LAST_SHOWN_EMOJI_CATEGORY_ID, value.ordinal) }
         }
@@ -148,7 +165,7 @@ internal class EmojiCategory(private val context: Context, private val layoutSet
                 val kbd = DynamicGridKeyboard.ofKeyCount(
                     prefs,
                     layoutSet.getKeyboard(KeyboardElement.EMOJI_RECENTS),
-                    maxRecentsKeyCount, category == Category.RECENTS, currentWidth
+                    minOf(maxRecentsKeyCount, computeMaxKeyCountPerPage()), category == Category.RECENTS, currentWidth, rowHeight
                 )
                 categoryKeyboardMap[categoryKeyboardMapKey] = kbd
                 kbd.loadRecentKeys(categoryKeyboardMap.values)
@@ -161,7 +178,7 @@ internal class EmojiCategory(private val context: Context, private val layoutSet
             for (pageId in sortedKeysPages.indices) {
                 val tempKeyboard = DynamicGridKeyboard.ofKeyCount(prefs,
                     layoutSet.getKeyboard(KeyboardElement.EMOJI_RECENTS),
-                    keyCountPerPage, category == Category.RECENTS, currentWidth)
+                    keyCountPerPage, category == Category.RECENTS, currentWidth, rowHeight)
                 for (emojiKey in sortedKeysPages[pageId]) {
                     if (emojiKey == null) {
                         break
@@ -174,13 +191,7 @@ internal class EmojiCategory(private val context: Context, private val layoutSet
         }
     }
 
-    private fun computeMaxKeyCountPerPage(): Int {
-        val tempKeyboard = DynamicGridKeyboard.ofKeyCount(prefs,
-            layoutSet.getKeyboard(KeyboardElement.EMOJI_RECENTS),
-            0, true, ResourceUtils.getKeyboardWidth(context, Settings.getValues())
-        )
-        return MAX_LINE_COUNT_PER_PAGE * tempKeyboard.occupiedColumnCount
-    }
+    private fun computeMaxKeyCountPerPage() = rowsPerPage * columnCount
 
     enum class Category(val element: KeyboardElement, val iconAttr: Int) {
         RECENTS(KeyboardElement.EMOJI_RECENTS, R.styleable.EmojiPalettesView_iconEmojiRecentsTab),
