@@ -392,9 +392,11 @@ public class KeyboardView extends View {
                 : key.getIcon(keyboard.mIconsSet, params.mAnimAlpha);
         float labelX = centerX;
         float labelBaseline = centerY;
-        final String label = key.getLabel();
+        final String keyLabel = key.getLabel();
+        final Typeface labelTypeface = keyLabel == null ? null : KeyboardTypeface.resolve(keyLabel, key.selectTypeface(params));
+        final String label = keyLabel == null ? null : KeyboardTypeface.forDrawing(keyLabel, labelTypeface);
         if (label != null) {
-            paint.setTypeface(KeyboardTypeface.resolve(label, key.selectTypeface(params)));
+            paint.setTypeface(labelTypeface);
             paint.setTextSize(key.selectTextSize(params) * mFontSizeMultiplier);
             final float labelCharHeight = TypefaceUtils.getReferenceCharHeight(paint);
             final float labelCharWidth = TypefaceUtils.getReferenceCharWidth(paint);

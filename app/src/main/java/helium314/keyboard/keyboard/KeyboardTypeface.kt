@@ -79,6 +79,16 @@ object KeyboardTypeface {
         }
     }
 
+    /**
+     * With a custom emoji font, Android routes every char followed by U+FE0F to the system emoji font,
+     * which splits ZWJ sequences (😶‍🌫️, 🙂‍↔️) into two overlapping glyphs. The font ligates them fine
+     * without the selector, so drop it for drawing only; the committed text keeps it.
+     */
+    @JvmStatic
+    fun forDrawing(text: String, typeface: Typeface?): String {
+        return if (typeface != null && typeface === cachedEmojiTypeface) text.replace("\uFE0F", "") else text
+    }
+
     @JvmStatic
     fun applyToTextView(textView: TextView) {
         applyToTextView(textView, textView.text, Typeface.DEFAULT)
