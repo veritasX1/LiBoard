@@ -279,7 +279,7 @@
         android:imeSubtypeLocale="de"
         android:languageTag="de"
         android:imeSubtypeMode="keyboard"
-        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
+        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable,SecondaryLocales=en_US"
         android:isAsciiCapable="true"
     />
     <subtype android:icon="@drawable/ic_ime_switcher"
@@ -288,7 +288,7 @@
         android:imeSubtypeLocale="de_CH"
         android:languageTag="de-CH"
         android:imeSubtypeMode="keyboard"
-        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz+,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
+        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz+,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable,SecondaryLocales=en_US"
         android:isAsciiCapable="true"
     />
     <subtype android:icon="@drawable/ic_ime_switcher"
@@ -297,7 +297,7 @@
         android:imeSubtypeLocale="de_DE"
         android:languageTag="de-DE"
         android:imeSubtypeMode="keyboard"
-        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz+,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable"
+        android:imeSubtypeExtraValue="KeyboardLayoutSet=MAIN:qwertz+,AsciiCapable,SupportTouchPositionCorrection,EmojiCapable,SecondaryLocales=en_US"
         android:isAsciiCapable="true"
     />
     <subtype android:icon="@drawable/ic_ime_switcher"
