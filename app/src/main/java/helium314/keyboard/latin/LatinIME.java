@@ -851,6 +851,11 @@ public class LatinIME extends InputMethodService implements
 
     void onStartInputViewInternal(final EditorInfo editorInfo, final boolean restarting) {
         super.onStartInputView(editorInfo, restarting);
+        if (!restarting) {
+            // A new text field starts with normal characters again.
+            ScriptMode.setMode(ScriptMode.Mode.NONE);
+            if (mSuggestionStripView != null) mSuggestionStripView.updateScriptButtons();
+        }
 
         setGestureDataGatheringMode(editorInfo, restarting);
 
@@ -1424,6 +1429,16 @@ public class LatinIME extends InputMethodService implements
     // This method is public for testability of LatinIME, but also in the future it should
     // completely replace #onCodeInput.
     public void onEvent(@NonNull final Event event) {
+        // LiBoard: x² / x₂ – write the raised or lowered character, past autocorrection.
+        final String scripted = event.getCodePoint() > 0 ? ScriptMode.map(event.getCodePoint()) : null;
+        if (scripted != null) {
+            mInputLogic.finishInput();
+            mInputLogic.mConnection.beginBatchEdit();
+            mInputLogic.mConnection.commitText(scripted, 1);
+            mInputLogic.mConnection.endBatchEdit();
+            mKeyboardSwitcher.onEvent(event, getCurrentAutoCapsState(), getCurrentRecapitalizeState());
+            return;
+        }
         if (KeyCode.VOICE_INPUT == event.getKeyCode()) {
             mRichImm.switchToShortcutIme(this);
         }

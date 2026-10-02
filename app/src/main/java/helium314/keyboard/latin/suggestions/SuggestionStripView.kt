@@ -113,6 +113,23 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         DEBUG_SUGGESTIONS = context.prefs().getBoolean(DebugSettings.PREF_SHOW_SUGGESTION_INFOS, Defaults.PREF_SHOW_SUGGESTION_INFOS)
     }
 
+    private val scriptButtons = mutableListOf<android.widget.TextView>()
+
+    /** Active mode: accent-coloured pill (state is always visible, as Apple's HIG asks). */
+    fun updateScriptButtons() {
+        val colors = Settings.getValues().mColors
+        val accent = colors.get(ColorType.ACTION_KEY_BACKGROUND)
+        for (button in scriptButtons) {
+            val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
+            button.setTextColor(if (active) Color.WHITE else colors.get(ColorType.KEY_TEXT))
+            button.background = if (!active) null else GradientDrawable().apply {
+                setColor(accent)
+                cornerRadius = 8 * resources.displayMetrics.density
+            }
+            button.isSelected = active
+        }
+    }
+
     // toolbar views, drawables and setup
     private val toolbar: ViewGroup = findViewById(R.id.toolbar)
     private val toolbarContainer: View = findViewById(R.id.toolbar_container)
@@ -184,6 +201,28 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             isHapticFeedbackEnabled = false
             setOnClickListener { (listener as? helium314.keyboard.latin.LatinIME)?.requestHideSelf(0) }
         }
+        // LiBoard: x² and x₂ – raised / lowered characters (chemistry, maths …), see ScriptMode.
+        for ((label, target, description) in listOf(
+            Triple("x²", helium314.keyboard.latin.ScriptMode.Mode.SUPER, R.string.liboard_superscript),
+            Triple("x₂", helium314.keyboard.latin.ScriptMode.Mode.SUB, R.string.liboard_subscript),
+        )) {
+            val button = android.widget.TextView(context).apply {
+                text = label
+                textSize = 16f
+                gravity = android.view.Gravity.CENTER
+                val side = (10 * resources.displayMetrics.density).toInt()
+                setPadding(side, 0, side, 0)
+                contentDescription = context.getString(description)
+                tag = target
+                setOnClickListener {
+                    helium314.keyboard.latin.ScriptMode.toggle(target)
+                    updateScriptButtons()
+                }
+            }
+            scriptButtons.add(button)
+            (pinnedKeys.parent as ViewGroup).addView(button, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT))
+        }
+        updateScriptButtons()
         (pinnedKeys.parent as ViewGroup).addView(done, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT))
         toolbarContainer.doOnNextLayout {
             // set min with of the toolbar so the weight of the toolbar keys actually does something

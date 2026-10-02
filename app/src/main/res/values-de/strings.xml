@@ -551,4 +551,6 @@
     <string name="liboard_space">Leerzeichen</string>
     <string name="theme_name_liboard_light" tools:keep="@string/theme_name_liboard_light">LiBoard hell</string>
     <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard dunkel</string>
+    <string name="liboard_superscript">Hochgestellt</string>
+    <string name="liboard_subscript">Tiefgestellt</string>
 </resources>
