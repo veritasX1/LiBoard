@@ -43,6 +43,7 @@ fun MainSettingsScreen(
     onClickLayouts: () -> Unit,
     onClickDictionaries: () -> Unit,
     onClickBack: () -> Unit,
+    onClickTypingTest: () -> Unit = {},
 ) {
     SearchSettingsScreen(
         onClickBack = onClickBack,
@@ -54,6 +55,12 @@ fun MainSettingsScreen(
             Column(
                 Modifier.verticalScroll(rememberScrollState()).then(Modifier.padding(innerPadding))
             ) {
+                Preference(
+                    name = "Tipp-Test",
+                    description = "Wie sauber tippst du? FUTO und LiBoard vergleichen",
+                    onClick = onClickTypingTest,
+                    icon = R.drawable.ic_settings_correction,
+                ) { NextScreenIcon() }
                 Preference(
                     name = stringResource(R.string.language_and_layouts_title),
                     description = enabledSubtypes.joinToString(", ") { it.displayName() },

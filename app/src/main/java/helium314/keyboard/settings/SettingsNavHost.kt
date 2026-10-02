@@ -68,6 +68,7 @@ fun SettingsNavHost(
         composable(SettingsDestination.Settings) {
             MainSettingsScreen(
                 onClickAbout = { navController.navigate(SettingsDestination.About) },
+                onClickTypingTest = { navController.navigate(SettingsDestination.TypingTest) },
                 onClickTextCorrection = { navController.navigate(SettingsDestination.TextCorrection) },
                 onClickPreferences = { navController.navigate(SettingsDestination.Preferences) },
                 onClickToolbar = { navController.navigate(SettingsDestination.Toolbar) },
@@ -83,6 +84,9 @@ fun SettingsNavHost(
         }
         composable(SettingsDestination.About) {
             AboutScreen(onClickBack = ::goBack)
+        }
+        composable(SettingsDestination.TypingTest) {
+            helium314.keyboard.settings.screens.TypingTestScreen(onClickBack = ::goBack)
         }
         composable(SettingsDestination.TextCorrection) {
             TextCorrectionScreen(onClickBack = ::goBack)
@@ -147,6 +151,7 @@ fun SettingsNavHost(
 object SettingsDestination {
     const val Settings = "settings"
     const val About = "about"
+    const val TypingTest = "typing_test"   // LiBoard
     const val TextCorrection = "text_correction"
     const val Preferences = "preferences"
     const val Toolbar = "toolbar"
