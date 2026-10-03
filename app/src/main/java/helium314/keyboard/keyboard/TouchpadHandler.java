@@ -40,6 +40,19 @@ public class TouchpadHandler {
         sTouchpadModeActive = active;
     }
 
+    public static boolean isTouchpadModeActive() {
+        return sTouchpadModeActive;
+    }
+
+    /** LiBoard: start right away, as after a long press on the space bar on iOS (no extra debounce). */
+    public void activateFromLongPress(int x, int y, KeyboardActionListener listener) {
+        sTouchpadModeActive = true;
+        enableTouchpadMove(x, y, listener);
+        mTouchpadActivationTime = SystemClock.elapsedRealtime() - Settings.getValues().mKeyLongpressTimeout;
+        mHandler.removeCallbacks(mHapticRunnable);
+        mHapticRunnable.run();
+    }
+
     public void disableTouchpadMode() {
         if (!mInTouchpadMode) return;
         stopEdgeScrolling();

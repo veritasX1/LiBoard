@@ -953,6 +953,8 @@ public final class PointerTracker implements PointerTrackerQueue.Element,
 
             // Touchpad mode
             mTouchpadHandler.enableTouchpadMove(x, y, sListener);
+            // LiBoard: while the trackpad is active the finger only moves the cursor
+            if (TouchpadHandler.isTouchpadModeActive()) return;
 
             // Vertical movement
             int stepsY = dY / sPointerStep;
@@ -1104,7 +1106,15 @@ public final class PointerTracker implements PointerTrackerQueue.Element,
             sInKeySwipe = false;
 
             // Touchpad mode
+            // LiBoard: releasing after using the trackpad must not type the space
+            final boolean wasTouchpad = TouchpadHandler.isTouchpadModeActive();
             mTouchpadHandler.disableTouchpadMode();
+            if (wasTouchpad) {
+                mInHorizontalSwipe = false;
+                mInVerticalSwipe = false;
+                if (currentKey != null) callListenerOnRelease(currentKey, currentKey.getCode(), true);
+                return;
+            }
 
             if (mInHorizontalSwipe || mInVerticalSwipe) {
                 mInHorizontalSwipe = false;
@@ -1161,6 +1171,12 @@ public final class PointerTracker implements PointerTrackerQueue.Element,
             return;
         }
         final int code = key.getCode();
+        // LiBoard: long press on the space bar turns the keyboard into a trackpad, as on iOS
+        if (code == Constants.CODE_SPACE && !mInHorizontalSwipe && !mInVerticalSwipe) {
+            mKeySwipeAllowed = true;
+            mTouchpadHandler.activateFromLongPress(mLastX, mLastY, sListener);
+            return;
+        }
         sListener.onLongPressKey(code);
         if (key.hasNoPanelAutoPopupKey()) {
             cancelKeyTracking();
