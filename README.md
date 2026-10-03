@@ -7,7 +7,7 @@
 <p align="center">
   <b>Eine Android-Tastatur im Stil der iPhone-Tastatur – offline, privat, quelloffen.</b><br>
   Version 0.1.0 Beta · aufgebaut auf <a href="https://github.com/HeliBorg/HeliBoard">HeliBoard</a> · GPL-3.0<br>
-  <a href="https://liboard.goip.de">liboard.goip.de</a>
+  <a href="https://lisoft.goip.de/liboard/">lisoft.goip.de/liboard</a>
 </p>
 
 ## Idee
@@ -37,7 +37,7 @@ bleiben auf dem Gerät.
 ## Installation
 
 - **F-Droid:** Paketquelle `https://volkskamera.goip.de/fdroid/repo` hinzufügen (Anleitung und QR-Code auf
-  [liboard.goip.de](https://liboard.goip.de)) – dann kommen Updates automatisch.
+  [lisoft.goip.de/liboard](https://lisoft.goip.de/liboard/)) – dann kommen Updates automatisch.
 - **APK:** unter [Releases](https://github.com/veritasX1/LiBoard/releases) oder auf der Homepage.
 
 Danach: Einstellungen → System → Tastatur → LiBoard aktivieren.
