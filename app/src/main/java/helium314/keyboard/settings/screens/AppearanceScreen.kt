@@ -1,6 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.screens
 
+import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.HorizontalDivider
+import helium314.keyboard.keyboard.KeyboardTypeface
 import android.content.Context
 import android.os.Build
 import androidx.compose.foundation.layout.Column
@@ -87,6 +96,8 @@ fun AppearanceScreen(
         SettingsWithoutKey.CUSTOM_FONT,
         Settings.PREF_FONT_SCALE,
         if (prefs.getBoolean(Settings.PREF_SHOW_HINTS, Defaults.PREF_SHOW_HINTS)) Settings.PREF_HINT_FONT_SCALE else null,
+        R.string.liboard_emojis,
+        KeyboardTypeface.PREF_EMOJI_STYLE,
         SettingsWithoutKey.CUSTOM_EMOJI_FONT,
         Settings.PREF_EMOJI_FONT_SCALE,
         if (prefs.getFloat(Settings.PREF_EMOJI_FONT_SCALE, Defaults.PREF_EMOJI_FONT_SCALE) != 1f)
@@ -322,6 +333,31 @@ fun createAppearanceSettings(context: Context) = listOf(
             range = 0.5f..1.5f,
             description = { "${(100 * it).toInt()}%" }
         ) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
+    },
+    Setting(context, KeyboardTypeface.PREF_EMOJI_STYLE, R.string.liboard_emoji_style) { setting ->
+        // LiBoard: inline choice with checkmarks, as in iOS Settings
+        val ctx = LocalContext.current
+        val prefs = ctx.prefs()
+        var style by remember { mutableStateOf(prefs.getString(setting.key, "apple") ?: "apple") }
+        val fontLoaded = Settings.getCustomEmojiFontFile(ctx).exists()
+        fun choose(value: String) {
+            style = value
+            prefs.edit { putString(setting.key, value) }
+            KeyboardTypeface.clearCache()
+            KeyboardSwitcher.getInstance().setThemeNeedsReload()
+        }
+        Column {
+            listOf("apple" to R.string.liboard_emoji_apple, "android" to R.string.liboard_emoji_android).forEachIndexed { i, (value, name) ->
+                if (i > 0) HorizontalDivider(Modifier.padding(start = 16.dp), thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
+                Preference(
+                    name = stringResource(name),
+                    description = if (value == "apple" && !fontLoaded) stringResource(R.string.liboard_emoji_apple_missing) else null,
+                    onClick = { choose(value) },
+                ) {
+                    if (style == value) Text("✓", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.SemiBold, fontSize = 18.sp)
+                }
+            }
+        }
     },
     Setting(context, SettingsWithoutKey.CUSTOM_EMOJI_FONT, R.string.custom_emoji_font) {
         CustomFontPreference(it, Settings.getCustomEmojiFontFile(LocalContext.current), R.string.custom_emoji_font)

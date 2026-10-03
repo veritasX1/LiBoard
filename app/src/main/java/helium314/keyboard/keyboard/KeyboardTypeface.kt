@@ -2,6 +2,7 @@
 
 package helium314.keyboard.keyboard
 
+import helium314.keyboard.latin.utils.prefs
 import android.content.Context
 import android.graphics.Typeface
 import android.widget.TextView
@@ -27,7 +28,11 @@ object KeyboardTypeface {
         }.getOrNull()
     }
 
+    /** LiBoard: "apple" (the loaded emoji font, default) or "android" (system emojis). */
+    const val PREF_EMOJI_STYLE = "liboard_emoji_style"
+
     private fun loadCustomEmojiTypeface(context: Context): Typeface? {
+        if (context.prefs().getString(PREF_EMOJI_STYLE, "apple") == "android") return null
         return runCatching {
             Typeface.createFromFile(Settings.getCustomEmojiFontFile(context))
         }.getOrNull()
