@@ -50,14 +50,17 @@ import java.util.Locale
 fun AboutScreen(
     onClickBack: () -> Unit,
 ) {
+    // LiBoard: grouped as in iOS; the origin (HeliBoard) gets its own section
     val items = listOf(
         SettingsWithoutKey.APP,
         SettingsWithoutKey.VERSION,
+        R.string.liboard_origin,
+        SettingsWithoutKey.GITHUB,
         SettingsWithoutKey.LICENSE,
-        SettingsWithoutKey.HIDDEN_FEATURES,
         SettingsWithoutKey.GITHUB_WIKI,
         SettingsWithoutKey.COMMUNITY_LINKS,
-        SettingsWithoutKey.GITHUB,
+        R.string.liboard_more,
+        SettingsWithoutKey.HIDDEN_FEATURES,
         SettingsWithoutKey.SAVE_LOG,
     )
     SearchSettingsScreen(
@@ -160,7 +163,7 @@ fun createAboutSettings(context: Context) = listOf(
             icon = R.drawable.ic_settings_about_community
         )
      },
-    Setting(context, SettingsWithoutKey.GITHUB, R.string.about_github_link) {
+    Setting(context, SettingsWithoutKey.GITHUB, R.string.liboard_heliboard_title, R.string.liboard_heliboard_desc) {
         val ctx = LocalContext.current
         Preference(
             name = it.title,

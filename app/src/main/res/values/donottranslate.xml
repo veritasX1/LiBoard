@@ -72,6 +72,6 @@
 
     <string name="english_ime_name" translatable="false">LiBoard</string>
     <!-- App slogan-->
-    <string name="app_slogan" translatable="false">100% FOSS keyboard, based on AOSP.</string>
+
 
 </resources>

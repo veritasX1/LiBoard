@@ -1315,4 +1315,16 @@ New dictionary:
     <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard dark</string>
     <string name="liboard_superscript">Superscript</string>
     <string name="liboard_subscript">Subscript</string>
+    <string name="liboard_based_on_heliboard">LiBoard is based on HeliBoard, a free keyboard by Helium314 and contributors. Free software under the GNU GPL v3.</string>
+    <string name="liboard_origin">Origin</string>
+    <string name="liboard_more">More</string>
+    <string name="liboard_heliboard_title">Based on HeliBoard</string>
+    <string name="liboard_heliboard_desc">Free keyboard by Helium314 and contributors – source code on GitHub</string>
+    <string name="liboard_emojis">Emojis</string>
+    <string name="liboard_emoji_style">Emoji style</string>
+    <string name="liboard_emoji_apple">Apple</string>
+    <string name="liboard_emoji_android">Android</string>
+    <string name="liboard_emoji_apple_missing">Load the Apple emoji font under “Custom emoji font” first.</string>
+    <string name="liboard_emoji_style_footer">Apple uses the loaded emoji font, Android the emojis of your system.</string>
+    <string name="app_slogan">iPhone-style keyboard, built on HeliBoard</string>
 </resources>

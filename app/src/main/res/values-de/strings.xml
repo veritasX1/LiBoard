@@ -554,4 +554,16 @@
     <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard dunkel</string>
     <string name="liboard_superscript">Hochgestellt</string>
     <string name="liboard_subscript">Tiefgestellt</string>
+    <string name="liboard_based_on_heliboard">LiBoard baut auf HeliBoard auf, einer freien Tastatur von Helium314 und vielen Mitwirkenden. Freie Software unter der GNU GPL v3.</string>
+    <string name="liboard_origin">Herkunft</string>
+    <string name="liboard_more">Weiteres</string>
+    <string name="liboard_heliboard_title">Aufgebaut auf HeliBoard</string>
+    <string name="liboard_heliboard_desc">Freie Tastatur von Helium314 und Mitwirkenden – Quellcode auf GitHub</string>
+    <string name="liboard_emojis">Emojis</string>
+    <string name="liboard_emoji_style">Emoji-Stil</string>
+    <string name="liboard_emoji_apple">Apple</string>
+    <string name="liboard_emoji_android">Android</string>
+    <string name="liboard_emoji_apple_missing">Dafür zuerst die Apple-Emoji-Schrift unter „Eigene Emoji-Schrift“ laden.</string>
+    <string name="liboard_emoji_style_footer">Apple nutzt die geladene Emoji-Schrift, Android die Emojis deines Systems.</string>
+    <string name="app_slogan">Tastatur im iPhone-Stil, aufgebaut auf HeliBoard</string>
 </resources>
