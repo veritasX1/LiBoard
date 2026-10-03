@@ -153,9 +153,17 @@ public class PopupKeysKeyboardView extends KeyboardView implements PopupKeysPane
         final int containerY = y + CoordinateUtils.y(mCoordinates);
         container.setY(containerY);
 
+        // Keep the panel on the visible part of parentView: emoji pages sit in a horizontally
+        // scrolling band, so a page may extend past the screen edges.
+        final int windowWidth = parentView.getRootView().getWidth();
+        final int visibleLeft = Math.max(0, -CoordinateUtils.x(mCoordinates));
+        final int visibleRight = windowWidth > 0
+                ? Math.min(parentView.getMeasuredWidth(), windowWidth - CoordinateUtils.x(mCoordinates))
+                : parentView.getMeasuredWidth();
+
         // This is needed for cases where there's also a text popup above this keyboard
-        final int panelMaxX = parentView.getMeasuredWidth() - getMeasuredWidth();
-        var panelFinalX = Math.max(0, Math.min(panelMaxX, x));
+        final int panelMaxX = visibleRight - getMeasuredWidth();
+        var panelFinalX = Math.max(visibleLeft, Math.min(panelMaxX, x));
         var center = panelFinalX + getMeasuredWidth() / 2;
         var layoutGravity = center < pointX - getKeyboard().mMostCommonKeyWidth / 2?
                         Gravity.RIGHT : center > pointX + getKeyboard().mMostCommonKeyWidth / 2? Gravity.LEFT : Gravity.CENTER_HORIZONTAL;
@@ -168,8 +176,8 @@ public class PopupKeysKeyboardView extends KeyboardView implements PopupKeysPane
         }
 
         // Ensure the horizontal position of the panel does not extend past the parentView edges.
-        int containerMaxX = parentView.getMeasuredWidth() - container.getMeasuredWidth();
-        int containerFinalX = Math.max(0, Math.min(containerMaxX, containerAdjustedX));
+        int containerMaxX = visibleRight - container.getMeasuredWidth();
+        int containerFinalX = Math.max(visibleLeft, Math.min(containerMaxX, containerAdjustedX));
         int containerX = containerFinalX + CoordinateUtils.x(mCoordinates);
         container.setX(containerX);
         setTranslationX(panelFinalX - containerFinalX);
