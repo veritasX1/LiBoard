@@ -26,8 +26,10 @@ import helium314.keyboard.latin.utils.Theme
 import helium314.keyboard.settings.initPreview
 import helium314.keyboard.settings.preferences.Preference
 import helium314.keyboard.latin.utils.previewDark
-import helium314.keyboard.settings.screens.gesturedata.END_DATE_EPOCH_MILLIS
-import helium314.keyboard.settings.screens.gesturedata.TWO_WEEKS_IN_MILLIS
+import helium314.keyboard.settings.IosGroup
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun MainSettingsScreen(
@@ -47,7 +49,7 @@ fun MainSettingsScreen(
 ) {
     SearchSettingsScreen(
         onClickBack = onClickBack,
-        title = stringResource(R.string.ime_settings),
+        title = stringResource(R.string.english_ime_name), // LiBoard: short large title as in iOS Settings
         settings = emptyList(),
     ) {
         val enabledSubtypes = SubtypeSettings.getEnabledSubtypes(true)
@@ -55,71 +57,81 @@ fun MainSettingsScreen(
             Column(
                 Modifier.verticalScroll(rememberScrollState()).then(Modifier.padding(innerPadding))
             ) {
-                Preference(
-                    name = "Tipp-Test",
-                    description = "Wie sauber tippst du? FUTO und LiBoard vergleichen",
-                    onClick = onClickTypingTest,
-                    icon = R.drawable.ic_settings_correction,
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.language_and_layouts_title),
-                    description = enabledSubtypes.joinToString(", ") { it.displayName() },
-                    onClick = onClickLanguage,
-                    icon = R.drawable.ic_settings_languages
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_preferences),
-                    onClick = onClickPreferences,
-                    icon = R.drawable.ic_settings_preferences
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_appearance),
-                    onClick = onClickAppearance,
-                    icon = R.drawable.ic_settings_appearance
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_toolbar),
-                    onClick = onClickToolbar,
-                    icon = R.drawable.ic_settings_toolbar
-                ) { NextScreenIcon() }
-                if (JniUtils.sHaveGestureLib)
-                    Preference(
-                        name = stringResource(R.string.settings_screen_gesture),
-                        onClick = onClickGestureTyping,
-                        icon = R.drawable.ic_settings_gesture
-                    ) { NextScreenIcon() }
-                // LiBoard: privacy first – no gesture data gathering, not even opt-in.
-                if (false && JniUtils.sHaveGestureLib && System.currentTimeMillis() < END_DATE_EPOCH_MILLIS + TWO_WEEKS_IN_MILLIS)
-                    Preference(
-                        name = stringResource(R.string.gesture_data_screen),
-                        onClick = onClickDataGathering,
-                        icon = R.drawable.ic_settings_gesture
-                    ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_correction),
-                    onClick = onClickTextCorrection,
-                    icon = R.drawable.ic_settings_correction
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_secondary_layouts),
-                    onClick = onClickLayouts,
-                    icon = R.drawable.ic_settings_layout
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.dictionary_settings_category),
-                    onClick = onClickDictionaries,
-                    icon = R.drawable.ic_dictionary
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_advanced),
-                    onClick = onClickAdvanced,
-                    icon = R.drawable.ic_settings_advanced
-                ) { NextScreenIcon() }
-                Preference(
-                    name = stringResource(R.string.settings_screen_about),
-                    onClick = onClickAbout,
-                    icon = R.drawable.ic_settings_about
-                ) { NextScreenIcon() }
+                // LiBoard: grouped like the iOS Settings app (Apple HIG)
+                IosGroup(inset = 59, items = listOf(
+                    { Preference(
+                        name = "Tipp-Test",
+                        description = "Wie sauber tippst du? FUTO und LiBoard vergleichen",
+                        onClick = onClickTypingTest,
+                        icon = R.drawable.ic_settings_typing_test,
+                    ) { NextScreenIcon() } },
+                ))
+                IosGroup(inset = 59, items = listOf(
+                    { Preference(
+                        name = stringResource(R.string.language_and_layouts_title),
+                        description = enabledSubtypes.joinToString(", ") { it.displayName() },
+                        onClick = onClickLanguage,
+                        icon = R.drawable.ic_settings_languages
+                    ) { NextScreenIcon() } },
+                    { Preference(
+                        name = stringResource(R.string.settings_screen_secondary_layouts),
+                        onClick = onClickLayouts,
+                        icon = R.drawable.ic_settings_layout
+                    ) { NextScreenIcon() } },
+                    { Preference(
+                        name = stringResource(R.string.dictionary_settings_category),
+                        onClick = onClickDictionaries,
+                        icon = R.drawable.ic_dictionary
+                    ) { NextScreenIcon() } },
+                ))
+                IosGroup(inset = 59, items = buildList {
+                    add @Composable { Preference(
+                        name = stringResource(R.string.settings_screen_preferences),
+                        onClick = onClickPreferences,
+                        icon = R.drawable.ic_settings_preferences
+                    ) { NextScreenIcon() } }
+                    add @Composable { Preference(
+                        name = stringResource(R.string.settings_screen_correction),
+                        onClick = onClickTextCorrection,
+                        icon = R.drawable.ic_settings_correction
+                    ) { NextScreenIcon() } }
+                    if (JniUtils.sHaveGestureLib)
+                        add @Composable { Preference(
+                            name = stringResource(R.string.settings_screen_gesture),
+                            onClick = onClickGestureTyping,
+                            icon = R.drawable.ic_settings_gesture
+                        ) { NextScreenIcon() } }
+                    // LiBoard: privacy first – no gesture data gathering, not even opt-in (onClickDataGathering unused)
+                    add @Composable { Preference(
+                        name = stringResource(R.string.settings_screen_toolbar),
+                        onClick = onClickToolbar,
+                        icon = R.drawable.ic_settings_toolbar
+                    ) { NextScreenIcon() } }
+                })
+                IosGroup(inset = 59, items = listOf(
+                    { Preference(
+                        name = stringResource(R.string.settings_screen_appearance),
+                        onClick = onClickAppearance,
+                        icon = R.drawable.ic_settings_appearance
+                    ) { NextScreenIcon() } },
+                    { Preference(
+                        name = stringResource(R.string.settings_screen_advanced),
+                        onClick = onClickAdvanced,
+                        icon = R.drawable.ic_settings_advanced
+                    ) { NextScreenIcon() } },
+                ))
+                IosGroup(
+                    inset = 59,
+                    footer = stringResource(R.string.liboard_based_on_heliboard),
+                    items = listOf(
+                        { Preference(
+                            name = stringResource(R.string.settings_screen_about),
+                            onClick = onClickAbout,
+                            icon = R.drawable.ic_settings_about
+                        ) { NextScreenIcon() } },
+                    )
+                )
+                Spacer(Modifier.height(32.dp))
             }
         }
     }

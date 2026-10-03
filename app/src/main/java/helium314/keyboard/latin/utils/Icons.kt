@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.latin.utils
 
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.size
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Icon
@@ -20,9 +25,11 @@ import helium314.keyboard.latin.R
 
 @Composable
 fun NextScreenIcon() {
+    // LiBoard: small grey disclosure chevron as in iOS lists
     Icon(
         painterResource(R.drawable.ic_arrow_left), null,
-        if (LocalLayoutDirection.current == LayoutDirection.Ltr) Modifier.scale(-1f, 1f) else Modifier
+        (if (LocalLayoutDirection.current == LayoutDirection.Ltr) Modifier.scale(-1f, 1f) else Modifier).size(18.dp),
+        tint = if (MaterialTheme.colorScheme.background.luminance() < 0.5f) Color(0xFF5A5A5F) else Color(0xFFC4C4C7)
     )
 }
 
@@ -66,10 +73,13 @@ fun ExpandButton(enabled: Boolean = true, onClick: () -> Unit) {
 
 @Composable
 fun BackButton(onClick: () -> Unit) {
+    // LiBoard: iOS back chevron in the accent colour
     IconButton(onClick = onClick) {
         Icon(
-            painterResource(R.drawable.ic_arrow_back),
-            stringResource(R.string.spoken_description_action_previous)
+            painterResource(R.drawable.ic_arrow_left),
+            stringResource(R.string.spoken_description_action_previous),
+            Modifier.size(28.dp),
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }

@@ -1,6 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.screens
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextField
+import helium314.keyboard.settings.IosFooter
+import helium314.keyboard.settings.IosHeader
+import helium314.keyboard.settings.IosGroup
 import android.provider.Settings as AndroidSettings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -129,48 +137,82 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
     }
 
     SearchSettingsScreen(onClickBack = onClickBack, title = "Tipp-Test", settings = emptyList()) {
-        Column(
-            Modifier.verticalScroll(rememberScrollState()).padding(16.dp).imePadding(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
+        // LiBoard: laid out as iOS grouped lists (Apple HIG)
+        Column(Modifier.verticalScroll(rememberScrollState()).imePadding()) {
             if (!done) {
-                Text("Satz ${index + 1} von ${SENTENCES.size} · Tastatur: ${activeKeyboard(context)}",
-                    style = MaterialTheme.typography.bodySmall)
-                Text(target, style = MaterialTheme.typography.titleMedium)
-                OutlinedTextField(
-                    value = text,
-                    onValueChange = { new ->
-                        if (started == 0L && new.isNotEmpty()) started = System.currentTimeMillis()
-                        if (new.length < text.length) deletions++
-                        text = new
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                    placeholder = { Text("Hier tippen – einfach drauflos, wie im Alltag") },
+                IosGroup(
+                    header = "Satz ${index + 1} von ${SENTENCES.size} · Tastatur: ${activeKeyboard(context)}",
+                    footer = "Fehler, die du selbst korrigierst, zählen als Korrekturen; was am Ende falsch bleibt, als Fehler.",
+                    items = listOf(
+                        {
+                            Text(target, style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp))
+                        },
+                        {
+                            TextField(
+                                value = text,
+                                onValueChange = { new ->
+                                    if (started == 0L && new.isNotEmpty()) started = System.currentTimeMillis()
+                                    if (new.length < text.length) deletions++
+                                    text = new
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                                placeholder = { Text("Hier tippen – einfach drauflos, wie im Alltag") },
+                                colors = TextFieldDefaults.colors(
+                                    focusedContainerColor = Color.Transparent,
+                                    unfocusedContainerColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent,
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                ),
+                            )
+                        },
+                    )
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { next() }, enabled = text.isNotBlank()) { Text("Weiter") }
-                    OutlinedButton(onClick = { restart() }) { Text("Neu beginnen") }
-                }
-                Text("Fehler, die du selbst korrigierst, zählen als Korrekturen; was am Ende falsch bleibt, als Fehler.",
-                    style = MaterialTheme.typography.bodySmall)
+                Button(
+                    onClick = { next() },
+                    enabled = text.isNotBlank(),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 18.dp).fillMaxWidth().height(50.dp),
+                ) { Text("Weiter", fontWeight = FontWeight.SemiBold) }
+                TextButton(
+                    onClick = { restart() },
+                    modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
+                ) { Text("Neu beginnen") }
             } else {
-                Text("Fertig!", style = MaterialTheme.typography.titleMedium)
-                Button(onClick = { restart() }) { Text("Noch eine Runde") }
+                IosGroup(items = listOf {
+                    Text("Fertig! Das Ergebnis steht unten.", style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp))
+                })
+                Button(
+                    onClick = { restart() },
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 18.dp).fillMaxWidth().height(50.dp),
+                ) { Text("Noch eine Runde", fontWeight = FontWeight.SemiBold) }
             }
-            Spacer(Modifier.height(8.dp))
-            Text("Bisherige Runden (nur auf diesem Handy)", fontWeight = FontWeight.Bold)
-            if (runs.length() == 0) Text("Noch keine – tippe eine Runde mit FUTO und eine mit LiBoard zum Vergleich.",
-                style = MaterialTheme.typography.bodySmall)
-            for (i in runs.length() - 1 downTo 0) {
-                val run = runs.getJSONObject(i)
-                Text(
-                    "${run.getString("date")} · ${run.getString("keyboard")}: " +
-                        "%.1f %% Fehler · %d Korrekturen · %.0f Wörter/Min".format(Locale.GERMANY,
-                            run.getDouble("errorRate") * 100, run.getInt("corrections"), run.getDouble("wpm")),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
+            val header = "Bisherige Runden (nur auf diesem Handy)"
+            if (runs.length() == 0) {
+                IosHeader(header)
+                IosFooter("Noch keine – tippe eine Runde mit FUTO und eine mit LiBoard zum Vergleich.")
+            } else IosGroup(
+                header = header,
+                items = (runs.length() - 1 downTo 0).map { i ->
+                    val run = runs.getJSONObject(i)
+                    val row: @Composable () -> Unit = {
+                        Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
+                            Text("${run.getString("keyboard")} · ${run.getString("date")}", style = MaterialTheme.typography.bodyLarge)
+                            Text(
+                                "%.1f %% Fehler · %d Korrekturen · %.0f Wörter/Min".format(Locale.GERMANY,
+                                    run.getDouble("errorRate") * 100, run.getInt("corrections"), run.getDouble("wpm")),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                    row
+                }
+            )
+            Spacer(Modifier.height(32.dp))
         }
     }
 }

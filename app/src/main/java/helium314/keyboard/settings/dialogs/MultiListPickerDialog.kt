@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.dialogs
 
+import helium314.keyboard.settings.iosSwitchColors
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -68,6 +70,7 @@ fun <T: Any> MultiListPickerDialog(
                                 modifier = Modifier.weight(1f),
                             )
                             Switch(
+                                colors = iosSwitchColors(),
                                 checked = item in selected,
                                 onCheckedChange = {
                                     selected = if (it) selected + item else selected - item

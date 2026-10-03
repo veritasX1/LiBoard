@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.screens
 
+import helium314.keyboard.settings.iosSwitchColors
+
 import android.content.Context
 import android.os.Build
 import android.view.inputmethod.InputMethodSubtype
@@ -93,7 +95,7 @@ private fun SubtypeRow(subtype: InputMethodSubtype, isEnabled: Boolean) {
             .clickable {
                 SettingsDestination.navigateTo(SettingsDestination.Subtype + subtype.toSettingsSubtype().toPref())
             }
-            .padding(vertical = 6.dp, horizontal = 16.dp)
+            .padding(vertical = 8.dp, horizontal = 16.dp)
     ) {
         var showNoDictDialog by remember { mutableStateOf(false) }
         Column(modifier = Modifier.weight(1f)) {
@@ -111,6 +113,7 @@ private fun SubtypeRow(subtype: InputMethodSubtype, isEnabled: Boolean) {
                 )
         }
         Switch(
+            colors = iosSwitchColors(),
             checked = isEnabled,
             onCheckedChange = {
                 if (it && !dictsAvailable(subtype.locale(), ctx))

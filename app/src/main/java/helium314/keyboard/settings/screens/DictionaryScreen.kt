@@ -79,19 +79,21 @@ fun DictionaryScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .clickable { showAddDictDialog = true }
-                        .padding(vertical = 4.dp, horizontal = 16.dp)
+                        .padding(vertical = 11.dp, horizontal = 16.dp)
                         .fillMaxWidth()
                 ) {
+                    // LiBoard: action row in the accent colour, as in iOS
                     Text(
                         stringResource(R.string.add_new_dictionary_title),
+                        color = MaterialTheme.colorScheme.primary,
                     )
-                    Icon(painterResource(R.drawable.ic_plus), stringResource(R.string.add_new_dictionary_title))
+                    Icon(painterResource(R.drawable.ic_plus), stringResource(R.string.add_new_dictionary_title), tint = MaterialTheme.colorScheme.primary)
                 }
             } else {
                 Column(
                     Modifier
                         .clickable { selectedLocale = locale }
-                        .padding(vertical = 6.dp, horizontal = 16.dp)
+                        .padding(vertical = 10.dp, horizontal = 16.dp)
                         .fillMaxWidth()
                 ) {
                     val (dicts, hasInternal) = getUserAndInternalDictionaries(ctx, locale)

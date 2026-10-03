@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.preferences
 
+import helium314.keyboard.settings.iosSwitchColors
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -59,6 +61,7 @@ fun ReorderSwitchPreference(setting: Setting, default: String) {
                         else item.name.lowercase().getStringResourceOrName("popup_keys_", ctx)
                     Text(actualText, Modifier.weight(1f))
                     Switch(
+                        colors = iosSwitchColors(),
                         checked = checked,
                         onCheckedChange = { item.state = it; checked = it }
                     )

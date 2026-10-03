@@ -28,7 +28,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import helium314.keyboard.latin.R
-import helium314.keyboard.settings.IconOrImage
+import androidx.compose.foundation.layout.Box
+import helium314.keyboard.settings.IosHeader
+import helium314.keyboard.settings.IosIconTile
 import helium314.keyboard.latin.utils.Theme
 import helium314.keyboard.latin.utils.previewDark
 
@@ -39,15 +41,8 @@ fun PreferenceCategory(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    Column {
-        HorizontalDivider()
-        Text(
-            text = title,
-            modifier = modifier.padding(top = 12.dp, start = 16.dp, end = 8.dp, bottom = 8.dp),
-            color = MaterialTheme.colorScheme.secondary,
-            style = MaterialTheme.typography.titleSmall
-        )
-    }
+    // LiBoard: iOS section header (grey, upper case, no divider)
+    Box(modifier) { IosHeader(title) }
 }
 
 @Composable
@@ -64,14 +59,14 @@ fun Preference(
             .fillMaxWidth()
             .clickable { onClick() }
             .heightIn(min = 44.dp)
-            .padding(vertical = 10.dp, horizontal = 12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+            .padding(vertical = 11.dp, horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (icon != null)
-            IconOrImage(icon, name, 32)
+            IosIconTile(icon)
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = name, style = MaterialTheme.typography.bodyLarge)
+            Text(text = name, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
             if (description != null) {
                 CompositionLocalProvider(
                     LocalTextStyle provides MaterialTheme.typography.bodyMedium,

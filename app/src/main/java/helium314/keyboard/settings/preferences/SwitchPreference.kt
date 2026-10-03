@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings.preferences
 
+import helium314.keyboard.settings.iosSwitchColors
+
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -75,6 +77,7 @@ fun SwitchPreference(
         Switch(
             checked = value,
             onCheckedChange = { switched(it) },
+            colors = iosSwitchColors(),
         )
     }
 }

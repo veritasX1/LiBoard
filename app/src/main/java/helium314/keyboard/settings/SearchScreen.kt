@@ -1,6 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.settings
 
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.background
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.LargeTopAppBar
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
@@ -73,18 +84,22 @@ fun SearchSettingsScreen(
                     Column(
                         Modifier.verticalScroll(rememberScrollState()).then(Modifier.padding(innerPadding))
                     ) {
+                        // LiBoard: every category becomes an inset grouped list (Apple HIG)
+                        val groups = mutableListOf<Pair<Int?, MutableList<Any>>>()
                         settings.forEach {
-                            if (it is Int) {
-                                PreferenceCategory(stringResource(it))
-                            } else {
-                                // this only animates appearing prefs
-                                // a solution would be using a list(visible to key)
-                                AnimatedVisibility(visible = it != null) {
-                                    if (it != null)
-                                        SettingsActivity.settingsContainer[it]?.Preference()
-                                }
+                            if (it is Int) groups.add(it to mutableListOf())
+                            else if (it != null) {
+                                if (groups.isEmpty()) groups.add(null to mutableListOf())
+                                groups.last().second.add(it)
                             }
                         }
+                        groups.forEach { (header, keys) ->
+                            IosGroup(
+                                header = header?.let { stringResource(it) },
+                                items = keys.map { key -> @Composable { SettingsActivity.settingsContainer[key]?.Preference() } }
+                            )
+                        }
+                        Spacer(Modifier.height(32.dp))
                     }
                     // lazyColumn has janky scroll for a while (not sure why compose gets smoother after a while)
                     // maybe related to unnecessary recompositions? but even for just displaying text it's there
@@ -126,7 +141,12 @@ fun <T: Any?> SearchScreen(
     // keyboard in unexpected situations such as going back from another screen, which is rather annoying
     var searchText by remember { mutableStateOf(TextFieldValue()) }
     var showSearch by remember { mutableStateOf(false) }
-    Scaffold(contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top))
+    // LiBoard: iOS large title that collapses into the navigation bar while scrolling
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)
+    )
     { innerPadding ->
         Column(Modifier.fillMaxSize().padding(innerPadding)) {
 
@@ -142,9 +162,16 @@ fun <T: Any?> SearchScreen(
                 color = MaterialTheme.colorScheme.surfaceContainer,
             ) {
                 Column {
-                    TopAppBar(
+                    LargeTopAppBar(
                         title = title,
                         windowInsets = WindowInsets(0),
+                        scrollBehavior = scrollBehavior,
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.background,
+                            scrolledContainerColor = MaterialTheme.colorScheme.background,
+                            actionIconContentColor = MaterialTheme.colorScheme.primary,
+                            navigationIconContentColor = MaterialTheme.colorScheme.primary,
+                        ),
                         navigationIcon = {
                             BackButton {
                                 if (showSearch) setShowSearch(false)
@@ -185,7 +212,10 @@ fun <T: Any?> SearchScreen(
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp),
                         colors = TextFieldDefaults.colors(
-                            focusedContainerColor = MaterialTheme.colorScheme.surface
+                            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                            focusedIndicatorColor = androidx.compose.ui.graphics.Color.Transparent,
+                            unfocusedIndicatorColor = androidx.compose.ui.graphics.Color.Transparent,
                         )
                     )
                 }
@@ -200,10 +230,30 @@ fun <T: Any?> SearchScreen(
                     Scaffold(
                         contentWindowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom)
                     ) { innerPadding ->
+                        // LiBoard: list entries as one inset grouped list (Apple HIG)
                         LazyColumn(contentPadding = innerPadding) {
-                            items(items) {
-                                itemContent(it)
+                            item { Spacer(Modifier.height(20.dp)) }
+                            itemsIndexed(items) { index, item ->
+                                val last = items.lastIndex
+                                val shape = when {
+                                    last == 0 -> RoundedCornerShape(10.dp)
+                                    index == 0 -> RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
+                                    index == last -> RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp)
+                                    else -> RectangleShape
+                                }
+                                Column(
+                                    Modifier.padding(horizontal = 16.dp).clip(shape).background(iosCellColor())
+                                ) {
+                                    if (index > 0)
+                                        HorizontalDivider(
+                                            Modifier.padding(start = 16.dp),
+                                            thickness = 0.5.dp,
+                                            color = MaterialTheme.colorScheme.outlineVariant
+                                        )
+                                    itemContent(item)
+                                }
                             }
+                            item { Spacer(Modifier.height(32.dp)) }
                         }
                     }
                 }
