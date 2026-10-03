@@ -1,0 +1,33 @@
+[
+  [
+    {"label": "["},
+    {"label": "]"},
+    {"label": "{"},
+    {"label": "}"},
+    {"label": "#"},
+    {"label": "%", "popup": {"relevant": [{"label": "‰"}]}},
+    {"label": "^"},
+    {"label": "*"},
+    {"label": "+", "popup": {"relevant": [{"label": "±"}]}},
+    {"label": "=", "popup": {"relevant": [{"label": "≠"}, {"label": "≈"}]}}
+  ],
+  [
+    {"label": "_"},
+    {"label": "\\"},
+    {"label": "|"},
+    {"label": "~"},
+    {"label": "<", "popup": {"relevant": [{"label": "≤"}, {"label": "«"}, {"label": "‹"}]}},
+    {"label": ">", "popup": {"relevant": [{"label": "≥"}, {"label": "»"}, {"label": "›"}]}},
+    {"label": "$", "popup": {"relevant": [{"label": "¢"}]}},
+    {"label": "£"},
+    {"label": "¥"},
+    {"label": "•", "popup": {"relevant": [{"label": "·"}, {"label": "°"}]}}
+  ],
+  [
+    {"label": ".", "popup": {"relevant": [{"label": "…"}]}, "width": 0.14},
+    {"label": ",", "width": 0.14},
+    {"label": "?", "popup": {"relevant": [{"label": "¿"}]}, "width": 0.14},
+    {"label": "!", "popup": {"relevant": [{"label": "¡"}]}, "width": 0.14},
+    {"label": "'", "popup": {"relevant": [{"label": "‚"}, {"label": "‘"}, {"label": "’"}, {"label": "`"}]}, "width": 0.14}
+  ]
+]

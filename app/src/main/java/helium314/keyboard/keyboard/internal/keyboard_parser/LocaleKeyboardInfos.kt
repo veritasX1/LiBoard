@@ -25,7 +25,7 @@ class LocaleKeyboardInfos(dataStream: InputStream?, locale: Locale) {
     val labelSymbolInNumpad = "!?#"
     var labelAlphabet = "ABC"
         private set
-    private var labelShiftSymbol = "= \\\\ <"
+    private var labelShiftSymbol = "#+="   // LiBoard: as on iOS
     private var labelShiftSymbolTablet = "~ [ <"
     var labelComma = ","
         private set
