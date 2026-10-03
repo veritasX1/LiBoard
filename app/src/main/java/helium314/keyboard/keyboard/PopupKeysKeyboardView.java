@@ -153,12 +153,13 @@ public class PopupKeysKeyboardView extends KeyboardView implements PopupKeysPane
         final int containerY = y + CoordinateUtils.y(mCoordinates);
         container.setY(containerY);
 
-        // Keep the panel on the visible part of parentView: emoji pages sit in a horizontally
-        // scrolling band, so a page may extend past the screen edges.
+        // Keep the panel on screen (in parentView coordinates): emoji pages sit in a horizontally
+        // scrolling band, so a page may start or end off screen and the panel may overlap the
+        // neighbouring page.
         final int windowWidth = parentView.getRootView().getWidth();
-        final int visibleLeft = Math.max(0, -CoordinateUtils.x(mCoordinates));
+        final int visibleLeft = windowWidth > 0 ? -CoordinateUtils.x(mCoordinates) : 0;
         final int visibleRight = windowWidth > 0
-                ? Math.min(parentView.getMeasuredWidth(), windowWidth - CoordinateUtils.x(mCoordinates))
+                ? windowWidth - CoordinateUtils.x(mCoordinates)
                 : parentView.getMeasuredWidth();
 
         // This is needed for cases where there's also a text popup above this keyboard
