@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LiBoard – Tapez comme sur l’iPhone. Sur Android.</title>
+<meta name="description" content="LiBoard est un clavier Android dans le style du clavier de l’iPhone : touches calmes, nombreuses variantes, barre d’espace en trackpad – hors ligne, sans compte et sans autorisation Internet. Construit sur HeliBoard.">
+<link rel="icon" href="../liboard.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../site.css">
+<!--lang--><link rel="alternate" hreflang="de" href="https://lisoft.goip.de/liboard/"><link rel="alternate" hreflang="en" href="https://lisoft.goip.de/liboard/en/"><link rel="alternate" hreflang="fr" href="https://lisoft.goip.de/liboard/fr/">
+<style>
+.apps .wrap { position: relative; }
+.lang-switch { position: absolute; right: 22px; display: flex; gap: 12px; }
+.lang-switch a[aria-current], .lang-foot a[aria-current] { color: #fff; opacity: 1; font-weight: 600; }
+.lang-foot { display: flex; gap: 14px; justify-content: center; padding-top: 18px; font-size: 13px; }
+.lang-foot a[aria-current] { color: inherit; }
+@media (max-width: 900px) { .lang-switch { display: none; } }
+</style><!--/lang-->
+</head>
+<body>
+
+<div class="apps">
+  <div class="wrap">
+    <a href="https://lisoft.goip.de/linotes/fr/">LiNotes</a>
+    <a href="https://lisoft.goip.de/prevux/fr/">Prevux</a>
+    <a href="https://lisoft.goip.de/liboard/fr/" aria-current="page">LiBoard</a>
+    <a href="https://lisoft.goip.de/licida/fr/">LiCida</a>
+    <a href="https://lisoft.goip.de/lical/fr/">LiCal</a>
+    <a href="https://lisoft.goip.de/lidio/fr/">LiDio</a>
+  <!--lang--><span class="lang-switch"><a href="../" hreflang="de" lang="de">DE</a><a href="../en/" hreflang="en" lang="en">EN</a><a href="./" hreflang="fr" lang="fr" aria-current="true">FR</a></span><!--/lang-->
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="../liboard.svg" alt="">LiBoard</a>
+    <nav class="links">
+      <a href="#tastatur">Clavier</a>
+      <a href="#trackpad">Trackpad</a>
+      <a href="#funktionen">Fonctions</a>
+      <a href="#datenschutz">Confidentialité</a>
+      <a href="https://github.com/veritasX1/LiBoard">GitHub</a>
+    </nav>
+    <a class="btn small cta" href="#laden">Télécharger</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <img class="app-icon reveal" src="../liboard.svg" alt="Icône de LiBoard" width="120" height="120">
+    <span class="badge reveal">Nouveau : version 0.1 bêta</span>
+    <h1 class="display reveal d1">Tapez comme sur l’iPhone.<br><span class="gradient-text">Sur Android.</span></h1>
+    <p class="lead reveal d2">Un clavier avec le calme et l’ordre du clavier de l’iPhone – pour Android.<br>Hors ligne, sans compte et sans aucune autorisation Internet.</p>
+    <div class="actions reveal d3">
+      <a class="btn" href="#laden">Télécharger gratuitement</a>
+      <a class="btn ghost" href="#funktionen">Toutes les fonctions</a>
+    </div>
+    <div class="solo-phone reveal">
+      <div class="phone"><img src="../img/abc.webp" alt="LiBoard avec lettres, barre de suggestions avec « OK » et la rangée du bas 123 · Emoji · espace · Rechercher" width="640" height="1422"></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap center" style="padding-top: 40px; max-width: 1000px">
+  <p class="headline reveal">Familier. Calme.<br><span style="color: var(--muted)">Et rien que pour vous.</span></p>
+  <p class="lead reveal d1">Quand on vient de l’iPhone, c’est souvent le clavier qui manque le plus. LiBoard reprend les proportions, la disposition et les habitudes du clavier de l’iPhone – et garde tout ce que vous tapez sur votre téléphone.</p>
+</section>
+
+<!-- KEYBOARD PAGES -->
+<section id="tastatur" class="alt">
+  <div class="wrap section-head reveal" style="margin-bottom: 30px">
+    <p class="eyebrow">Clavier</p>
+    <h2 class="headline">Chaque chose à sa place.</h2>
+    <p class="lead">Lettres, chiffres et symboles sont là où vous les connaissez sur l’iPhone. En bas, toujours la même rangée : 123 · Emoji · espace · action.</p>
+  </div>
+  <div class="carousel" id="pages">
+    <figure><div class="phone"><img src="../img/abc.webp" alt="" loading="lazy"></div><figcaption>Lettres<span>Avec trémas et « OK »</span></figcaption></figure>
+    <figure><div class="phone"><img src="../img/num.webp" alt="" loading="lazy"></div><figcaption>123<span>- / : ; ( ) € &amp; @ "</span></figcaption></figure>
+    <figure><div class="phone"><img src="../img/sym.webp" alt="" loading="lazy"></div><figcaption>#+=<span>Parenthèses, devises, symboles</span></figcaption></figure>
+    <figure><div class="phone"><img src="../img/popup_a.webp" alt="" loading="lazy"></div><figcaption>Appui long<span>ä à á â æ ã å ā</span></figcaption></figure>
+    <figure><div class="phone"><img src="../img/emoji.webp" alt="" loading="lazy"></div><figcaption>Emoji<span>Avec recherche et catégories</span></figcaption></figure>
+    <figure><div class="phone"><img src="../img/settings.webp" alt="" loading="lazy"></div><figcaption>Réglages<span>Selon les directives d’Apple</span></figcaption></figure>
+  </div>
+  <div class="carousel-nav" data-track="#pages"><button data-dir="-1" aria-label="Retour">‹</button><button data-dir="1" aria-label="Suivant">›</button></div>
+</section>
+
+<!-- TRACKPAD -->
+<section id="trackpad">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <p class="eyebrow">Trackpad</p>
+        <h2 class="headline">La barre d’espace<br>devient un trackpad.</h2>
+        <p class="lead">Maintenez la barre d’espace – les touches s’estompent et votre doigt déplace librement le curseur dans le texte. Caractère par caractère, ligne par ligne, exactement là où vous voulez.</p>
+        <ul class="checks">
+          <li><b>Sur tout le clavier</b> – pas seulement sur la barre d’espace.</li>
+          <li><b>Relâcher</b> quitte le mode sans taper d’espace.</li>
+          <li><b>Un court glissement</b> sur la barre d’espace déplace le curseur comme d’habitude.</li>
+        </ul>
+      </div>
+      <div class="reveal d1" style="max-width: 320px; margin: 0 auto">
+        <div class="phone"><img src="../img/trackpad.webp" alt="Mode trackpad : les touches sont estompées, le curseur se déplace avec le doigt" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TILES -->
+<section id="funktionen" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Fonctions</p>
+      <h2 class="headline">Et bien plus encore.</h2>
+      <p class="lead">Les petits détails qui rendent la frappe agréable.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 14h10"/></svg></div><h3>Pas de bande vide</h3><p>Le clavier va jusqu’au bord inférieur. « OK » en haut à droite le masque – comme sur l’iPhone.</p></div>
+      <div class="tile reveal d1"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l6-12M10 18L4 6M14 9h4M16 7v4M14 19h4"/></svg></div><h3>Exposant et indice</h3><p>x² et x₂ dans la barre de suggestions : H₂O, SO₄²⁻, m² – fonctionne dans toutes les apps.</p></div>
+      <div class="tile reveal d2"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg></div><h3>Allemand et anglais</h3><p>Les deux langues à la fois – sans basculer, avec des suggestions issues des deux dictionnaires.</p></div>
+      <div class="tile reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0"/><circle cx="9" cy="10" r=".8" fill="currentColor"/><circle cx="15" cy="10" r=".8" fill="currentColor"/></svg></div><h3>Emoji avec recherche</h3><p>Toutes les catégories dans un seul bandeau, teintes de peau par appui long, recherche par mot-clé. Au choix avec sa propre police d’emoji.</p></div>
+      <div class="tile reveal d1"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7.5"/><path d="M12 13V9M10 2.5h4M18.4 6.1l1.2-1.2"/></svg></div><h3>Test de frappe</h3><p>Mesurez le taux d’erreurs, les corrections et la vitesse – et comparez avec votre clavier habituel. Tout reste sur le téléphone.</p></div>
+      <div class="tile reveal d2"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 9h8M8 12h8M8 15h5"/></svg></div><h3>Réglages comme sur iOS</h3><p>Listes groupées, grands titres, langage clair – selon les Human Interface Guidelines d’Apple.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="datenschutz">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Confidentialité</p>
+      <h2 class="headline">Ce que vous tapez<br>reste chez vous.</h2>
+      <p class="lead">Un clavier voit tout : mots de passe, messages, recherches. C’est pourquoi LiBoard ne peut techniquement rien envoyer.</p>
+    </div>
+    <div class="facts">
+      <div class="reveal"><div class="num gradient-text">0</div><div class="lbl">autorisation Internet</div></div>
+      <div class="reveal d1"><div class="num gradient-text">0</div><div class="lbl">comptes et clouds</div></div>
+      <div class="reveal d2"><div class="num gradient-text">0</div><div class="lbl">traqueurs et statistiques</div></div>
+      <div class="reveal d3"><div class="num gradient-text">100 %</div><div class="lbl">code source ouvert</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="alt">
+  <div class="wrap">
+    <div class="split reverse">
+      <div class="reveal">
+        <p class="eyebrow">Origine</p>
+        <h2 class="headline">Construit sur<br>HeliBoard.</h2>
+        <p class="lead">LiBoard est un fork de <a href="https://github.com/HeliBorg/HeliBoard">HeliBoard</a>, le clavier libre de Helium314 et de nombreux contributeurs – avec la même reconnaissance de frappe éprouvée issue du code source d’Android. LiBoard change l’apparence et l’utilisation, supprime la collecte de données facultative et reste un logiciel libre sous GPL-3.0.</p>
+      </div>
+      <div class="reveal d1 center"><img src="../liboard.svg" alt="" width="200" height="200" style="margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(74,63,214,.3))"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="laden">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Télécharger</p>
+      <h2 class="headline">Lancez-vous. Gratuitement.</h2>
+      <p class="lead">Version 0.1.0 bêta pour Android 5 et ultérieur. S’installe aussi à côté de HeliBoard.</p>
+    </div>
+    <div class="downloads">
+      <div class="download reveal">
+        <h3>F-Droid</h3>
+        <div class="meta">Recommandé – les mises à jour arrivent automatiquement</div>
+        <div class="grow">
+          <p>Ajoutez le dépôt dans F-Droid, puis recherchez LiBoard et installez-le.</p>
+          <a href="fdroidrepos://volkskamera.goip.de/fdroid/repo?fingerprint=8DA9DEF44C65856A1B098DB7BF876D48514997EF17C7256E23E91EAC6C486500">Ajouter le dépôt dans F-Droid ›</a>
+          <img class="qr" src="../fdroid-qr.svg" alt="QR code du dépôt F-Droid">
+        </div>
+        <details><summary>Empreinte du dépôt</summary>
+          <p><code style="word-break: break-all">8DA9DEF44C65856A1B098DB7BF876D48514997EF17C7256E23E91EAC6C486500</code></p>
+        </details>
+      </div>
+      <div class="download reveal d1">
+        <h3>APK</h3>
+        <div class="meta">Environ 22 Mo, avec dictionnaires</div>
+        <div class="grow">
+          <p>Téléchargez et installez directement. Ensuite : Paramètres → Système → Clavier → activer LiBoard.</p>
+        </div>
+        <a class="btn" href="../download/LiBoard-0.1.0.apk">Télécharger l’APK</a>
+        <details><summary>Signature de l’app</summary>
+          <p>SHA-256: <code style="word-break: break-all">fdf9c1947bb6b0b5d571ccac64b3bc1ae7ab3367a38dc0927f9d42bcdb1f946a</code></p>
+        </details>
+      </div>
+      <div class="download reveal d2">
+        <h3>Code source</h3>
+        <div class="meta">GPL-3.0 · sur GitHub</div>
+        <div class="grow">
+          <p>Chaque ligne consultable, toutes les versions à télécharger. Bugs ou idées bienvenus dans le gestionnaire de tickets.</p>
+        </div>
+        <a class="btn" href="https://github.com/veritasX1/LiBoard">Aller sur GitHub</a>
+      </div>
+    </div>
+    <p class="center reveal" style="margin-top: 50px; font-size: 19px; font-weight: 600">Développé par Olaf Winkler dans le Schleswig-Holstein.</p>
+    <p class="center" style="margin-top: 10px; color: var(--muted); font-size: 15px">Sommes de contrôle : <a href="../download/SHA256SUMS">SHA256SUMS</a> · Bêta, car la précision de frappe est encore en cours d’amélioration.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap made">
+    <img src="../liboard.svg" alt="" width="34" height="34">
+    <p><b>Développé dans le Schleswig-Holstein.</b><br>Par Olaf Winkler – entre mer du Nord et mer Baltique.</p>
+  </div>
+  <div class="wrap cols">
+    <div>
+      <h4>LiBoard</h4>
+      <p>Un clavier Android dans le style du clavier de l’iPhone. Un projet privé et non commercial d’Olaf Winkler, construit sur <a href="https://github.com/HeliBorg/HeliBoard">HeliBoard</a>.</p>
+      <p>Logiciel libre sous <a href="https://github.com/veritasX1/LiBoard/blob/main/LICENSE">GPL-3.0</a>.</p>
+    </div>
+    <div>
+      <h4>Confidentialité de ce site</h4>
+      <p>Pas de cookies, aucun contenu de serveurs tiers, aucun journal d’accès. Le JavaScript de ce site s’exécute uniquement dans votre navigateur et n’envoie rien.</p>
+    </div>
+    <div>
+      <h4>Remarque</h4>
+      <p>LiBoard est un projet indépendant, sans lien avec Apple Inc. « iPhone » est une marque d’Apple Inc. Aucun graphisme ni aucune police d’Apple n’est fourni.</p>
+    </div>
+  </div>
+<!--lang--><div class="wrap lang-foot"><a href="../" hreflang="de" lang="de">DE</a><a href="../en/" hreflang="en" lang="en">EN</a><a href="./" hreflang="fr" lang="fr" aria-current="true">FR</a></div><!--/lang-->
+</footer>
+
+<script src="../site.js"></script>
+</body>
+</html>
