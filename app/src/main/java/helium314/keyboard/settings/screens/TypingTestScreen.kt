@@ -43,7 +43,9 @@ import helium314.keyboard.latin.utils.prefs
 import helium314.keyboard.settings.SearchSettingsScreen
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.SimpleDateFormat
+import java.text.DateFormat
+import androidx.compose.ui.res.stringResource
+import helium314.keyboard.latin.R
 import java.util.Date
 import java.util.Locale
 
@@ -52,20 +54,6 @@ import java.util.Locale
  * be checked instead of guessed. Works with any keyboard (compare FUTO and LiBoard in the same way).
  * Everything stays on the phone (shared preferences), nothing is sent anywhere.
  */
-private val SENTENCES = listOf(
-    "Ich komme heute etwas später nach Hause.",
-    "Kannst du bitte noch Milch und Brot mitbringen?",
-    "Das Wetter in Kiel ist wieder richtig schön.",
-    "Wir treffen uns morgen um halb neun am Bahnhof.",
-    "Der Bericht ist fast fertig, ich schicke ihn gleich.",
-    "Danke für die schnelle Antwort, das hilft mir sehr.",
-    "Die Präsentation braucht noch ein paar Folien.",
-    "Hast du schon den neuen Kalender ausprobiert?",
-    "Das Meeting ist leider auf Donnerstag verschoben.",
-    "Bitte prüfe die Zahlen noch einmal genau.",
-    "Thanks, see you tomorrow at the meeting.",
-    "Das Feature ist im neuen Release enthalten.",
-)
 private const val RUNS_KEY = "liboard_typing_runs"
 
 /** Edit distance between what was asked and what was typed (characters). */
@@ -106,9 +94,10 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
     var characters by remember { mutableIntStateOf(0) }
     var corrections by remember { mutableIntStateOf(0) }
     var millis by remember { mutableLongStateOf(0L) }
+    val sentences = remember { context.resources.getStringArray(R.array.liboard_typing_sentences).toList() }
     var runs by remember { mutableStateOf(JSONArray(prefs.getString(RUNS_KEY, "[]"))) }
-    val target = SENTENCES[index % SENTENCES.size]
-    val done = index >= SENTENCES.size
+    val target = sentences[index % sentences.size]
+    val done = index >= sentences.size
 
     fun next() {
         val typed = text.trim()
@@ -118,9 +107,9 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
         if (started > 0) millis += System.currentTimeMillis() - started
         text = ""; started = 0L; deletions = 0
         index++
-        if (index >= SENTENCES.size) {
+        if (index >= sentences.size) {
             val run = JSONObject()
-                .put("date", SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY).format(Date()))
+                .put("date", DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date()))
                 .put("keyboard", activeKeyboard(context))
                 .put("errorRate", errors.toDouble() / characters)
                 .put("corrections", corrections)
@@ -136,13 +125,13 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
         index = 0; text = ""; started = 0L; deletions = 0; errors = 0; characters = 0; corrections = 0; millis = 0L
     }
 
-    SearchSettingsScreen(onClickBack = onClickBack, title = "Tipp-Test", settings = emptyList()) {
+    SearchSettingsScreen(onClickBack = onClickBack, title = stringResource(R.string.liboard_typing_test), settings = emptyList()) {
         // LiBoard: laid out as iOS grouped lists (Apple HIG)
         Column(Modifier.verticalScroll(rememberScrollState()).imePadding()) {
             if (!done) {
                 IosGroup(
-                    header = "Satz ${index + 1} von ${SENTENCES.size} · Tastatur: ${activeKeyboard(context)}",
-                    footer = "Fehler, die du selbst korrigierst, zählen als Korrekturen; was am Ende falsch bleibt, als Fehler.",
+                    header = stringResource(R.string.liboard_typing_sentence_of, index + 1, sentences.size, activeKeyboard(context)),
+                    footer = stringResource(R.string.liboard_typing_footer),
                     items = listOf(
                         {
                             Text(target, style = MaterialTheme.typography.titleMedium,
@@ -158,7 +147,7 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                                placeholder = { Text("Hier tippen – einfach drauflos, wie im Alltag") },
+                                placeholder = { Text(stringResource(R.string.liboard_typing_placeholder)) },
                                 colors = TextFieldDefaults.colors(
                                     focusedContainerColor = Color.Transparent,
                                     unfocusedContainerColor = Color.Transparent,
@@ -174,26 +163,26 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
                     enabled = text.isNotBlank(),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 18.dp).fillMaxWidth().height(50.dp),
-                ) { Text("Weiter", fontWeight = FontWeight.SemiBold) }
+                ) { Text(stringResource(R.string.liboard_typing_next), fontWeight = FontWeight.SemiBold) }
                 TextButton(
                     onClick = { restart() },
                     modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
-                ) { Text("Neu beginnen") }
+                ) { Text(stringResource(R.string.liboard_typing_restart)) }
             } else {
                 IosGroup(items = listOf {
-                    Text("Fertig! Das Ergebnis steht unten.", style = MaterialTheme.typography.titleMedium,
+                    Text(stringResource(R.string.liboard_typing_finished), style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp))
                 })
                 Button(
                     onClick = { restart() },
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 18.dp).fillMaxWidth().height(50.dp),
-                ) { Text("Noch eine Runde", fontWeight = FontWeight.SemiBold) }
+                ) { Text(stringResource(R.string.liboard_typing_again), fontWeight = FontWeight.SemiBold) }
             }
-            val header = "Bisherige Runden (nur auf diesem Handy)"
+            val header = stringResource(R.string.liboard_typing_runs)
             if (runs.length() == 0) {
                 IosHeader(header)
-                IosFooter("Noch keine – tippe eine Runde mit FUTO und eine mit LiBoard zum Vergleich.")
+                IosFooter(stringResource(R.string.liboard_typing_no_runs))
             } else IosGroup(
                 header = header,
                 items = (runs.length() - 1 downTo 0).map { i ->
@@ -202,7 +191,7 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
                         Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
                             Text("${run.getString("keyboard")} · ${run.getString("date")}", style = MaterialTheme.typography.bodyLarge)
                             Text(
-                                "%.1f %% Fehler · %d Korrekturen · %.0f Wörter/Min".format(Locale.GERMANY,
+                                stringResource(R.string.liboard_typing_result,
                                     run.getDouble("errorRate") * 100, run.getInt("corrections"), run.getDouble("wpm")),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,

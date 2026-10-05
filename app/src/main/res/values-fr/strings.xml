@@ -551,4 +551,50 @@ Nouveau dictionnaire:
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Pavé directionnel</string>
     <string name="space_swipe_toggle_dpad_entry">Basculer vers le pavé directionnel</string>
+    <string name="liboard_typing_test">Test de frappe</string>
+    <string name="liboard_typing_test_desc">Tapes-tu proprement ? Compare FUTO et LiBoard</string>
+    <string name="liboard_typing_sentence_of" formatted="true">Phrase %1$d sur %2$d · clavier : %3$s</string>
+    <string name="liboard_typing_footer">Les fautes que tu corriges toi-même comptent comme corrections ; ce qui reste faux à la fin compte comme erreur.</string>
+    <string name="liboard_typing_placeholder">Tape ici – naturellement, comme au quotidien</string>
+    <string name="liboard_typing_next">Suivant</string>
+    <string name="liboard_typing_restart">Recommencer</string>
+    <string name="liboard_typing_finished">Terminé ! Le résultat est en bas.</string>
+    <string name="liboard_typing_again">Encore une manche</string>
+    <string name="liboard_typing_runs">Manches précédentes (sur ce téléphone uniquement)</string>
+    <string name="liboard_typing_no_runs">Aucune pour l’instant – tape une manche avec FUTO et une avec LiBoard pour comparer.</string>
+    <string name="liboard_typing_result" formatted="true">%1$.1f %% d’erreurs · %2$d corrections · %3$.0f mots/min</string>
+    <string name="liboard_done">OK</string>
+    <string name="liboard_done_description">Masquer le clavier</string>
+    <string name="liboard_space">espace</string>
+    <string name="liboard_emoji_search">Rechercher un emoji</string>
+    <string name="theme_name_liboard_light" tools:keep="@string/theme_name_liboard_light">LiBoard clair</string>
+    <string name="theme_name_liboard_dark" tools:keep="@string/theme_name_liboard_dark">LiBoard sombre</string>
+    <string name="liboard_superscript">Exposant</string>
+    <string name="liboard_subscript">Indice</string>
+    <string name="liboard_based_on_heliboard">LiBoard est basé sur HeliBoard, un clavier libre de Helium314 et de nombreux contributeurs. Logiciel libre sous GNU GPL v3.</string>
+    <string name="liboard_origin">Origine</string>
+    <string name="liboard_more">Autres</string>
+    <string name="liboard_heliboard_title">Basé sur HeliBoard</string>
+    <string name="liboard_heliboard_desc">Clavier libre de Helium314 et des contributeurs – code source sur GitHub</string>
+    <string name="liboard_emojis">Emojis</string>
+    <string name="liboard_emoji_style">Style des emojis</string>
+    <string name="liboard_emoji_apple">Apple</string>
+    <string name="liboard_emoji_android">Android</string>
+    <string name="liboard_emoji_apple_missing">Charge d’abord la police d’emojis Apple sous « Police d’emojis personnalisée ».</string>
+    <string name="liboard_emoji_style_footer">Apple utilise la police d’emojis chargée, Android les emojis de ton système.</string>
+    <string name="app_slogan">Clavier façon iPhone, basé sur HeliBoard</string>
+    <string-array name="liboard_typing_sentences">
+        <item>Je rentre un peu plus tard aujourd’hui.</item>
+        <item>Tu peux encore rapporter du lait et du pain ?</item>
+        <item>Il fait de nouveau très beau au bord de la mer.</item>
+        <item>On se retrouve demain à huit heures et demie à la gare.</item>
+        <item>Le rapport est presque prêt, je l’envoie tout de suite.</item>
+        <item>Merci pour la réponse rapide, ça m’aide beaucoup.</item>
+        <item>La présentation a encore besoin de quelques diapositives.</item>
+        <item>Tu as déjà essayé le nouveau calendrier ?</item>
+        <item>La réunion est malheureusement reportée à jeudi.</item>
+        <item>Merci de vérifier encore une fois les chiffres.</item>
+        <item>Thanks, see you tomorrow at the meeting.</item>
+        <item>La fonctionnalité fait partie de la nouvelle version.</item>
+    </string-array>
 </resources>

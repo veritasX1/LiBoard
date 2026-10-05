@@ -1327,4 +1327,30 @@ New dictionary:
     <string name="liboard_emoji_apple_missing">Load the Apple emoji font under “Custom emoji font” first.</string>
     <string name="liboard_emoji_style_footer">Apple uses the loaded emoji font, Android the emojis of your system.</string>
     <string name="app_slogan">iPhone-style keyboard, built on HeliBoard</string>
+    <string name="liboard_typing_test">Typing test</string>
+    <string name="liboard_typing_test_desc">How cleanly do you type? Compare FUTO and LiBoard</string>
+    <string name="liboard_typing_sentence_of" formatted="true">Sentence %1$d of %2$d · keyboard: %3$s</string>
+    <string name="liboard_typing_footer">Mistakes you fix yourself count as corrections; whatever is still wrong at the end counts as an error.</string>
+    <string name="liboard_typing_placeholder">Type here – just go ahead, like every day</string>
+    <string name="liboard_typing_next">Next</string>
+    <string name="liboard_typing_restart">Start over</string>
+    <string name="liboard_typing_finished">Done! The result is below.</string>
+    <string name="liboard_typing_again">One more round</string>
+    <string name="liboard_typing_runs">Previous rounds (only on this phone)</string>
+    <string name="liboard_typing_no_runs">None yet – type one round with FUTO and one with LiBoard to compare.</string>
+    <string name="liboard_typing_result" formatted="true">%1$.1f %% errors · %2$d corrections · %3$.0f words/min</string>
+    <string-array name="liboard_typing_sentences">
+        <item>I’ll be home a little later today.</item>
+        <item>Could you pick up some milk and bread?</item>
+        <item>The weather by the sea is lovely again.</item>
+        <item>Let’s meet tomorrow at half past eight at the station.</item>
+        <item>The report is almost done, I’ll send it shortly.</item>
+        <item>Thanks for the quick reply, that helps a lot.</item>
+        <item>The presentation still needs a few slides.</item>
+        <item>Have you tried the new calendar yet?</item>
+        <item>Unfortunately the meeting has been moved to Thursday.</item>
+        <item>Please check the numbers once more.</item>
+        <item>Danke, bis morgen beim Meeting.</item>
+        <item>The feature is part of the new release.</item>
+    </string-array>
 </resources>

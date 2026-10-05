@@ -60,8 +60,8 @@ fun MainSettingsScreen(
                 // LiBoard: grouped like the iOS Settings app (Apple HIG)
                 IosGroup(inset = 59, items = listOf(
                     { Preference(
-                        name = "Tipp-Test",
-                        description = "Wie sauber tippst du? FUTO und LiBoard vergleichen",
+                        name = stringResource(R.string.liboard_typing_test),
+                        description = stringResource(R.string.liboard_typing_test_desc),
                         onClick = onClickTypingTest,
                         icon = R.drawable.ic_settings_typing_test,
                     ) { NextScreenIcon() } },

@@ -566,4 +566,30 @@
     <string name="liboard_emoji_apple_missing">Dafür zuerst die Apple-Emoji-Schrift unter „Eigene Emoji-Schrift“ laden.</string>
     <string name="liboard_emoji_style_footer">Apple nutzt die geladene Emoji-Schrift, Android die Emojis deines Systems.</string>
     <string name="app_slogan">Tastatur im iPhone-Stil, aufgebaut auf HeliBoard</string>
+    <string name="liboard_typing_test">Tipp-Test</string>
+    <string name="liboard_typing_test_desc">Wie sauber tippst du? FUTO und LiBoard vergleichen</string>
+    <string name="liboard_typing_sentence_of" formatted="true">Satz %1$d von %2$d · Tastatur: %3$s</string>
+    <string name="liboard_typing_footer">Fehler, die du selbst korrigierst, zählen als Korrekturen; was am Ende falsch bleibt, als Fehler.</string>
+    <string name="liboard_typing_placeholder">Hier tippen – einfach drauflos, wie im Alltag</string>
+    <string name="liboard_typing_next">Weiter</string>
+    <string name="liboard_typing_restart">Neu beginnen</string>
+    <string name="liboard_typing_finished">Fertig! Das Ergebnis steht unten.</string>
+    <string name="liboard_typing_again">Noch eine Runde</string>
+    <string name="liboard_typing_runs">Bisherige Runden (nur auf diesem Handy)</string>
+    <string name="liboard_typing_no_runs">Noch keine – tippe eine Runde mit FUTO und eine mit LiBoard zum Vergleich.</string>
+    <string name="liboard_typing_result" formatted="true">%1$.1f %% Fehler · %2$d Korrekturen · %3$.0f Wörter/Min</string>
+    <string-array name="liboard_typing_sentences">
+        <item>Ich komme heute etwas später nach Hause.</item>
+        <item>Kannst du bitte noch Milch und Brot mitbringen?</item>
+        <item>Das Wetter in Kiel ist wieder richtig schön.</item>
+        <item>Wir treffen uns morgen um halb neun am Bahnhof.</item>
+        <item>Der Bericht ist fast fertig, ich schicke ihn gleich.</item>
+        <item>Danke für die schnelle Antwort, das hilft mir sehr.</item>
+        <item>Die Präsentation braucht noch ein paar Folien.</item>
+        <item>Hast du schon den neuen Kalender ausprobiert?</item>
+        <item>Das Meeting ist leider auf Donnerstag verschoben.</item>
+        <item>Bitte prüfe die Zahlen noch einmal genau.</item>
+        <item>Thanks, see you tomorrow at the meeting.</item>
+        <item>Das Feature ist im neuen Release enthalten.</item>
+    </string-array>
 </resources>
