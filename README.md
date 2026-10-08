@@ -31,7 +31,7 @@ der iPhone-Tastatur. Die App hat keinen Internetzugang und braucht kein Konto.
 Eine Tastatur bekommt alles mit, was du tippst, auch Passwörter. LiBoard hat deshalb **keinen
 Internetzugang**. Nichts davon kann dein Handy verlassen. Die freiwillige Spende von Gestendaten
 aus HeliBoard ist weggelassen. Wörterbücher, Lernen und Tipp-Test
-bleiben auf dem Gerät.
+bleiben auf dem Gerät. Ausführlich: [Datenschutz bei LiBoard](docs/DATENSCHUTZ.md).
 
 ## Installation
 
