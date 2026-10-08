@@ -121,9 +121,8 @@ fun DictionaryScreen(
             },
             title = { Text(stringResource(R.string.add_new_dictionary_title)) },
             content = {
-                val link = stringResource(R.string.dictionary_link_text).withHtmlLink(Links.DICTIONARY_URL)
-                val addDictString = stringResource(R.string.add_dictionary, link)
-                Text(addDictString.htmlToAnnotated())
+                // LiBoard: no download links – dictionaries for German, English and French are built in (Olaf 08.10.)
+                Text(stringResource(R.string.liboard_add_dictionary))
             }
         )
     }

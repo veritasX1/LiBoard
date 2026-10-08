@@ -57,8 +57,7 @@ fun AboutScreen(
         R.string.liboard_origin,
         SettingsWithoutKey.GITHUB,
         SettingsWithoutKey.LICENSE,
-        SettingsWithoutKey.GITHUB_WIKI,
-        SettingsWithoutKey.COMMUNITY_LINKS,
+        // LiBoard: no link to HeliBoard's wiki (Olaf 08.10.)
         R.string.liboard_more,
         SettingsWithoutKey.HIDDEN_FEATURES,
         SettingsWithoutKey.SAVE_LOG,
@@ -119,8 +118,7 @@ fun createAboutSettings(context: Context) = listOf(
             onClick = {
                 // Compose dialogs are in a rather sad state. They don't understand HTML, and don't scroll without customization.
                 // this should be re-done in compose, but... bah
-                val link = ("<a href=\"https://developer.android.com/reference/android/content/Context#createDeviceProtectedStorageContext()\">"
-                        + ctx.getString(R.string.hidden_features_text) + "</a>")
+                val link = ctx.getString(R.string.hidden_features_text) // LiBoard: no external link (card 212c0fa2)
                 val message = ctx.getString(R.string.hidden_features_message, link)
                 val dialogMessage = SpannableStringUtils.fromHtml(message)
                 val builder = AlertDialog.Builder(ctx)
@@ -135,34 +133,6 @@ fun createAboutSettings(context: Context) = listOf(
             icon = R.drawable.ic_settings_about_hidden_features
         )
     },
-    Setting(context, SettingsWithoutKey.GITHUB_WIKI, R.string.about_wiki_link, R.string.about_wiki_link_description) {
-        val ctx = LocalContext.current
-        Preference(
-            name = it.title,
-            description = it.description,
-            onClick = {
-                val intent = Intent()
-                intent.data = Links.WIKI_URL.toUri()
-                intent.action = Intent.ACTION_VIEW
-                ctx.startActivity(intent)
-            },
-            icon = R.drawable.ic_settings_about_wiki
-        )
-    },
-    Setting(context, SettingsWithoutKey.COMMUNITY_LINKS, R.string.about_community_links, R.string.about_community_links_description) {
-        val ctx = LocalContext.current
-        Preference(
-            name = it.title,
-            description = it.description,
-            onClick = {
-                val intent = Intent()
-                intent.data = Links.COMMUNITY_LINKS.toUri()
-                intent.action = Intent.ACTION_VIEW
-                ctx.startActivity(intent)
-            },
-            icon = R.drawable.ic_settings_about_community
-        )
-     },
     Setting(context, SettingsWithoutKey.GITHUB, R.string.liboard_heliboard_title, R.string.liboard_heliboard_desc) {
         val ctx = LocalContext.current
         Preference(

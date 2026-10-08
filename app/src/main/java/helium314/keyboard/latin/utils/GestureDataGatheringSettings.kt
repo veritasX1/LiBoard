@@ -20,8 +20,6 @@ import helium314.keyboard.latin.common.Constants.Separators
 import helium314.keyboard.latin.settings.Settings
 import helium314.keyboard.settings.SettingsDestination
 import helium314.keyboard.settings.dialogs.ThreeButtonAlertDialog
-import helium314.keyboard.settings.screens.gesturedata.END_DATE_EPOCH_MILLIS
-import helium314.keyboard.settings.screens.gesturedata.TWO_WEEKS_IN_MILLIS
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
@@ -172,57 +170,7 @@ object GestureDataGatheringSettings {
     }
 
     /** shows dialog promoting contribution of gesture data, or ask to do again if last contribution was more than 2 weeks ago */
-    @Composable fun GestureDataPromotionReminderDialog() {
-        val ctx = LocalContext.current
-        val promotionShowNext = ctx.prefs().getLong(PREF_SHOW_PROMOTION_DIALOG_NEXT, 0)
-        val reminderShowNext = ctx.prefs().getLong(PREF_SHOW_REMINDER_DIALOG_NEXT, 0)
-        val neverShow = promotionShowNext == Long.MAX_VALUE || reminderShowNext == Long.MAX_VALUE // user selected "don't show again"
-            // we only show the dialog if the use actively loaded the gesture typing library (as opposed to having the lib in the system and HeliBoard as a system app)
-            || ctx.protectedPrefs().getString(Settings.PREF_LIBRARY_CHECKSUM, "").isNullOrEmpty() || !JniUtils.sHaveGestureLib
-        var shouldShowReminder by remember { mutableStateOf(
-            !neverShow && reminderShowNext < System.currentTimeMillis() && reminderShowNext > 0L
-        ) }
-        var shouldShowPromotion by remember { mutableStateOf(
-            // only show if the user never contributed data
-            !neverShow && promotionShowNext < System.currentTimeMillis() && reminderShowNext == 0L
-        ) }
-        if (shouldShowPromotion) {
-            ThreeButtonAlertDialog(
-                cancelButtonText = stringResource(R.string.ask_later),
-                onDismissRequest = {
-                    ctx.prefs().edit { putLong(PREF_SHOW_PROMOTION_DIALOG_NEXT, System.currentTimeMillis() + 30L * 60 * 60 * 1000) }
-                    shouldShowPromotion = false
-                },
-                title = { Text(stringResource(R.string.gesture_data_screen)) },
-                content = { Text(stringResource(R.string.gesture_data_promotion_message)) },
-                confirmButtonText = stringResource(R.string.gesture_data_take_me_there),
-                onConfirmed = { SettingsDestination.navigateTo(SettingsDestination.DataGathering) },
-                neutralButtonText = stringResource(R.string.no_dictionary_dont_show_again_button),
-                onNeutral = {
-                    ctx.prefs().edit { putLong(PREF_SHOW_PROMOTION_DIALOG_NEXT, Long.MAX_VALUE) }
-                    shouldShowPromotion = false
-                },
-            )
-        }
-        if (shouldShowReminder) {
-            ThreeButtonAlertDialog(
-                cancelButtonText = stringResource(R.string.ask_later),
-                onDismissRequest = {
-                    ctx.prefs().edit { putLong(PREF_SHOW_REMINDER_DIALOG_NEXT, System.currentTimeMillis() + 30L * 60 * 60 * 1000) }
-                    shouldShowReminder = false
-                },
-                title = { Text(stringResource(R.string.gesture_data_screen)) },
-                content = { Text(stringResource(R.string.gesture_data_reminder_message)) },
-                confirmButtonText = stringResource(R.string.gesture_data_take_me_there),
-                onConfirmed = { SettingsDestination.navigateTo(SettingsDestination.DataGathering) },
-                neutralButtonText = stringResource(R.string.no_dictionary_dont_show_again_button),
-                onNeutral = {
-                    ctx.prefs().edit { putLong(PREF_SHOW_REMINDER_DIALOG_NEXT, Long.MAX_VALUE) }
-                    shouldShowReminder = false
-                },
-            )
-        }
-    }
+    // LiBoard: no reminder dialog promoting HeliBoard's gesture data donation (card 212c0fa2)
 
     /** shows a toast notification if we're close to the end of the data gathering phase (at most once per 24 hours, only if there is non-exported data) */
     fun showEndNotificationIfNecessary(context: Context) {
@@ -239,3 +187,6 @@ object GestureDataGatheringSettings {
         KeyboardSwitcher.getInstance().showToast(context.getString(R.string.gesture_data_ends_at, endDate), false)
     }
 }
+
+const val END_DATE_EPOCH_MILLIS = 1796079600000L // Dec 1st 2026
+const val TWO_WEEKS_IN_MILLIS = 14L * 24 * 3600 * 1000

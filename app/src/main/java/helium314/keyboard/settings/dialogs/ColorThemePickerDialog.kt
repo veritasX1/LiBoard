@@ -141,9 +141,8 @@ fun ColorThemePickerDialog(
             onDismissRequest = { showLoadDialog = false },
             title = { Text(stringResource(R.string.load)) },
             content = {
-                val link = stringResource(R.string.discussion_section_link).withHtmlLink(Links.CUSTOM_COLORS)
-                val text = stringResource(R.string.get_colors_message, link)
-                Text(text.htmlToAnnotated())
+                // LiBoard: no link to HeliBoard's discussions (Olaf 08.10.)
+                Text(stringResource(R.string.liboard_load_colors))
             },
             onConfirmed = {
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)

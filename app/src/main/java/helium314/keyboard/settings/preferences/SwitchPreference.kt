@@ -89,10 +89,7 @@ fun SwitchPreferenceWithEmojiDictWarning(setting: Setting, default: Boolean) {
     val hasEmojiDict = DictionaryInfoUtils.getLocalesWithEmojiDicts(context).isNotEmpty()
     SwitchPreference(setting, default && hasEmojiDict) { showWarningDialog = it && !hasEmojiDict }
     if (showWarningDialog) {
-        // emoji_dictionary_required contains "%s" since we didn't supply a formatArg
-        val link = stringResource(R.string.dictionary_link_text).withHtmlLink(Links.DICTIONARY_URL + Links.DICTIONARY_DOWNLOAD_SUFFIX.replace("raw", "src")
-            + Links.DICTIONARY_EMOJI_CLDR_SUFFIX)
-        val message = stringResource(R.string.emoji_dictionary_required, link)
-        InfoDialog(message.htmlToAnnotated(), onDismissRequest = { showWarningDialog = false })
+        // LiBoard: no download links (Olaf 08.10.)
+        InfoDialog(stringResource(R.string.liboard_emoji_dictionary_required), onDismissRequest = { showWarningDialog = false })
     }
 }

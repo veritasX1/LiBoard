@@ -46,14 +46,9 @@ fun MissingDictionaryDialog(onDismissRequest: () -> Unit, locale: Locale) {
         onDismissRequest()
         return
     }
-    val availableDicts = createDictionaryTextAnnotated(locale)
-    val repositoryLink = stringResource(R.string.dictionary_link_text).withHtmlLink(Links.DICTIONARY_URL)
-    val dictUrl = "${Links.DICTIONARY_URL}${Links.DICTIONARY_DOWNLOAD_SUFFIX}dictionaries/main_$locale.dict"
-    val dictionaryLink = stringResource(R.string.dictionary_link_text).withHtmlLink(dictUrl)
-    val message = stringResource(R.string.no_dictionary_message, repositoryLink, locale.toString(), dictionaryLink)
-    var annotatedString = message.htmlToAnnotated()
-    if (availableDicts.isNotEmpty())
-        annotatedString += AnnotatedString("\n") + availableDicts
+    // LiBoard: no download links – German, English and French are built in (card 212c0fa2)
+    val annotatedString = AnnotatedString(stringResource(R.string.liboard_no_dictionary_message,
+        locale.getDisplayName(LocalContext.current.resources.configuration.locale())))
 
     ConfirmationDialog(
         onDismissRequest = onDismissRequest,
@@ -64,43 +59,9 @@ fun MissingDictionaryDialog(onDismissRequest: () -> Unit, locale: Locale) {
     )
 }
 
-/** if dictionaries for [locale] or language are available returns links to them */
+/** LiBoard: no links to downloadable dictionaries (card 212c0fa2) */
 @Composable
-fun createDictionaryTextAnnotated(locale: Locale): AnnotatedString {
-    val context = LocalContext.current
-    val knownDicts = getKnownDictionariesForLocale(locale, context)
-    if (knownDicts.isEmpty()) return AnnotatedString("")
-    val knownDictLinks = knownDicts.map { (name, link) ->
-        "<li>${name.withHtmlLink(link)}</li>"
-    }
-    return "<ul>${knownDictLinks.joinToString("\n")}</ul>".htmlToAnnotated()
-}
-
-/** returns a pair of dictionary description and link for each dictionary  */
-fun getKnownDictionariesForLocale(locale: Locale, context: Context): List<Pair<String, String>> {
-    val knownDicts = mutableListOf<Pair<String, String>>()
-    context.assets.open("dictionaries_in_dict_repo.csv").reader().forEachLine {
-        if (it.isBlank()) return@forEachLine
-        val (type, localeString, experimental) = it.split(",")
-        // we use a locale string here because that's in the dictionaries repo
-        // ideally the repo would switch to language tag, but not sure how this is handled in the dictionary header
-        // further, the dicts in the dictionaries repo should be compatible with other AOSP-based keyboards
-        val dictLocale = localeString.constructLocale()
-        if (LocaleUtils.getMatchLevel(locale, dictLocale) < LocaleUtils.LOCALE_GOOD_MATCH) return@forEachLine
-        val rawDictString = "$type: ${dictLocale.getDisplayName(context.resources.configuration.locale())}"
-        val dictString = if (experimental != "exp") rawDictString
-            else context.getString(R.string.available_dictionary_experimental, rawDictString)
-        val dictLinkSuffix = when (experimental) {
-            "cldr" -> Links.DICTIONARY_EMOJI_CLDR_SUFFIX
-            "exp"  -> Links.DICTIONARY_EXPERIMENTAL_SUFFIX
-            else   -> Links.DICTIONARY_NORMAL_SUFFIX
-        }
-        val dictBaseUrl = Links.DICTIONARY_URL + Links.DICTIONARY_DOWNLOAD_SUFFIX + dictLinkSuffix
-        val dictLink = dictBaseUrl + type + "_" + localeString.lowercase() + ".dict"
-        knownDicts.add(dictString to dictLink)
-    }
-    return knownDicts
-}
+fun createDictionaryTextAnnotated(locale: Locale): AnnotatedString = AnnotatedString("")
 
 fun cleanUnusedMainDicts(context: Context) {
     val dictionaryDir = File(DictionaryInfoUtils.getWordListCacheDirectory(context))
