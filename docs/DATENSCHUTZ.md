@@ -23,8 +23,11 @@ LiBoard ist eine Tastatur. Eine Tastatur bekommt alles mit, was du tippst, auch 
 | Zwischenablage-Vorschläge | zuletzt Kopiertes als Vorschlag | aus |
 | Namen aus deinen Kontakten | Namen als Vorschläge | aus, Android fragt beim Einschalten |
 | Namen installierter Apps | App-Namen als Vorschläge | aus |
+| Zwischenablage-Verlauf | Kopiertes erneut einfügen; Einträge verfallen nach der eingestellten Zeit (ab Werk 10 Minuten) und werden auch beim Start aufgeräumt. Was die kopierende App als vertraulich kennzeichnet oder was aus einem Passwortfeld stammt, wird nie gespeichert. | aus |
 
 Getippter Text selbst wird nicht gespeichert, nur die Wörter, die LiBoard für Vorschläge lernt.
+
+**Absturzprotokolle:** Stürzt LiBoard ab, schreibt es einen Bericht in den eigenen Ordner der App auf dem Gerät. Beim nächsten Öffnen der Einstellungen fragt LiBoard, ob du ihn als Datei speichern oder löschen willst. Gesendet wird er nie.
 
 ## Berechtigungen
 
@@ -81,8 +84,11 @@ LiBoard is a keyboard. A keyboard sees everything you type, passwords included. 
 | Clipboard suggestions | recently copied text as a suggestion | off |
 | Names from your contacts | names as suggestions | off, Android asks when you turn it on |
 | Names of installed apps | app names as suggestions | off |
+| Clipboard history | paste copied items again; entries expire after the set time (10 minutes by default) and are also cleared at start. Anything the copying app marks as sensitive, or that comes from a password field, is never stored. | off |
 
 Typed text itself is not stored, only the words LiBoard learns for suggestions.
+
+**Crash reports:** if LiBoard crashes, it writes a report into the app's own folder on the device. The next time you open the settings, LiBoard asks whether to save it as a file or delete it. It is never sent.
 
 ## Permissions
 

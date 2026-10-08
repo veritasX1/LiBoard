@@ -51,6 +51,8 @@ class ClipboardHistoryManager(
         clipboardManager = latinIME.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager.addPrimaryClipChangedListener(this)
         clipboardDao = ClipboardDao.getInstance(latinIME)
+        // LiBoard: expired entries go at every start too, not only when something is copied or the history opens (Richard 08.10.)
+        clipboardDao?.clearOldClips(true)
         if (latinIME.mSettings.current.mClipboardHistoryEnabled)
             fetchPrimaryClip()
     }
@@ -77,6 +79,9 @@ class ClipboardHistoryManager(
         val clipItem = clipData.getItemAt(0) ?: return
         val description = clipData.description ?: return
         val timeStamp = ClipboardManagerCompat.getClipTimestamp(clipData)
+        // LiBoard: never store what the copying app marked as sensitive, nor anything copied from a password field –
+        // until now it was only masked in the display, but kept in plain text in the database (Richard 08.10.)
+        if (isClipSensitive(latinIME.currentInputEditorInfo?.inputType ?: InputType.TYPE_NULL)) return
 
         if (description.hasMimeType("text/*")) {
             val content = clipItem.coerceToText(latinIME)
