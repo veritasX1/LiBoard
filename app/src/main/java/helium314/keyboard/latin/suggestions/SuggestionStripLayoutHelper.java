@@ -23,6 +23,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.text.style.CharacterStyle;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -339,8 +340,9 @@ final class SuggestionStripLayoutHelper {
         final TextView centerWordView = mWordViews.get(mCenterPositionInStrip);
         final int stripWidth = stripView.getWidth();
         final int centerWidth = getSuggestionWidth(mCenterPositionInStrip, stripWidth);
-        if (wordCountToShow == 1 || getTextScaleX(centerWordView.getText(), centerWidth,
-                centerWordView.getPaint()) < MIN_TEXT_XSCALE) {
+        // LiBoard: one word over the whole strip as soon as the best one does not fit its slot in a
+        // readable size – fewer suggestions rather than tiny or cut ones (card 88674485)
+        if (wordCountToShow == 1 || !fitsAtMinFont(centerWordView, centerWordView.getText(), centerWidth)) {
             // Layout only the most relevant suggested word at the center of the suggestion strip
             // by consolidating all slots in the strip.
             final int countInStrip = 1;
@@ -368,6 +370,11 @@ final class SuggestionStripLayoutHelper {
             }
 
             final int width = getSuggestionWidth(positionInStrip, stripWidth);
+            // LiBoard: a side suggestion that does not fit in a readable size stays empty instead of
+            // being shrunk further or cut in the middle (card 88674485)
+            final TextView sideView = mWordViews.get(positionInStrip);
+            if (positionInStrip != mCenterPositionInStrip && !fitsAtMinFont(sideView, sideView.getText(), width))
+                sideView.setText("");
             final TextView wordView = layoutWord(context, positionInStrip, width);
             stripView.addView(wordView);
             setLayoutWeight(wordView, getSuggestionWeight(positionInStrip), ViewGroup.LayoutParams.MATCH_PARENT);
@@ -413,6 +420,9 @@ final class SuggestionStripLayoutHelper {
                 TextUtils.isEmpty(word)
                     ? context.getResources().getString(R.string.spoken_empty_suggestion)
                     : word.toString());
+        // LiBoard: like iOS, a long word first gets a smaller font (down to 60 %) instead of being
+        // squeezed or cut in the middle ("Tast…gung") – card 5d006c0b
+        shrinkFontToFit(wordView, word, width);
         final CharSequence text = getEllipsizedTextWithSettingScaleX(
                 word, width, wordView.getPaint());
         final float scaleX = wordView.getTextScaleX();
@@ -425,6 +435,30 @@ final class SuggestionStripLayoutHelper {
         wordView.setEnabled(!TextUtils.isEmpty(word)
                 || AccessibilityUtils.Companion.getInstance().isTouchExplorationEnabled());
         return wordView;
+    }
+
+    private static final float MIN_FONT_SCALE = 0.85f; // LiBoard: stays readable, as on the iPhone (card 88674485)
+    private float mBaseTextSizePx = 0f; // LiBoard: unshrunk suggestion font size
+
+    private boolean fitsAtMinFont(final TextView wordView, @Nullable final CharSequence word, final int width) {
+        if (TextUtils.isEmpty(word) || width <= 0) return true;
+        if (mBaseTextSizePx <= 0f) mBaseTextSizePx = wordView.getTextSize();
+        final TextPaint paint = new TextPaint(wordView.getPaint());
+        paint.setTextScaleX(1.0f);
+        paint.setTextSize(mBaseTextSizePx * MIN_FONT_SCALE);
+        return getTextWidth(word, paint) <= width;
+    }
+
+    private void shrinkFontToFit(final TextView wordView, @Nullable final CharSequence word, final int width) {
+        if (mBaseTextSizePx <= 0f) mBaseTextSizePx = wordView.getTextSize();
+        wordView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBaseTextSizePx);
+        if (TextUtils.isEmpty(word) || width <= 0) return;
+        final TextPaint paint = wordView.getPaint();
+        paint.setTextScaleX(1.0f);
+        final int textWidth = getTextWidth(word, paint);
+        if (textWidth <= width) return;
+        final float scale = Math.max(MIN_FONT_SCALE, width / (float) textWidth);
+        wordView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBaseTextSizePx * scale);
     }
 
     private void layoutDebugInfo(final int positionInStrip, final ViewGroup placerView,
@@ -508,6 +542,7 @@ final class SuggestionStripLayoutHelper {
             wordView.setText(punctuation);
             wordView.setContentDescription(punctuation);
             wordView.setTextScaleX(1.0f);
+            if (mBaseTextSizePx > 0f) wordView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBaseTextSizePx); // LiBoard
             wordView.setCompoundDrawables(null, null, null, null);
             wordView.setTextColor(mColorAutoCorrect);
             KeyboardTypeface.applyToTextView(wordView);
