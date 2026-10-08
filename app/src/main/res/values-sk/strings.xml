@@ -407,10 +407,6 @@
     <string name="settings_screen_about">O aplikácii</string>
     <string name="version">Verzia</string>
     <string name="about_github_link">Zobraziť na GitHub</string>
-    <string name="about_wiki_link">Prejsť na Wiki</string>
-    <string name="about_wiki_link_description">Wiki môže vylepšiť každý používateľ GitHubu!</string>
-    <string name="about_community_links">Odkazy na komunitné stránky</string>
-    <string name="about_community_links_description">Témy, editor rozloženia, diskusie, …</string>
     <string name="save_log">Uložiť protokol</string>
     <string name="license">Licencia s otvoreným zdrojovým kódom</string>
     <string name="gnu_gpl">Všeobecná verejná licencia GNU verzia 3.0</string>

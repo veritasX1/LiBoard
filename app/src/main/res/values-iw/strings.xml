@@ -427,8 +427,6 @@
     <string name="space_swipe_hide_keyboard_entry">הסתרת המקלדת</string>
     <string name="suggest_punctuation">הצעות פיסוק</string>
     <string name="suggest_punctuation_summary">הצגת פיסוק כאשר אין הצעות זמינות אחרות</string>
-    <string name="about_wiki_link">מעבר ל-Wiki</string>
-    <string name="about_wiki_link_description">כל משתמש GitHub יכול לשפר את הוויקי!</string>
     <string name="subtype_khipro_bn">%s (כיפרו)</string>
     <string name="save_subtype_per_app">שיוך שפה ליישום</string>
     <string name="clipboard_history_pinned_first">הצגת פריטים נעוצים תחילה</string>
@@ -471,8 +469,6 @@
     <string name="item_type">סוג: %s</string>
     <string name="abbreviation_unit_mb">%s מ\"ב</string>
     <string name="prefs_hint_font_scale">קנה-מידה של גופן הרמז לפקדים</string>
-    <string name="about_community_links">קישורים של הקהילה</string>
-    <string name="about_community_links_description">ערכות נושא, עורך הפריסות, דיונים, …</string>
     <string name="background_gesture_data_links">מידע אודות צבירה ברקע:</string>
     <string name="subtype_tok">טוקי פונה</string>
     <string name="space_swipe_toggle_dpad_entry">מעבר למקשי הכיוון (D-pad)</string>

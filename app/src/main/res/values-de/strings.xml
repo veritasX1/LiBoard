@@ -7,13 +7,13 @@
     <string name="use_contacts_dict">Namen aus Kontakten</string>
     <string name="vibrate_on_keypress">Vibration bei Tastendruck</string>
     <string name="sound_on_keypress">"Ton bei Tastendruck"</string>
-    <string name="popup_on_keypress">Popup bei Tastendruck</string>
-    <string name="settings_screen_preferences">Optionen</string>
+    <string name="popup_on_keypress">Zeichenvorschau</string>
+    <string name="settings_screen_preferences">Tippen</string>
     <string name="settings_screen_gesture">Gesten-Tippen</string>
     <string name="settings_screen_correction">"Textkorrektur"</string>
     <string name="settings_screen_advanced">"Erweitert"</string>
     <string name="settings_screen_theme">"Design"</string>
-    <string name="enable_split_keyboard">"Geteilte Tastatur aktivieren"</string>
+    <string name="enable_split_keyboard">Geteilte Tastatur</string>
     <string name="language_switch_key_switch_input_method">"Eingabemethoden wechseln"</string>
     <string name="show_language_switch_key">Sprachwechseltaste</string>
     <string name="abbreviation_unit_milliseconds">"%s ms"</string>
@@ -38,7 +38,7 @@
     <string name="auto_correction_threshold_mode_very_aggressive">Stark</string>
     <string name="bigram_prediction">Nächstes Wort vorschlagen</string>
     <string name="bigram_prediction_summary">Passend zum vorherigen Wort</string>
-    <string name="gesture_input">Gesten-Tippen aktivieren</string>
+    <string name="gesture_input">Streichen zum Tippen</string>
     <string name="gesture_input_summary">Gib ein Wort ein, indem du durch die Buchstaben gleitest</string>
     <string name="gesture_preview_trail">Gestenspur anzeigen</string>
     <string name="gesture_floating_preview_text">Schwebender Echtzeit-Vorschlag</string>
@@ -65,17 +65,17 @@
     <string name="prefs_enable_emoji_alt_physical_key_summary">"Emoji-Palette auf physischen Tastaturen über Alt-Taste aufrufen"</string>
     <string name="button_default">"Standard"</string>
     <string name="setup_welcome_title">Willkommen bei %s</string>
-    <string name="setup_welcome_additional_description">mit Gesten-Tippen</string>
-    <string name="setup_start_action">"Jetzt starten"</string>
+    <string name="setup_welcome_additional_description">mit Streichen zum Tippen</string>
+    <string name="setup_start_action">Weiter</string>
     <string name="setup_steps_title">%s einrichten</string>
     <string name="setup_step1_title">%s aktivieren</string>
-    <string name="setup_step1_instruction">Bitte aktiviere „%s“ in den Einstellungen zu „Sprachen und Eingabe“. Dadurch wird das Ausführen auf deinem Gerät erlaubt.</string>
+    <string name="setup_step1_instruction">Schalte „%s“ in den Einstellungen unter „Bildschirmtastatur“ ein.</string>
     <string name="setup_step1_action">"In den Einstellungen aktivieren"</string>
     <string name="setup_step2_title">Zu %s wechseln</string>
-    <string name="setup_step2_instruction">Wähle als nächstes „%s“ als deine aktive Bildschirmtastatur.</string>
+    <string name="setup_step2_instruction">Wähle jetzt „%s“ als Tastatur.</string>
     <string name="setup_step2_action">"Eingabemethode wechseln"</string>
-    <string name="setup_step3_title">Hurra, die Einrichtung ist abgeschlossen!</string>
-    <string name="setup_step3_instruction">Jetzt kannst du in all deinen Lieblingsapps mit %s schreiben.</string>
+    <string name="setup_step3_title">Fertig eingerichtet</string>
+    <string name="setup_step3_instruction">Du kannst %s jetzt in allen Apps verwenden.</string>
     <string name="setup_finish_action">"Fertig"</string>
     <string name="show_setup_wizard_icon">"App-Symbol anzeigen"</string>
     <string name="show_setup_wizard_icon_summary">"App-Symbol in der Übersicht anzeigen"</string>
@@ -105,17 +105,17 @@
     <string name="settings_category_input">Eingabe</string>
     <string name="settings_category_additional_keys">Zusätzliche Tasten</string>
     <string name="settings_category_miscellaneous">Sonstiges</string>
-    <string name="enable_clipboard_history">Zwischenablage-Verlauf aktivieren</string>
+    <string name="enable_clipboard_history">Zwischenablage-Verlauf</string>
     <string name="delete_swipe_summary">Wische über die Löschen-Taste, um mehr Text auf einmal auszuwählen und zu löschen</string>
     <string name="clipboard_history_retention_time">Speicherdauer des Zwischenablage-Verlaufs</string>
     <string name="delete_swipe">Löschen durch Wischen</string>
-    <string name="prefs_force_incognito_mode_summary">Deaktiviert das Lernen von neuen Wörtern</string>
+    <string name="prefs_force_incognito_mode_summary">LiBoard merkt sich keine neuen Wörter.</string>
     <string name="more_keys_strip_description">Mehr Tasten</string>
     <string name="number_row_summary">Zahlenzeile immer anzeigen</string>
     <string name="number_row">Zahlenzeile</string>
     <string name="show_hints">Tasten-Hinweise anzeigen</string>
-    <string name="incognito">Inkognito-Modus erzwingen</string>
-    <string name="enable_clipboard_history_summary">Wenn deaktiviert, fügt die Zwischenablage-Taste den Inhalt der Zwischenablage ein (falls vorhanden)</string>
+    <string name="incognito">Nichts dazulernen</string>
+    <string name="enable_clipboard_history_summary">Aus: Die Zwischenablage-Taste fügt nur den aktuellen Inhalt ein.</string>
     <string name="autospace_after_punctuation_summary">Fügt automatisch ein Leerzeichen nach einem Punkt ein, sobald ein neues Wort eingegeben wird</string>
     <string name="autospace_after_punctuation">Automatisches Leerzeichen nach Punkt</string>
     <string name="show_hints_summary">Hinweise bei langem Halten anzeigen</string>
@@ -146,12 +146,12 @@
     <string name="voice" tools:keep="@string/voice">Spracheingabe</string>
     <string name="theme_name_dynamic" tools:keep="@string/theme_name_dynamic">Dynamische Farben</string>
     <string name="settings_screen_appearance">Aussehen</string>
-    <string name="show_popup_hints">Funktionale Hinweise anzeigen</string>
+    <string name="show_popup_hints">Hinweise an Sondertasten</string>
     <string name="message_add_custom_layout">Datei in einem kompatiblen Format auswählen. Information zu den Formaten ist %s verfügbar.</string>
     <string name="select_color_key_background">Tastenhintergrund</string>
     <string name="restore_error">Fehler beim Wiederherstellen der Sicherung: %s</string>
     <string name="theme_colors">Farben</string>
-    <string name="select_color_functional_key_background">Funktionstastenhintergrund</string>
+    <string name="select_color_functional_key_background">Hintergrund der Sondertasten</string>
     <string name="subtype_generic_sebeolsik_390">%s (Sebeolsik 390)</string>
     <string name="add_to_personal_dictionary_summary">Persönliches Wörterbuch des Gerätes verwenden, um gelernte Wörter zu speichern</string>
     <string name="user_dict_word_already_present">Dieses Wort ist bereits im Benutzer-Wörterbuch %s vorhanden. Bitte gib ein anderes Wort ein.</string>
@@ -165,11 +165,11 @@
     <string name="gnu_gpl">GNU General Public License v3.0</string>
     <string name="day_or_night_day">Tag</string>
     <string name="dictionary_file_wrong_script">Fehler: Skript ist nicht kompatibel mit dieser Tastatur</string>
-    <string name="hidden_features_title">Beschreibung der versteckten Features</string>
+    <string name="hidden_features_title">Tipps und Kniffe</string>
     <string name="popup_keys_language_priority" tools:keep="@string/popup_keys_language_priority">Sprache (Priorität)</string>
     <string name="add_to_personal_dictionary">Wörter zum persönlichen Wörterbuch hinzufügen</string>
     <string name="customize_background_image">Hintergrundbild festlegen</string>
-    <string name="edit_layout">Tippen, um das Rohlayout zu bearbeiten</string>
+    <string name="edit_layout">Layout bearbeiten</string>
     <string name="theme_name_pink" tools:keep="@string/theme_name_pink">Pink</string>
     <string name="language_and_layouts_title">Sprachen &amp; Layouts</string>
     <string name="file_read_error">Datei kann nicht gelesen werden</string>
@@ -192,7 +192,7 @@
     <string name="select_color_suggestion">Textfarbe Wortvorschlag</string>
     <string name="show_popup_keys_normal">In den Tastatursprachen definierte Varianten anzeigen</string>
     <string name="show_popup_keys_more">Gemeinsame Varianten hinzufügen</string>
-    <string name="theme_name_user" tools:keep="@string/theme_name_user">Benutzerdefiniert</string>
+    <string name="theme_name_user" tools:keep="@string/theme_name_user">Eigenes</string>
     <string name="replace_dictionary">Wörterbuch ersetzen</string>
     <string name="select_color_background">Tastaturhintergrund</string>
     <string name="clipboard" tools:keep="@string/clipboard">Zwischenablage</string>
@@ -201,7 +201,7 @@
     <string name="about_github_link">Auf GitHub ansehen</string>
     <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Zahlenzeile</string>
     <string name="button_restore">Wiederherstellen</string>
-    <string name="popup_order">Popup-Tastenreihenfolge wählen</string>
+    <string name="popup_order">Reihenfolge beim langen Drücken</string>
     <string name="version">Version</string>
     <string name="hint_source">Hinweis-Quelle wählen</string>
     <string name="load_gesture_library_summary">Native Bibliothek bereitstellen, um Gesten-Tippen zu aktivieren</string>
@@ -220,19 +220,19 @@
     <string name="license">Open-Source-Lizenz</string>
     <string name="theme_name_ocean" tools:keep="@string/theme_name_ocean">Ozean</string>
     <string name="backup_error">Sicherungsfehler: %s</string>
-    <string name="show_popup_hints_summary">Hinweis anzeigen, wenn durch langes Drücken einer Funktionstaste ein Popup geöffnet wird</string>
+    <string name="show_popup_hints_summary">Markiert Sondertasten, die beim langen Drücken mehr anbieten.</string>
     <string name="theme_name_sand" tools:keep="@string/theme_name_sand">Sand</string>
     <string name="backup_restore_title">Sichern und Wiederherstellen</string>
     <string name="full_left" tools:keep="@string/full_left">Ganz links</string>
     <string name="theme_style">Stil</string>
     <string name="select_word" tools:keep="@string/select_word">Wort auswählen</string>
-    <string name="hidden_features_summary">Funktionen anzeigen, die möglicherweise unbemerkt bleiben</string>
+    <string name="hidden_features_summary">Was LiBoard noch kann</string>
     <string name="theme_colors_night">Farben (Nacht)</string>
     <string name="left" tools:keep="@string/left">Links</string>
     <string name="all_colors">Alle Farben zeigen</string>
-    <string name="delete_layout">Benutzerdefiniertes Layout %s wirklich löschen?</string>
+    <string name="delete_layout">Eigenes Layout %s löschen?</string>
     <string name="dictionary_settings_category">Wörterbücher</string>
-    <string name="button_title_add_custom_layout">Benutzerdefiniertes Layout hinzufügen</string>
+    <string name="button_title_add_custom_layout">Eigenes Layout hinzufügen</string>
     <string name="select_color_key_hint">Tasten-Hinweistext</string>
     <string name="setup_step3_action">Tastatur konfigurieren</string>
     <string name="popup_keys_symbols" tools:keep="@string/popup_keys_symbols">Symbole</string>
@@ -247,24 +247,24 @@
     <string name="more_autocorrect">Überall korrigieren</string>
     <string name="split_spacer_scale">Teilungsabstand</string>
     <string name="user_dict_settings_add_weight_value">Gewichtung:</string>
-    <string name="prefs_always_show_suggestions_summary">Ignoriere Anfragen anderer Apps, Vorschläge zu deaktivieren (kann Probleme verursachen)</string>
+    <string name="prefs_always_show_suggestions_summary">Auch zeigen, wenn eine App keine Vorschläge möchte (kann Probleme verursachen)</string>
     <string name="switch_language">Sprache wechseln</string>
     <string name="clear_clipboard" tools:keep="@string/clear_clipboard">Zwischenablage löschen</string>
     <string name="day_or_night_night">Nacht</string>
-    <string name="prefs_narrow_key_gaps">Enge Tastenlücken</string>
+    <string name="prefs_narrow_key_gaps">Schmale Tastenabstände</string>
     <string name="no_dictionary_dont_show_again_button">Nicht noch einmal zeigen</string>
-    <string name="disable_personalized_dicts_message">Warnung: Deaktivieren dieser Einstellung löscht gelernte Daten</string>
+    <string name="disable_personalized_dicts_message">Beim Ausschalten werden gelernte Wörter gelöscht.</string>
     <string name="load_gesture_library_button_load">Bibliothek laden</string>
     <string name="button_load_custom">Datei laden</string>
     <string name="dialog_close">Schließen</string>
     <string name="prefs_bottom_padding_scale">Randabstand unten</string>
     <string name="select_color_gesture">Gesteneingabe</string>
     <string name="text_tap_languages">Sprache antippen, um Einstellungen zu öffnen</string>
-    <string name="show_popup_keys_title">Mehr Buchstaben mit diakritischen Zeichen im Popup anzeigen</string>
+    <string name="show_popup_keys_title">Zeichen mit Akzenten beim langen Drücken</string>
     <string name="one_handed" tools:keep="@string/one_handed">Einhandmodus</string>
     <string name="layout_error">Layoutfehler: %s</string>
     <string name="secondary_locale">Mehrsprachiges Tippen</string>
-    <string name="backup_restore_message">Speichern oder Laden aus Datei. Warnung: Die Wiederherstellung überschreibt vorhandene Daten</string>
+    <string name="backup_restore_message">In einer Datei sichern oder daraus laden. Beim Wiederherstellen werden vorhandene Daten ersetzt.</string>
     <string name="save_log">Protokoll speichern</string>
     <string name="popup_keys_layout" tools:keep="@string/popup_keys_layout">Layout</string>
     <string name="more_autocorrect_summary">Auch dort, wo die App keine Korrektur anfordert</string>
@@ -312,10 +312,10 @@
     <string name="layout_functional_keys" tools:keep="@string/layout_functional_keys">Funktionstasten</string>
     <string name="layout_functional_keys_symbols" tools:keep="@string/layout_functional_keys_symbols">Funktionstasten (Symbole)</string>
     <string name="layout_functional_keys_symbols_shifted" tools:keep="@string/layout_functional_keys_symbols_shifted">Funktionstasten (Mehr Symbole)</string>
-    <string name="gesture_fast_typing_cooldown">­Abkühlzeit für schnelles Tippen</string>
+    <string name="gesture_fast_typing_cooldown">Pause nach schnellem Tippen</string>
     <string name="gesture_fast_typing_cooldown_instant">Immer direkt starten</string>
     <string name="customize_currencies">Währungen anpassen</string>
-    <string name="customize_currencies_detail">Standard- und bis zu 6 zusätzliche Währungssymbole, separiert durch ein Leerzeichen, festlegen</string>
+    <string name="customize_currencies_detail">Hauptsymbol und bis zu 6 weitere Währungssymbole, durch Leerzeichen getrennt</string>
     <string name="load">Laden</string>
     <string name="button_save_file">In Datei speichern</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
@@ -333,13 +333,13 @@
     <string name="switch_keyboard_after">Zur Haupttastatur zurückkehren nach …</string>
     <string name="space_swipe_toggle_numpad_entry">Ziffernblock umschalten</string>
     <string name="show_popup_keys_main">Sehr häufige Varianten hinzufügen (Standard)</string>
-    <string name="remove_redundant_popups">Redundante Popups entfernen</string>
-    <string name="remove_redundant_popups_summary">Popup-Tasten unterdrücken, die bereits im Basislayout vorhanden sind</string>
+    <string name="remove_redundant_popups">Doppelte Zeichen ausblenden</string>
+    <string name="remove_redundant_popups_summary">Zeichen, die schon auf der Tastatur liegen, erscheinen beim langen Drücken nicht noch einmal.</string>
     <string name="gesture_floating_preview_static">Schwebende Vorschau</string>
     <string name="gesture_floating_preview_static_summary">Das vorgeschlagene Wort während der Geste anzeigen</string>
     <string name="gesture_floating_preview_dynamic_summary">Die Vorschau während einer Geste mitbewegen</string>
     <string name="gesture_trail_fadeout_duration">Anzeigedauer der Gestenspur</string>
-    <string name="prefs_space_bar_text">Benutzerdefinierter Text auf der Leertaste</string>
+    <string name="prefs_space_bar_text">Eigener Text auf der Leertaste</string>
     <string name="layout_number_row" tools:keep="@string/layout_number_row">Zahlenzeile</string>
     <string name="layout_emoji_bottom_row" tools:keep="@string/layout_emoji_bottom_row">Untere Emoji-Zeile</string>
     <string name="layout_clip_bottom_row" tools:keep="@string/layout_clip_bottom_row">Zwischenablage untere Zeile</string>
@@ -368,7 +368,7 @@
     <string name="prefs_key_emoji_max_sdk">Emoji-Version überschreiben</string>
     <string name="auto_correct_shortcuts">Textersetzungen einsetzen</string>
     <string name="auto_correct_shortcuts_summary">Kürzel aus „Wörter &amp; Textersetzung“ beim Tippen ersetzen</string>
-    <string name="custom_font">Benutzerdefinierte Schriftart aus Datei festlegen</string>
+    <string name="custom_font">Eigene Schrift</string>
     <string name="summary_customize_background_image_landscape">Wenn nicht gesetzt, wird das Hochformat-Bild genutzt</string>
     <string name="customize_background_image_landscape">Hintergrundbild setzen (Querformat)</string>
     <string name="customize_toolbar_key_code_reset_message">Wirklich alle benutzerdefinierten Tastencodes zurücksetzen?</string>
@@ -380,63 +380,61 @@
     <string name="locales_with_dict">Sprachen mit Wörterbüchern</string>
     <string name="get_colors_message">Du kannst Farben im %s finden und teilen.</string>
     <string name="subtype_dru">Dargwa (Urakhi)</string>
-    <string name="settings_screen_secondary_layouts">Sekundäre Layouts</string>
+    <string name="settings_screen_secondary_layouts">Weitere Layouts</string>
     <string name="layout_functional_keys_tablet" tools:keep="@string/layout_functional_keys_tablet">Funktionstasten (großer Bildschirm)</string>
     <string name="prefs_side_padding_scale">Seitenabstand</string>
     <string name="subtype_generic_phonetic">%s (phonetisch)</string>
-    <string name="layout_in_use">Warnung: Das Layout wird derzeit verwendet</string>
+    <string name="layout_in_use">Dieses Layout wird gerade verwendet.</string>
     <string name="get_layouts_message">Du kannst Layouts im %s finden und freigeben.</string>
     <string name="discussion_section_link">Diskussionsbereich</string>
     <string name="delete_confirmation">%s wirklich löschen?</string>
     <string name="name_invalid">Ungültiger Name</string>
-    <string name="custom_subtype">Benutzerdefinierter Subtyp</string>
+    <string name="custom_subtype">Eigene Sprache</string>
     <string name="subtype_baishakhi_bn_IN">%s (Baisakhi)</string>
-    <string name="show_tld_popup_keys">Zeige TLD-Popup-Tasten</string>
-    <string name="show_tld_popup_keys_summary">Ersetze Punkt-Tastenpopups durch Top-Level-Domains, wenn URLs und Mailadressen eingegeben werden</string>
+    <string name="show_tld_popup_keys">Domain-Endungen anzeigen</string>
+    <string name="show_tld_popup_keys_summary">Bei Web- und E-Mail-Adressen bietet die Punkt-Taste beim langen Drücken .de, .com und andere Endungen an.</string>
     <string name="prefs_always_show_suggestions_except_web_text">Nicht immer Vorschläge für Web-Editierfelder anzeigen</string>
     <string name="layout_number_row_basic" tools:keep="@string/layout_number_row_basic">Zahlenreihe (Basis)</string>
     <string name="prefs_always_show_suggestions_except_web_text_summary">Web-Eingabefelder (meist in Browsern) sind eine häufige Ursache für Probleme mit der Einstellung „Immer Vorschläge anzeigen“</string>
     <string name="after_numpad_and_space">Drücken der Eingabetaste oder der Leertaste nach anderen Tasten im Ziffernblock</string>
     <string name="settings_category_space">Leertaste</string>
-    <string name="shift_removes_autospace_summary">Shift entfernt anstehende automatische Leerzeichen</string>
+    <string name="shift_removes_autospace_summary">Die Umschalttaste entfernt ein anstehendes automatisches Leerzeichen</string>
     <string name="autospace_after_gesture_typing">Leerzeichen nach Wörtern bei Gesten-Tippen</string>
-    <string name="shift_removes_autospace">Kein automatisches Leerzeichen beim Drücken von Shift</string>
+    <string name="shift_removes_autospace">Kein automatisches Leerzeichen nach Umschalttaste</string>
     <string name="autospace_before_gesture_typing">Leerzeichen vor Wörtern bei Gesten-Tippen</string>
     <string name="timestamp_format_title">Format der Zeitstempel-Taste</string>
     <string name="subtype_dag">Dagbani</string>
     <string name="subtype_st">Sesotho</string>
     <string name="backspace_reverts_autocorrect">Löschtaste nimmt Korrektur zurück</string>
     <string name="autospace_after_suggestion">Automatische Leerzeichen nach Auswählen eines Vorschlags</string>
-    <string name="prefs_emoji_key_fit">Skaliere den Emoji-Knopf mit der Schriftgröße</string>
-    <string name="backup_restored">Backup wiederhergestellt</string>
+    <string name="prefs_emoji_key_fit">Emoji-Taste mit der Schrift vergrößern</string>
+    <string name="backup_restored">Sicherung wiederhergestellt</string>
     <string name="use_apps_dict">App-Namen</string>
     <string name="use_apps_dict_summary">Namen installierter Apps vorschlagen</string>
     <string name="prefs_emoji_skin_tone">Standard-Emoji-Hautton</string>
     <string name="prefs_emoji_skin_tone_neutral">Neutral</string>
     <string name="toolbar_mode_expandable">Symbolleisten-Tasten und Vorschläge</string>
     <string name="toolbar_mode_toolbar_keys">Nur Symbolleisten-Tasten</string>
-    <string name="popup_order_and_hint_source">Popup-Tasten-Reihenfolge und Vorschlagsquelle</string>
+    <string name="popup_order_and_hint_source">Zeichen beim langen Drücken</string>
     <string name="toolbar_mode_hidden">Versteckt</string>
     <string name="toolbar_hiding_global">Auch Zwischenablage- und Emoji-Symbolleisten verstecken</string>
     <string name="subtype_with_layout_generic">%1$s (%2$s)</string>
     <string name="landscape">Querformat</string>
     <string name="toolbar_mode_suggestion_strip">Nur Vorschläge</string>
-    <string name="toolbar_mode">Symbolleisten-Modus</string>
-    <string name="show_emoji_descriptions">Zeige Emoji-Beschreibung bei langem gedrückt halten</string>
+    <string name="toolbar_mode">Leiste über der Tastatur</string>
+    <string name="show_emoji_descriptions">Emoji-Namen beim langen Drücken zeigen</string>
     <string name="suggest_emojis">Emojis vorschlagen</string>
     <string name="suggest_emojis_summary">Emoji-Wörterbuch in normalen Vorschlägen verwenden</string>
     <string name="space_swipe_hide_keyboard_entry">Tastatur verstecken</string>
     <string name="suggest_punctuation">Satzzeichen-Vorschläge</string>
-    <string name="suggest_punctuation_summary">Zeige Satzzeichen, wenn keine anderen Vorschläge verfügbar sind</string>
-    <string name="about_wiki_link_description">Das Wiki kann von jedem GitHub-Nutzer verbessert werden!</string>
-    <string name="about_wiki_link">Zum Wiki gehen</string>
+    <string name="suggest_punctuation_summary">Satzzeichen zeigen, wenn es keine Wortvorschläge gibt</string>
     <string name="inline_emoji_search">Inline-Emoji-Suche</string>
     <string name="inline_emoji_search_summary">Emojis werden nur vorgeschlagen, wenn ein Wort direkt auf einen Doppelpunkt folgt</string>
     <string name="emoji_dictionary_required">Ein Emoji-Wörterbuch wird für diese Funktion benötigt. Wörterbücher im .dict-Format können %s heruntergeladen werden.</string>
     <string name="save_subtype_per_app">Sprache pro App merken</string>
     <string name="layout_emoji_bottom_row_with_action" tools:keep="@string/layout_emoji_bottom_row_with_action">Untere Emoji-Zeile mit Aktionstaste</string>
     <string name="layout_clip_bottom_row_with_action" tools:keep="@string/layout_clip_bottom_row_with_action">Untere Zwischenablage-Zeile mit Aktiontaste</string>
-    <string name="custom_emoji_font">Benutzerdefinierte Emoji-Schriftart aus Datei festlegen</string>
+    <string name="custom_emoji_font">Eigene Emoji-Schrift</string>
     <string name="number_row_in_symbols">Zahlenzeile in Symbol-Ansicht anzeigen</string>
     <string name="clipboard_history_pinned_first">Angeheftete Elemente zuerst anzeigen</string>
     <string name="subtype_mhr">Ostmari</string>
@@ -444,7 +442,7 @@
     <string name="layout_functional_keys_khipro" tools:keep="@string/layout_functional_keys">Funktionale Tasten (Khipro)</string>
     <string name="toolbar_swipe_down_to_hide">Tastatur durch Wischen ausblenden</string>
     <string name="toolbar_swipe_down_to_hide_summary">Auf Symbolleiste nach unten wischen, um Tastatur zu schließen</string>
-    <string name="ask_later">Frag mich später</string>
+    <string name="ask_later">Später</string>
     <string name="search_field_placeholder">Suche</string>
     <string name="folded">Eingeklappt</string>
     <string name="emoji_search_title">Suche nach Emojis</string>
@@ -464,8 +462,6 @@
     <string name="subtype_tok">Toki Pona</string>
     <string name="subtype_generic_4row">%s (4-zeilig)</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Steuerkreuz</string>
-    <string name="about_community_links">Community-Links</string>
-    <string name="about_community_links_description">Designs, Layout-Editor, Diskussionen, …</string>
     <string name="space_swipe_toggle_dpad_entry">Steuerkreuz umschalten</string>
     <string name="space_swipe_touchpad_mode_entry">Touchpad-Modus</string>
     <string name="touchpad_sensitivity">Touchpad-Empfindlichkeit</string>
@@ -496,7 +492,7 @@
     <string name="liboard_emoji_apple">Apple</string>
     <string name="liboard_emoji_android">Android</string>
     <string name="liboard_emoji_apple_missing">Dafür zuerst die Apple-Emoji-Schrift unter „Eigene Emoji-Schrift“ laden.</string>
-    <string name="liboard_emoji_style_footer">Apple nutzt die geladene Emoji-Schrift, Android die Emojis deines Systems.</string>
+    <string name="liboard_emoji_style_footer">„Apple“ verwendet deine geladene Emoji-Schrift, „Android“ die Emojis des Systems.</string>
     <string name="app_slogan">Tastatur im iPhone-Stil, aufgebaut auf HeliBoard</string>
     <string name="liboard_typing_test">Tipptest</string>
     <string name="liboard_typing_test_desc">Genauigkeit und Tempo messen</string>
@@ -522,14 +518,14 @@
         <item>Das Meeting ist leider auf Donnerstag verschoben.</item>
         <item>Bitte prüfe die Zahlen noch einmal genau.</item>
         <item>Thanks, see you tomorrow at the meeting.</item>
-        <item>Das Feature ist im neuen Release enthalten.</item>
+        <item>Die neue Version ist ab heute verfügbar.</item>
     </string-array>
     <string name="liboard_reset_category">Zurücksetzen</string>
     <string name="liboard_reset_dictionary">Tastaturwörterbuch zurücksetzen</string>
     <string name="liboard_reset_dictionary_message">Alle Wörter, die die Tastatur beim Tippen gelernt hat, werden gelöscht. Eigene Wörter und Textersetzungen bleiben erhalten.</string>
     <string name="liboard_reset_dictionary_confirm">Zurücksetzen</string>
     <string name="liboard_system_spell_checker">Rechtschreibprüfung des Systems ist an</string>
-    <string name="liboard_system_spell_checker_summary">Sie unterstreicht Wörter rot und öffnet beim Antippen ein Android-Menü. LiBoard zeigt Korrekturen stattdessen in der Vorschlagsleiste, wie das iPhone. Tippen, um sie in den Systemeinstellungen auszuschalten.</string>
+    <string name="liboard_system_spell_checker_summary">Rote Unterstreichungen kommen vom System. LiBoard zeigt Korrekturen in der Vorschlagsleiste. Zum Ausschalten tippen.</string>
     <string name="liboard_script_buttons">Hoch- &amp; tiefgestellte Zeichen</string>
     <string name="liboard_script_buttons_summary">Zwei Schalter neben „Fertig“ für Hochstellen (x²) und Tiefstellen (H₂O)</string>
     <string name="liboard_add_dictionary">Wörterbuch-Datei im .dict-Format zum Hinzufügen auswählen.</string>

@@ -171,8 +171,6 @@
     <string name="more_colors">အခြားအရောင်များကိုကြည့်မည်</string>
     <string name="all_colors">အရောင်အားလုံးကိုကြည့်မည်</string>
     <string name="about_github_link">GitHub တွင်ကြည့်ပါ</string>
-    <string name="about_wiki_link">ဝီကီသို့သွားမည်</string>
-    <string name="about_wiki_link_description">ယင်းဝီကီစာမျက်နှာကို မည်သည့် GitHub အသုံးပြုသူမဆို ပိုမိုကောင်းမွန်အောင် မွမ်းမံခွင့်ရှိသည်!</string>
     <string name="save_log">အဖြစ်အပျက်မှတ်တမ်းများကိုသိမ်းမည်</string>
     <string name="license">လွတ်လပ်သောရင်းမြစ်လိုင်စင်</string>
     <string name="gnu_gpl">ဂျီအန်ယူ အများပြည်သူအသုံးပြုခွင့်လိုင်စင် မူ ၃.၀</string>

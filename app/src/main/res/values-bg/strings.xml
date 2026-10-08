@@ -430,8 +430,6 @@
     <string name="suggest_punctuation">Предложения за пунктуация</string>
     <string name="suggest_punctuation_summary">Показване на пунктуационни знаци, когато няма други предложения</string>
     <string name="space_swipe_hide_keyboard_entry">Скриване на клавиатурата</string>
-    <string name="about_wiki_link">Отидете на Уики</string>
-    <string name="about_wiki_link_description">Уикито може да бъде подобрено от всеки потребител на GitHub!</string>
     <string name="save_subtype_per_app">Запомняне на езика за всяко приложение</string>
     <string name="subtype_khipro_bn">%s (Khipro)</string>
     <string name="clipboard_history_pinned_first">Показване на закачените елементи отгоре</string>
@@ -475,8 +473,6 @@
     <string name="auto_correct_capitalized_suggestions">Автоматично коригиране на предложения с главни букви</string>
     <string name="auto_correct_capitalized_suggestions_description">След натискане на Shift за изписване на предложения с главни букви, ще се задейства автоматичното коригиране</string>
     <string name="prefs_hint_font_scale">Мащаб на шрифта за ключови подсказки</string>
-    <string name="about_community_links">Връзки към общността</string>
-    <string name="about_community_links_description">Теми, редактор на оформление, дискусии, …</string>
     <string name="subtype_tok">Токи Пона</string>
     <string name="space_swipe_toggle_dpad_entry">Превключване на D-pad</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>

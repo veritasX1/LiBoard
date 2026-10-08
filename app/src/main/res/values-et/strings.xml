@@ -428,8 +428,6 @@
     <string name="space_swipe_hide_keyboard_entry">Peida klahvistik</string>
     <string name="suggest_punctuation">Kirjavahemärkide soovitused</string>
     <string name="suggest_punctuation_summary">Kui muid soovitusi ei leidu, siis näita kirjavahemärkide soovitusi</string>
-    <string name="about_wiki_link_description">Iga GitHubi kasutaja võib viki importida!</string>
-    <string name="about_wiki_link">Ava viki leht</string>
     <string name="clipboard_history_pinned_first">Näita esiletõstetud objekte ülal</string>
     <string name="save_subtype_per_app">Jäta kasutatud keel meelde rakendusekohaselt</string>
     <string name="subtype_khipro_bn">%s (khipro)</string>
@@ -473,8 +471,6 @@
     <string name="auto_correct_capitalized_suggestions">Paranda suurtähtedes soovitused automaatselt</string>
     <string name="auto_correct_capitalized_suggestions_description">Suurtähtedeks tegemiseks Shift-klahvi vajutaamise järel käivitub automaatne parandus</string>
     <string name="prefs_hint_font_scale">Soovituste kirjatüüpide mõõtkava</string>
-    <string name="about_community_links">Kogukonna lingid</string>
-    <string name="about_community_links_description">Kujundused, klahvipaigutused, arutelud, …</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Suunaklahvistik</string>
     <string name="space_swipe_toggle_dpad_entry">Lülita suunaklahvistik sisse/välja</string>

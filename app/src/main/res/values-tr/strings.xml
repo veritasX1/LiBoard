@@ -415,8 +415,6 @@
     <string name="get_colors_message">%s içinde renkleri bulabilir ve paylaşabilirsiniz.</string>
     <string name="get_layouts_message">%s içinde düzenleri bulabilir ve paylaşabilirsiniz.</string>
     <string name="discussion_section_link">tartışma bölümü</string>
-    <string name="about_wiki_link">Wiki\'ye git</string>
-    <string name="about_wiki_link_description">Wiki, herhangi bir GitHub kullanıcısı tarafından geliştirilebilir!</string>
     <string name="label_stop_onehanded_mode_key" tools:keep="@string/label_stop_onehanded_mode_key">Tek elle modunu sonlandır</string>
     <string name="label_resize_onehanded_key" tools:keep="@string/label_resize_onehanded_key">Tek elle kullanım modunu yeniden boyutlandır</string>
     <string name="label_shortcut_key_disabled" tools:keep="@string/label_shortcut_key_disabled">Ses girişi devre dışı</string>
@@ -468,8 +466,6 @@
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Yön tuşları</string>
     <string name="layout_emoji_bottom_row_with_action" tools:keep="@string/layout_emoji_bottom_row_with_action">Eylem tuşlu emoji alt satırı</string>
     <string name="layout_clip_bottom_row_with_action" tools:keep="@string/layout_clip_bottom_row_with_action">Eylem tuşlu pano alt satırı</string>
-    <string name="about_community_links">Topluluk bağlantıları</string>
-    <string name="about_community_links_description">Temalar, düzen editörü, tartışmalar, …</string>
     <string name="label_zwnj_key" tools:keep="@string/label_zwnj_key">Sıfır genişlikli bağlantı önleyici eleman</string>
     <string name="space_swipe_toggle_dpad_entry">Yön tuşlarını aç kapa</string>
     <string name="space_swipe_touchpad_mode_entry">Dokunmatik yüzey modu</string>

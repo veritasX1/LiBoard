@@ -431,8 +431,6 @@
     <string name="suggest_punctuation">标点建议</string>
     <string name="suggest_punctuation_summary">无其他建议时显示标点</string>
     <string name="space_swipe_hide_keyboard_entry">隐藏键盘</string>
-    <string name="about_wiki_link_description">任何 GitHub 用户都可以改进 Wiki！</string>
-    <string name="about_wiki_link">前往 Wiki</string>
     <string name="save_subtype_per_app">为每个应用记住语言设置</string>
     <string name="subtype_khipro_bn">%s (Khipro)</string>
     <string name="clipboard_history_pinned_first">在顶部显示已固定项目</string>
@@ -476,8 +474,6 @@
     <string name="auto_correct_capitalized_suggestions">自动更正大写建议</string>
     <string name="auto_correct_capitalized_suggestions_description">按 Shift 键启用大写建议后，自动更正将触发</string>
     <string name="prefs_hint_font_scale">按键提示字体比例</string>
-    <string name="about_community_links">社区链接</string>
-    <string name="about_community_links_description">主题、布局编辑器、讨论…</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">方向键盘</string>
     <string name="space_swipe_toggle_dpad_entry">切换方向键盘</string>

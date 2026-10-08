@@ -397,8 +397,6 @@
     <string name="settings_screen_about">درباره</string>
     <string name="version">نسخه</string>
     <string name="about_github_link">مشاهده در گیت‌هاب</string>
-    <string name="about_wiki_link">رفتن به ویکی (Wiki)</string>
-    <string name="about_wiki_link_description">ویکی می‌تواند توسط هر کاربر گیت‌هاب بهبود یابد!</string>
     <string name="save_log">ذخیره گزارش (Log)</string>
     <string name="license">مجوز متن‌باز</string>
     <string name="gnu_gpl">پروانه عمومی همگانی گنو (GNU GPL v3.0)</string>
@@ -474,8 +472,6 @@
     <string name="subtype_tok">Toki Pona</string>
     <string name="subtype_generic_4row">%s (۴ ردیفه)</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">پد جهت‌نما (D-pad)</string>
-    <string name="about_community_links">پیوندهای انجمن</string>
-    <string name="about_community_links_description">پوسته‌ها، ویرایشگر چیدمان، گفتگوها و…</string>
     <string name="space_swipe_toggle_dpad_entry">تغییر به پد جهت‌نما (D-pad)</string>
     <string name="background_gesture_data_links">اطلاعات درباره جمع‌آوری در پس‌زمینه:</string>
 </resources>

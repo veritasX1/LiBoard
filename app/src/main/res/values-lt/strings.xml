@@ -387,8 +387,6 @@
     <string name="settings_screen_about">Apie</string>
     <string name="version">Versija</string>
     <string name="about_github_link">Peržiūrėti GitHub</string>
-    <string name="about_wiki_link">Eiti į Wiki</string>
-    <string name="about_wiki_link_description">Wiki gali pagerinti betkuris Github naudotojas!</string>
     <string name="save_log">Išsaugoti žurnalą</string>
     <string name="license">Atviro kodo licencija</string>
     <string name="gnu_gpl">GNU General Public License v3.0</string>

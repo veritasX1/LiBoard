@@ -419,8 +419,6 @@
     <string name="get_colors_message">Du kan finne og dele farger i %s.</string>
     <string name="get_layouts_message">Du kan finne og dele tastaturoppsett i %s.</string>
     <string name="discussion_section_link">diskusjonsseksjon</string>
-    <string name="about_wiki_link">Gå til wiki</string>
-    <string name="about_wiki_link_description">Wikien kan forbedres av alle GitHub-brukere!</string>
     <string name="settings_screen_toolbar">Verktøylinje</string>
     <string name="label_enter_key" tools:keep="@string/label_enter_key">Enter</string>
     <string name="label_tab_key" tools:keep="@string/label_tab_key">Tab</string>
@@ -482,8 +480,6 @@
     <string name="subtype_tok">Toki Pona</string>
     <string name="subtype_generic_4row">%s (4 rader)</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
-    <string name="about_community_links">Fellesskapslenker</string>
-    <string name="about_community_links_description">Temaer, oppsettredigering, diskusjoner …</string>
     <string name="space_swipe_toggle_dpad_entry">Slå på/av D-pad</string>
     <string name="background_gesture_data_links">Informasjon om bakgrunnsinnsamling:</string>
 </resources>

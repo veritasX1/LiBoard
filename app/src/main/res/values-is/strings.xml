@@ -438,10 +438,6 @@
     <string name="layout_emoji_bottom_row_with_action" tools:keep="@string/layout_emoji_bottom_row_with_action">Tjáningartákn í neðstu röð með aðgerðalykli</string>
     <string name="layout_clip_bottom_row_with_action" tools:keep="@string/layout_clip_bottom_row_with_action">Klippispjald í neðstu röð með aðgerðalykli</string>
     <string name="after_numpad_and_space">Með því að ýta á Enter eða Bil á eftir öðrum lyklum á talnaborði</string>
-    <string name="about_wiki_link">Fara á wiki-síðuna</string>
-    <string name="about_wiki_link_description">Allir GitHub-notendur geta endurbætt wiki-svæðið!</string>
-    <string name="about_community_links">Samfélagstenglar</string>
-    <string name="about_community_links_description">Þemu, framsetningar, umræður, …</string>
     <string name="space_swipe_toggle_dpad_entry">Víxla D-platta af/á</string>
     <string name="space_swipe_hide_keyboard_entry">Fela lyklaborð</string>
     <string name="space_swipe_touchpad_mode_entry">Snertiplattahamur</string>

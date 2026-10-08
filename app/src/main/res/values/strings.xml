@@ -21,29 +21,29 @@
     <!-- Option to play back sound on keypress in soft keyboard -->
     <string name="sound_on_keypress">Sound on keypress</string>
     <!-- Option to suggest emojis -->
-    <string name="suggest_emojis">Suggest emojis</string>
+    <string name="suggest_emojis">Suggest Emojis</string>
     <!-- Description for option to suggest emojis -->
     <string name="suggest_emojis_summary">Use emoji dictionary in normal suggestions</string>
     <!-- Option to perform inline emoji search -->
-    <string name="inline_emoji_search">Inline emoji search</string>
+    <string name="inline_emoji_search">Inline Emoji Search</string>
     <!-- Description for option to perform inline emoji search -->
     <string name="inline_emoji_search_summary">Suggest only emojis when a word is preceded by a colon</string>
     <!-- Warning text for when enabling inline emoji search with no emoji dictionary. The %s will be replaced by dictionary_link_text. -->
     <string name="emoji_dictionary_required">An emoji dictionary is required for this feature to work. Dictionaries in .dict format can be downloaded %s.</string>
     <!-- Option to show emoji descriptions on long press -->
-    <string name="show_emoji_descriptions">Show emoji description on long press</string>
+    <string name="show_emoji_descriptions">Show Emoji Names on Long Press</string>
     <!-- Option to control whether or not to show a popup with a larger font on each key press. -->
-    <string name="popup_on_keypress">Popup on keypress</string>
+    <string name="popup_on_keypress">Character Preview</string>
     <!-- Option whether the keyboard can be hidden by swiping down on the toolbar -->
     <string name="toolbar_swipe_down_to_hide">Hide keyboard by swipe</string>
     <!-- Description for toolbar_swipe_down_to_hide -->
     <string name="toolbar_swipe_down_to_hide_summary">Swipe down on the toolbar to close the keyboard</string>
     <!-- Settings screen title for preferences-->
-    <string name="settings_screen_preferences">Preferences</string>
+    <string name="settings_screen_preferences">Typing</string>
     <!-- Settings screen title for gesture typing preferences -->
     <string name="settings_screen_gesture">Gesture Typing</string>
     <!-- Settings screen title for text correction options -->
-    <string name="settings_screen_correction">Text correction</string>
+    <string name="settings_screen_correction">Text Correction</string>
     <!-- Settings screen title for advanced settings -->
     <string name="settings_screen_advanced">Advanced</string>
     <!-- Settings screen title for keyboard theme settings -->
@@ -65,7 +65,7 @@
     <!-- Settings category title for Appearance & Layout/Misc -->
     <string name="settings_category_miscellaneous">Miscellaneous</string>
     <!-- Option for enabling or disabling the split keyboard layout in portrait mode.-->
-    <string name="enable_split_keyboard">Enable split keyboard</string>
+    <string name="enable_split_keyboard">Split Keyboard</string>
     <!-- Option for setting distance for split keyboard in portrait mode -->
     <string name="split_spacer_scale">Split distance</string>
     <!-- Option name for including other IMEs in the language key switch list -->
@@ -99,9 +99,9 @@
     <!-- Option name for enabling the use by the keyboards of sent/received messages, e-mail and typing history to improve suggestion accuracy -->
     <string name="use_personalized_dicts">Learn from My Typing</string>
     <!-- Dialog message informing that dictionaries will be deleted on changing the setting -->
-    <string name="disable_personalized_dicts_message">Warning: Disabling this setting will clear learned data</string>
+    <string name="disable_personalized_dicts_message">Turning this off deletes learned words.</string>
     <!-- Option name for adding learned words to personal dictionary -->
-    <string name="add_to_personal_dictionary">Add words to personal dictionary</string>
+    <string name="add_to_personal_dictionary">Add Words to Personal Dictionary</string>
     <!-- Description for option to add learned words to system-wide user dictionary -->
     <string name="add_to_personal_dictionary_summary">Use device personal dictionary to store learned words</string>
     <!-- Option name for enabling or disabling the double-space period feature that lets double tap on spacebar insert a period followed by a space -->
@@ -121,19 +121,19 @@
     <!-- Description for show suggestions -->
     <string name="prefs_show_suggestions_summary">Suggest words in the bar above the keyboard</string>
     <!-- Option to override app flag to not show suggestions -->
-    <string name="prefs_always_show_suggestions">Always show suggestions</string>
+    <string name="prefs_always_show_suggestions">Always Show Suggestions</string>
     <!-- Description for override app flag to not show suggestions -->
-    <string name="prefs_always_show_suggestions_summary">Ignore other apps’ request to disable suggestions (may cause issues)</string>
+    <string name="prefs_always_show_suggestions_summary">Also show them when an app asks for none (may cause issues)</string>
     <!-- Option to not override the above flags for InputType.WEB_EDIT_TEXT -->
     <string name="prefs_always_show_suggestions_except_web_text">Don’t always show suggestions for web edit fields</string>
     <!-- Description for prefs_always_show_suggestions_except_web_text -->
     <string name="prefs_always_show_suggestions_except_web_text_summary">Web edit fields (mostly found in browsers) are a very common cause for issues with the always show suggestions setting</string>
     <!-- Option to block potentially offensive words to be shown -->
-    <string name="prefs_block_potentially_offensive_title">Block offensive words</string>
+    <string name="prefs_block_potentially_offensive_title">Block Offensive Words</string>
     <!-- Summary for option to block potentially offensive words to be shown -->
     <string name="prefs_block_potentially_offensive_summary">Do not suggest potentially offensive words</string>
     <!-- Option to enable auto correction -->
-    <string name="autocorrect">Auto-correction</string>
+    <string name="autocorrect">Auto-Correction</string>
     <!-- Description for auto correction -->
     <string name="auto_correction_summary">Fix typos as you type</string>
     <!-- Option to enable auto correction for many fields that do not request auto correction -->
@@ -161,7 +161,7 @@
     <!-- Option to suggest auto correction suggestions very aggressively. Auto-corrects to a word which has even large edit distance from typed word. -->
     <string name="auto_correction_threshold_mode_very_aggressive">Strong</string>
     <!-- Option to show the text to be entered as the middle middle suggestion -->
-    <string name="center_suggestion_text_to_enter">Always use middle suggestion</string>
+    <string name="center_suggestion_text_to_enter">Always Use Middle Suggestion</string>
     <!-- Description for the center text to enter setting -->
     <string name="center_suggestion_text_to_enter_summary">On pressing space or punctuation, the middle suggestion will be entered</string>
     <!-- Option to enable using next word suggestions. After the user types a space, with this option on, the keyboard will try to predict the next word. -->
@@ -169,9 +169,9 @@
     <!-- Description for "next word suggestion" option. This displays suggestions even when there is no input, based on the previous word. -->
     <string name="bigram_prediction_summary">Based on the previous word</string>
     <!-- Option to enable using punctuation suggestions. -->
-    <string name="suggest_punctuation">Punctuation suggestions</string>
+    <string name="suggest_punctuation">Punctuation Suggestions</string>
     <!-- Description for "suggest_punctuation" option. -->
-    <string name="suggest_punctuation_summary">Show punctuation when no other suggestions are available</string>
+    <string name="suggest_punctuation_summary">Show punctuation when there are no word suggestions</string>
     <!-- Option to customize punctuation suggestions. -->
     <string name="custom_punctuation_suggestions">Set punctuation suggestions</string>
     <!-- Option to enable the suggestion of clipboard content. -->
@@ -179,7 +179,7 @@
     <!-- Description for the "suggest clipboard content" option. This makes the primary clipboard content visible in the suggestion strip view. -->
     <string name="suggest_clipboard_content_summary">Offer what you copied last in the bar</string>
     <!-- Option to enable gesture input. The user can input a word by tracing the letters of a word without releasing the finger from the screen.-->
-    <string name="gesture_input">Enable gesture typing</string>
+    <string name="gesture_input">Slide to Type</string>
     <!-- Description for "gesture_input" option. The user can input a word by tracing the letters of a word without releasing the finger from the screen.-->
     <string name="gesture_input_summary">Input a word by sliding through the letters</string>
     <!-- Option to enable gesture trail preview. The user can see a trail of the gesture during gesture input.-->
@@ -197,15 +197,15 @@
     <!-- Description for "gesture_space_aware" option. The user can input multiple words by gliding through the space key during a gesture input.-->
     <string name="gesture_space_aware_summary">Input spaces during gestures by gliding to the space key</string>
     <!-- Title of the setting to adjust the fast-typing gesture cooldown-->
-    <string name="gesture_fast_typing_cooldown">Rapid typing cooldown</string>
+    <string name="gesture_fast_typing_cooldown">Pause After Fast Typing</string>
     <!-- The text that represents no cooldown-->
     <string name="gesture_fast_typing_cooldown_instant">Always start instantly</string>
     <!-- Title of the setting to adjust the gesture trail fadeout duration-->
     <string name="gesture_trail_fadeout_duration">Gesture trail lifespan</string>
     <!-- Preferences item for enabling clipboard history -->
-    <string name="enable_clipboard_history">Enable clipboard history</string>
+    <string name="enable_clipboard_history">Clipboard History</string>
     <!-- Description for enabling/disabling clipboard history mentioning that if disabled, clipboard content is pasted -->
-    <string name="enable_clipboard_history_summary">If disabled, clipboard key will paste clipboard content if any</string>
+    <string name="enable_clipboard_history_summary">Off: the clipboard key only pastes the current content.</string>
     <!-- Preferences item for controlling clipboard history retention time -->
     <string name="clipboard_history_retention_time">History retention time</string>
     <!-- Preferences item for showing pinned clipboard items first -->
@@ -227,7 +227,7 @@
     <!-- Preferences item and dialog title for backup and restore -->
     <string name="backup_restore_title">Backup and restore</string>
     <!-- Message for backup and restore dialog -->
-    <string name="backup_restore_message">Save or load from file. Warning: restore will overwrite existing data</string>
+    <string name="backup_restore_message">Save to or load from a file. Restoring replaces existing data.</string>
     <!-- Error message for backup -->
     <string name="backup_error">Backup error: %s</string>
     <!-- Error message for restore, %s is replaced by the error message -->
@@ -260,21 +260,21 @@
     <!-- Button text for deleting gesture library -->
     <string name="load_gesture_library_button_delete">Delete library</string>
     <!-- Preferences item for inserting space after punctuation -->
-    <string name="autospace_after_punctuation">Autospace after punctuation</string>
+    <string name="autospace_after_punctuation">Auto-Space After Punctuation</string>
     <!-- Description for "autospace_after_punctuation" setting -->
     <string name="autospace_after_punctuation_summary">Automatically insert space after punctuation when typing a new word</string>
     <!-- Preferences item for inserting space after manualle picking a suggestion -->
-    <string name="autospace_after_suggestion">Autospace after picking a suggestion</string>
+    <string name="autospace_after_suggestion">Auto-Space After Picking a Suggestion</string>
     <!-- Preferences item for inserting space before entering a word using gesture typing -->
     <string name="autospace_before_gesture_typing">Autospace before gesture typing a word</string>
     <!-- Preferences item for inserting space after entering a word using gesture typing -->
     <string name="autospace_after_gesture_typing">Autospace after gesture typing a word</string>
     <!-- Preferences item for avoiding automatic space insertion by pressing shift -->
-    <string name="shift_removes_autospace">No autospace when pressing shift</string>
+    <string name="shift_removes_autospace">No Auto-Space After Shift</string>
     <!-- Description for "autospace_after_punctuation" setting -->
-    <string name="shift_removes_autospace_summary">Shift removes pending autospace</string>
+    <string name="shift_removes_autospace_summary">The shift key removes a pending automatic space</string>
     <!-- Preferences item for showing popup keys in long-press popup -->
-    <string name="show_popup_keys_title">Show more letters with diacritics in popup</string>
+    <string name="show_popup_keys_title">Accented Characters on Long Press</string>
     <!-- Option for showing only letters defined in the current language file in long-press popup -->
     <string name="show_popup_keys_normal">Show variants defined in keyboard languages</string>
     <!-- Option for showing letters common in foreign word (previous default in many language files) -->
@@ -288,9 +288,9 @@
     <!-- Description for "url_detection_title" option. -->
     <string name="url_detection_summary">Try to detect URLs and similar as a single word</string>
     <!-- Preferences item for disabling word learning -->
-    <string name="incognito">Force incognito mode</string>
+    <string name="incognito">Don’t Learn New Words</string>
     <!-- Description for "prefs_force_incognito_mode" option. -->
-    <string name="prefs_force_incognito_mode_summary">Disable learning of new words</string>
+    <string name="prefs_force_incognito_mode_summary">LiBoard does not remember new words.</string>
     <!-- Content description for "popup keys" suggestions view -->
     <string name="more_keys_strip_description">More keys</string>
     <!-- Title for input language & layout selection screen -->
@@ -314,15 +314,15 @@
     <!-- Description of the settings to show hints -->
     <string name="show_hints_summary">Show long-press hints</string>
     <!-- Preferences item to set popup key order and select hints source -->
-    <string name="popup_order_and_hint_source">Popup key order and hints source</string>
+    <string name="popup_order_and_hint_source">Characters on Long Press</string>
     <!-- Title of the setting to select key hints source -->
     <string name="hint_source">Select hint source</string>
     <!-- Title of the setting to set popup key order -->
-    <string name="popup_order">Select popup key order</string>
+    <string name="popup_order">Order on Long Press</string>
     <!-- Title of the setting to show TLD popup keys -->
-    <string name="show_tld_popup_keys">Show TLD popup keys</string>
+    <string name="show_tld_popup_keys">Show Domain Endings</string>
     <!-- Description of the setting to show TLD popup keys -->
-    <string name="show_tld_popup_keys_summary">Replace period key popups with top level domains when typing URLs and email addresses</string>
+    <string name="show_tld_popup_keys_summary">For web and email addresses, long-pressing the period key offers .com, .org and other endings.</string>
     <!-- Names of the popup key classes -->
     <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Number row</string>
     <string name="popup_keys_language" translatable="false" tools:keep="@string/popup_keys_language">@string/subtype_locale</string>
@@ -330,7 +330,7 @@
     <string name="popup_keys_layout" tools:keep="@string/popup_keys_layout">Layout</string>
     <string name="popup_keys_symbols" tools:keep="@string/popup_keys_symbols">Symbols</string>
     <!-- Title of the setting to set the toolbar mode -->
-    <string name="toolbar_mode">Toolbar mode</string>
+    <string name="toolbar_mode">Bar Above the Keyboard</string>
     <!-- Option to set the toolbar mode to show an expandable toolbar -->
     <string name="toolbar_mode_expandable" tools:keep="@string/toolbar_mode_expandable">Toolbar keys and suggestions</string>
     <!-- Option to set the toolbar mode to show the toolbar keys only -->
@@ -383,13 +383,13 @@
     <!-- Description of the setting to quick-pin toolbar keys -->
     <string name="quick_pin_toolbar_keys_summary">This will disable other long press actions for toolbar keys that are not pinned</string>
     <!-- Title of the setting to show "..." as hints for more functionality on long-press -->
-    <string name="show_popup_hints">Show functional hints</string>
+    <string name="show_popup_hints">Hints on Special Keys</string>
     <!-- Description of the show_popup_hints setting -->
-    <string name="show_popup_hints_summary">Show hint if long-pressing a functional key opens a popup</string>
+    <string name="show_popup_hints_summary">Marks special keys that offer more on long press.</string>
     <!-- Option to remove popup keys that already exist on the base keyboard -->
-    <string name="remove_redundant_popups">Remove redundant popups</string>
+    <string name="remove_redundant_popups">Hide Duplicate Characters</string>
     <!-- Description of the remove_redundant_popups setting -->
-    <string name="remove_redundant_popups_summary">Suppress popup keys that are already present on the base layout</string>
+    <string name="remove_redundant_popups_summary">Characters that are already on the keyboard don’t appear again on long press.</string>
     <!-- Title of the setting enabling long press on space key to change IME -->
     <string name="prefs_long_press_keyboard_to_change_lang">Change input method with space key</string>
     <!-- Description of the settings to change IME indicating long press triggers change. -->
@@ -397,7 +397,7 @@
     <!-- Title of the setting enabling long press on symbols key to switch to numpad -->
     <string name="prefs_long_press_symbol_for_numpad">Long press symbols key for numpad</string>
     <!-- Title of the setting for reduced distance between keys, todo: not used any more -->
-    <string name="prefs_narrow_key_gaps">Narrow key gaps</string>
+    <string name="prefs_narrow_key_gaps">Narrow Key Spacing</string>
     <!-- Title of the setting for setting distance between keys -->
     <string name="prefs_key_gap_scale">Key gap scale</string>
     <!-- Title of the setting for setting keyboard height -->
@@ -415,17 +415,17 @@
     <!-- Title of the setting for adjusting font size in emoji view -->
     <string name="prefs_emoji_font_scale">Emoji view font scale</string>
     <!-- Title of the setting for adjusting emoji key size to fit emoji size in emoji view -->
-    <string name="prefs_emoji_key_fit">Scale emoji key size with font size</string>
+    <string name="prefs_emoji_key_fit">Scale Emoji Key with Font Size</string>
     <!-- Title of the setting for setting default emoji skin tone -->
     <string name="prefs_emoji_skin_tone">Default emoji skin tone</string>
     <!-- Name of the neutral / yellow skin tone -->
     <string name="prefs_emoji_skin_tone_neutral">Neutral</string>
     <!-- Title of the setting for customizing space bar text -->
-    <string name="prefs_space_bar_text">Custom text on space bar</string>
+    <string name="prefs_space_bar_text">Custom Space Bar Text</string>
     <!-- Title of the setting for adding / removing custom font file -->
-    <string name="custom_font">Set custom font from file</string>
+    <string name="custom_font">Custom Font</string>
     <!-- Title of the setting for adding / removing custom font file used only for emojis -->
-    <string name="custom_emoji_font">Set custom emoji font from file</string>
+    <string name="custom_emoji_font">Custom Emoji Font</string>
     <!-- Description for English (UK) keyboard subtype
          (UK) should be an abbreviation of United Kingdom. -->
     <string name="subtype_en_GB">English (UK)</string>
@@ -498,7 +498,7 @@ language, hence "No language". -->
     <!-- Title of the section for choosing a keyboard layout language settings dialog -->
     <string name="keyboard_layout_set">Layout</string>
     <!-- Button text and title for adding a custom layout -->
-    <string name="button_title_add_custom_layout">Add custom layout</string>
+    <string name="button_title_add_custom_layout">Add Custom Layout</string>
     <!-- Message text for adding a custom layout -->
     <string name="message_add_custom_layout">Select a file in a compatible format. Information about the formats is available %s.</string>
     <!-- Button text for loading a custom layout, image or theme file. Preferably 10 characters or less. -->
@@ -510,15 +510,15 @@ language, hence "No language". -->
     <!-- Error message when file cannot be read -->
     <string name="file_read_error">Cannot read file</string>
     <!-- Message when deleting a layout -->
-    <string name="delete_layout">Really delete custom layout %s?</string>
+    <string name="delete_layout">Delete custom layout %s?</string>
     <!-- Message when layout to be deleted is in use -->
-    <string name="layout_in_use">Warning: layout is in currently use</string>
+    <string name="layout_in_use">This layout is currently in use.</string>
     <!-- Message on layout error -->
     <string name="layout_error">Layout error: %s</string>
     <!-- Text hint for editing layout -->
-    <string name="edit_layout">Tap to edit raw layout</string>
+    <string name="edit_layout">Edit Layout</string>
     <!-- Settings screen title for secondary layouts (functional keys, symbols, numpad, ...) -->
-    <string name="settings_screen_secondary_layouts">Secondary layouts</string>
+    <string name="settings_screen_secondary_layouts">More Layouts</string>
     <!-- Name for functional keys layout -->
     <string name="layout_functional_keys" tools:keep="@string/layout_functional_keys">Functional keys</string>
     <!-- Name for functional keys layout for tablets -->
@@ -568,7 +568,7 @@ language, hence "No language". -->
     <!-- Title for customizing currencies -->
     <string name="customize_currencies">Customize currencies</string>
     <!-- Info for customizing currencies -->
-    <string name="customize_currencies_detail">Set main and up to 6 secondary currency symbols, separated with space</string>
+    <string name="customize_currencies_detail">Main symbol and up to 6 more, separated by spaces</string>
     <!-- Title setting / dialog for selecting when to switch to main keyboard -->
     <string name="switch_keyboard_after">Switch to main keyboard after…</string>
     <!-- Switch to main keyboard after selecting emoji from emoji view -->
@@ -602,27 +602,27 @@ language, hence "No language". -->
     <!-- Title of the setup wizard welcome screen. %s is the application name. -->
     <string name="setup_welcome_title">"Welcome to %s"</string>
     <!-- Additional title of the setup wizard welcome screen, just below the setup_welcome_title. -->
-    <string name="setup_welcome_additional_description">with Gesture Typing</string>
+    <string name="setup_welcome_additional_description">with Slide to Type</string>
     <!-- The label of the button that starts the setup wizard. -->
-    <string name="setup_start_action">Get started</string>
+    <string name="setup_start_action">Continue</string>
     <!-- Title of the setup wizard. %s is the application name. -->
     <string name="setup_steps_title">"Setting up %s"</string>
     <!-- Title of the 1st step in the setup wizard. %s is the application name. -->
     <string name="setup_step1_title">"Enable %s"</string>
     <!-- Detailed instruction of the 1st step in the setup wizard. %s is the application name. -->
-    <string name="setup_step1_instruction">"Please check \"%s\" in your Languages &amp; input settings. This will authorize it to run on your device."</string>
+    <string name="setup_step1_instruction">Turn on “%s” in Settings under “On-screen keyboard”.</string>
     <!-- The label of the button that triggers the Languages & input settings in order to enable the keyboard. -->
     <string name="setup_step1_action">Enable in Settings</string>
     <!-- Title of the 2nd step in the setup wizard. %s is the application name. -->
     <string name="setup_step2_title">"Switch to %s"</string>
     <!-- Detailed instruction of the 2nd step in the setup wizard. %s is the application name. -->
-    <string name="setup_step2_instruction">"Next, select \"%s\" as your active text-input method."</string>
+    <string name="setup_step2_instruction">Now choose “%s” as your keyboard.</string>
     <!-- The label of the button that triggers the choose input method dialog in order to select the keyboard. -->
     <string name="setup_step2_action">Switch input methods</string>
     <!-- Title of the 3rd step in the setup wizard. -->
-    <string name="setup_step3_title">"Congratulations, you're all set!"</string>
+    <string name="setup_step3_title">You’re All Set</string>
     <!-- Detailed instruction of the 3rd step in the setup wizard. %s is the application name. -->
-    <string name="setup_step3_instruction">Now you can type in all your favorite apps with %s.</string>
+    <string name="setup_step3_instruction">You can now use %s in any app.</string>
     <!-- The label of the button that triggers the settings screen for the keyboard. -->
     <string name="setup_step3_action">Configure the keyboard</string>
     <!-- The label of the button that finishes the setup wizard. -->
@@ -748,7 +748,7 @@ New dictionary:
     <!-- Theme name for violette theme -->
     <string name="theme_name_violette" tools:keep="@string/theme_name_violette">Violette</string>
     <!-- Theme name for user-defined theme -->
-    <string name="theme_name_user" tools:keep="@string/theme_name_user">User-Defined</string>
+    <string name="theme_name_user" tools:keep="@string/theme_name_user">Custom</string>
     <!-- Theme name for user-defined theme night mode theme -->
     <!-- Text when determining color automatically -->
     <string name="auto_user_color">Choose color automatically</string>
@@ -771,7 +771,7 @@ New dictionary:
     <!-- Selection: key color. -->
     <string name="select_color_key_background">Key background</string>
     <!-- Selection: functional key color. -->
-    <string name="select_color_functional_key_background">Functional key background</string>
+    <string name="select_color_functional_key_background">Special Key Background</string>
     <!-- Selection: space bar color. -->
     <string name="select_color_spacebar_background">Space bar background</string>
     <!-- Selection: space bar text color. -->
@@ -793,13 +793,9 @@ New dictionary:
     <!-- github repo link for about screen -->
     <string name="about_github_link">View on GitHub</string>
     <!-- link to the wiki for about screen -->
-    <string name="about_wiki_link">Go to Wiki</string>
     <!-- description for wiki link -->
-    <string name="about_wiki_link_description">The Wiki can be improved by any GitHub user!</string>
     <!-- links to community stuff -->
-    <string name="about_community_links">Community links</string>
     <!-- description for about_community_links -->
-    <string name="about_community_links_description">Themes, layout editor, discussions, …</string>
     <!-- preference title for saving the log to a file -->
     <string name="save_log">Save log</string>
     <!-- license for about screen-->
@@ -817,9 +813,9 @@ New dictionary:
     <!-- Settings screen title for toolbar preferences -->
     <string name="settings_screen_toolbar">Toolbar</string>
     <!-- Hidden features title -->
-    <string name="hidden_features_title">Description of hidden features</string>
+    <string name="hidden_features_title">Tips &amp; Tricks</string>
     <!-- Hidden features summary -->
-    <string name="hidden_features_summary">Show features that may go unnoticed</string>
+    <string name="hidden_features_summary">What else LiBoard can do</string>
     <!-- Title of the link to the web page inserted into messages -->
     <string name="hidden_features_text">device protected storage</string>
     <!-- Hidden features text (might get removed in the future) -->
@@ -967,7 +963,7 @@ New dictionary:
     <!-- Message when chosen name is invalid (empty or already taken) -->
     <string name="name_invalid">Invalid name</string>
     <!-- Description indicating a subtype in Locales & Layouts has customizations -->
-    <string name="custom_subtype">Custom subtype</string>
+    <string name="custom_subtype">Custom Language</string>
     <!-- Name for landscape orientation, used in various settings -->
     <string name="landscape">Landscape</string>
     <!-- When a foldable phone is folded -->
@@ -977,7 +973,7 @@ New dictionary:
     <!-- Placeholder text for search field -->
     <string name="search_field_placeholder">Search</string>
     <!-- Button to show later -->
-    <string name="ask_later">Ask me later</string>
+    <string name="ask_later">Later</string>
     <!-- Switch to toggle suggestions when using the spell checker -->
     <string name="spell_check_suggestions">Show spellchecker suggestions</string>
     <!-- Description for toggling suggestions when using the spell checker -->
@@ -1006,8 +1002,8 @@ New dictionary:
     <string name="liboard_emoji_style">Emoji style</string>
     <string name="liboard_emoji_apple">Apple</string>
     <string name="liboard_emoji_android">Android</string>
-    <string name="liboard_emoji_apple_missing">Load the Apple emoji font under “Custom emoji font” first.</string>
-    <string name="liboard_emoji_style_footer">Apple uses the loaded emoji font, Android the emojis of your system.</string>
+    <string name="liboard_emoji_apple_missing">Load the Apple emoji font under “Custom Emoji Font” first.</string>
+    <string name="liboard_emoji_style_footer">“Apple” uses your loaded emoji font, “Android” the system’s emojis.</string>
     <string name="app_slogan">iPhone-style keyboard, built on HeliBoard</string>
     <string name="liboard_typing_test">Typing Test</string>
     <string name="liboard_typing_test_desc">Measure accuracy and speed</string>
@@ -1033,14 +1029,14 @@ New dictionary:
         <item>Unfortunately the meeting has been moved to Thursday.</item>
         <item>Please check the numbers once more.</item>
         <item>Danke, bis morgen beim Meeting.</item>
-        <item>The feature is part of the new release.</item>
+        <item>The new version is available today.</item>
     </string-array>
     <string name="liboard_reset_category">Reset</string>
     <string name="liboard_reset_dictionary">Reset Keyboard Dictionary</string>
     <string name="liboard_reset_dictionary_message">All words the keyboard has learned while you typed will be deleted. Your own words and text replacements stay.</string>
     <string name="liboard_reset_dictionary_confirm">Reset</string>
     <string name="liboard_system_spell_checker">System spell checker is on</string>
-    <string name="liboard_system_spell_checker_summary">It underlines words in red and opens an Android menu when tapped. LiBoard shows corrections in the suggestion bar instead, like the iPhone. Tap to switch it off in the system settings.</string>
+    <string name="liboard_system_spell_checker_summary">Red underlines come from the system. LiBoard shows corrections in the suggestion bar. Tap to turn it off.</string>
     <string name="liboard_script_buttons">Raised &amp; lowered characters</string>
     <string name="liboard_script_buttons_summary">Two switches next to “Done” for superscript (x²) and subscript (H₂O)</string>
     <string name="liboard_add_dictionary">Select a dictionary file in .dict format to add.</string>

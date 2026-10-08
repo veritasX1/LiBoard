@@ -430,8 +430,6 @@
     <string name="suggest_punctuation">Návrhy interpunkce</string>
     <string name="space_swipe_hide_keyboard_entry">Skrýt klávesnici</string>
     <string name="suggest_punctuation_summary">Zobrazit interpunkci, pokud nejsou dostupné žádné jiné návrhy</string>
-    <string name="about_wiki_link">Přejít na wiki</string>
-    <string name="about_wiki_link_description">Wiki může vylepšit jakýkoli uživatel GitHubu!</string>
     <string name="save_subtype_per_app">Zapamatovat jazyk dle aplikace</string>
     <string name="subtype_khipro_bn">%s (Khipro)</string>
     <string name="clipboard_history_pinned_first">Zobrazit připnuté položky nahoře</string>
@@ -475,8 +473,6 @@
     <string name="auto_correct_capitalized_suggestions">Automaticky opravit návrhy s velkými písmeny</string>
     <string name="auto_correct_capitalized_suggestions_description">Po stisknutí klávesy Shift pro použití velkých písmen bude spuštěna automatická oprava</string>
     <string name="prefs_hint_font_scale">Velikost písma nápovědy klávesy</string>
-    <string name="about_community_links">Komunitní odkazy</string>
-    <string name="about_community_links_description">Motivy, úprava rozložení, diskuze, …</string>
     <string name="subtype_tok">Toki pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Směrové klávesy</string>
     <string name="space_swipe_toggle_dpad_entry">Přepnout směrové klávesy</string>

@@ -428,8 +428,6 @@
     <string name="suggest_punctuation">Подсказки по пунктуации</string>
     <string name="suggest_punctuation_summary">Показывать пунктуацию, если нет других подсказок</string>
     <string name="space_swipe_hide_keyboard_entry">Скрыть клавиатуру</string>
-    <string name="about_wiki_link">Перейти на Wiki</string>
-    <string name="about_wiki_link_description">Любой пользователь GitHub может улучшить Wiki!</string>
     <string name="save_subtype_per_app">Запоминать язык для каждого приложения</string>
     <string name="subtype_khipro_bn">%s (Кипро)</string>
     <string name="clipboard_history_pinned_first">Показывать закреплённые элементы вверху</string>
@@ -470,11 +468,9 @@
     <string name="abbreviation_unit_mb">%s МБ</string>
     <string name="subtype_generic_4row">%s (4-строчная)</string>
     <string name="background_gesture_data_links">Информация о сборе данных в фоновом режиме:</string>
-    <string name="about_community_links">Ссылки на сообщество</string>
     <string name="auto_correct_capitalized_suggestions">Автоисправление заглавных букв в подсказках</string>
     <string name="auto_correct_capitalized_suggestions_description">Нажатие Shift меняет регистр подсказки и активирует автоисправление</string>
     <string name="prefs_hint_font_scale">Масштаб шрифта подсказок клавиш</string>
-    <string name="about_community_links_description">Темы, редактор макета, обсуждения…</string>
     <string name="subtype_tok">Токи пона</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
     <string name="space_swipe_toggle_dpad_entry">Переключить D-pad</string>

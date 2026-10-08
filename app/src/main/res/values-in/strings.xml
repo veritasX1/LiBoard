@@ -443,8 +443,6 @@
     <string name="prefs_key_gap_scale">Skala jarak tombol</string>
     <string name="prefs_bottom_row_scale">Skala baris bawah</string>
     <string name="prefs_hint_font_scale">Skala fon petunjuk tombol</string>
-    <string name="about_community_links">Tautan komunitas</string>
-    <string name="about_community_links_description">Tema, editor tata letak, diskusi, …</string>
     <string name="toolbar_only_with_hw_keyboard">Tampilkan hanya bilah alat saat menggunakan papan tik fisik</string>
     <string name="toolbar_only_with_hw_keyboard_summary">Anda tetap perlu mengaktifkan tampilan papan tik maya di pengaturan sistem</string>
     <string name="landscape">Lanskap</string>

@@ -372,10 +372,6 @@
     <string name="settings_screen_about">정보</string>
     <string name="version">버전</string>
     <string name="about_github_link">GitHub에서 보기</string>
-    <string name="about_wiki_link">위키로 이동</string>
-    <string name="about_wiki_link_description">GitHub 사용자 모두가 위키를 개선할 수 있습니다!</string>
-    <string name="about_community_links">커뮤니티 링크</string>
-    <string name="about_community_links_description">테마, 레이아웃 편집기, 토의, …</string>
     <string name="save_log">로그 저장</string>
     <string name="license">오픈소스 라이선스</string>
     <string name="dialog_close">닫기</string>

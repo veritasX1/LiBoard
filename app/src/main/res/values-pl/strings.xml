@@ -437,8 +437,6 @@
     <string name="suggest_punctuation">Sugestie interpunkcji</string>
     <string name="suggest_punctuation_summary">Pokaż znaki interpunkcyjne, gdy nie ma innych sugestii</string>
     <string name="space_swipe_hide_keyboard_entry">Ukryj klawiaturę</string>
-    <string name="about_wiki_link">Przejdź do Wiki</string>
-    <string name="about_wiki_link_description">Każdy użytkownik GitHuba może ulepszać Wiki!</string>
     <string name="clipboard_history_pinned_first">Pokaż przypięte elementy na górze</string>
     <string name="save_subtype_per_app">Zapamiętaj język dla każdej aplikacji</string>
     <string name="subtype_mhr">Mari (wschodni)</string>
@@ -480,10 +478,8 @@
     <string name="subtype_generic_4row">%s (4-rzędowy)</string>
     <string name="background_gesture_data_links">Informacje o gromadzeniu danych w tle:</string>
     <string name="prefs_hint_font_scale">Rozmiar czcionki wskazówek</string>
-    <string name="about_community_links_description">Motywy, edytor układu, dyskusje, …</string>
     <string name="auto_correct_capitalized_suggestions">Autokorekta sugestii z wielkimi literami</string>
     <string name="auto_correct_capitalized_suggestions_description">Po naciśnięciu shift zostanie zastosowana autokorekta</string>
-    <string name="about_community_links">Linki społecznościowe</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
     <string name="space_swipe_toggle_dpad_entry">Przełącz na D-pad</string>

@@ -421,8 +421,6 @@
     <string name="subtype_khipro_bn">%s (Khipro)</string>
     <string name="layout_emoji_bottom_row_with_action" tools:keep="@string/layout_emoji_bottom_row_with_action">Sección inferior de emoticonos con tecla de acción</string>
     <string name="layout_clip_bottom_row_with_action" tools:keep="@string/layout_clip_bottom_row_with_action">Sección inferior de portapapeles con tecla de acción</string>
-    <string name="about_wiki_link">Ir a la Wiki</string>
-    <string name="about_wiki_link_description">¡La Wiki puede ser mejorada por cualquier usuario de GitHub!</string>
     <string name="space_swipe_hide_keyboard_entry">Ocultar el teclado</string>
     <string name="landscape">Horizontal</string>
     <string name="toolbar_mode_suggestion_strip" tools:keep="@string/toolbar_mode_suggestion_strip">Solo sugerencias</string>
@@ -470,8 +468,6 @@
     <string name="abbreviation_unit_mb">%s MB</string>
     <string name="background_gesture_data_links">Información sobre la recopilación de antecedentes:</string>
     <string name="subtype_generic_4row">%s (4 filas)</string>
-    <string name="about_community_links">Enlaces de la comunidad</string>
-    <string name="about_community_links_description">Temas, editor de diseño, debates,…</string>
     <string name="auto_correct_capitalized_suggestions">Corrección automática de sugerencias en mayúsculas</string>
     <string name="auto_correct_capitalized_suggestions_description">Después de presionar shift para poner en mayúscula las sugerencias, se activará la autocorrección</string>
     <string name="prefs_hint_font_scale">ajustar el tamaño del texto de las atajos visuales</string>

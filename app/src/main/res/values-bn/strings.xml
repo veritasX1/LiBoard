@@ -429,8 +429,6 @@
     <string name="space_swipe_hide_keyboard_entry">কিবোর্ড আড়াল</string>
     <string name="suggest_punctuation_summary">কোনো পরামর্শ উপলব্ধ না থাকলে যতিচিহ্ন প্রদর্শন</string>
     <string name="suggest_punctuation">যতিচিহ্নের পরামর্শ</string>
-    <string name="about_wiki_link">উইকিতে প্রবেশ</string>
-    <string name="about_wiki_link_description">যেকোনো গিটহাব ব্যবহারকারী উইকির উন্নয়ন করতে পারবে!</string>
     <string name="save_subtype_per_app">অ্যাপ অনুযায়ী ভাষা সংরক্ষণ</string>
     <string name="subtype_khipro_bn">%s (ক্ষিপ্র)</string>
     <string name="clipboard_history_pinned_first">পিন করা আইটেম শীর্ষে প্রদর্শন</string>
@@ -474,8 +472,6 @@
     <string name="auto_correct_capitalized_suggestions">বড় হাতের পরামর্শের স্বতঃসংশোধন</string>
     <string name="auto_correct_capitalized_suggestions_description">পরামর্শ বড়ো হাতের করার জন্য শিফট চাপার পরে স্বতঃসংশোধন চালু হবে</string>
     <string name="prefs_hint_font_scale">বোতামের ইঙ্গিতের স্কেল</string>
-    <string name="about_community_links">সম্প্রদায়ের সংযোগ</string>
-    <string name="about_community_links_description">থিম, লেআউট সম্পাদনা, আলোচনা, …</string>
     <string name="subtype_tok">টোকি পোনা</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">ডি-প্যাড</string>
     <string name="space_swipe_toggle_dpad_entry">ডি-প্যাডে অবস্থান্তর</string>

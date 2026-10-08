@@ -371,7 +371,6 @@
     <string name="settings_screen_about">Sobre</string>
     <string name="version">Versão</string>
     <string name="about_github_link">Ver no GitHub</string>
-    <string name="about_wiki_link">Ir para a Wiki</string>
     <string name="icon_style">Estilo do ícone</string>
     <string name="user_dict_settings_add_weight_value">Peso:</string>
     <string name="theme_name_chocolate" tools:keep="@string/theme_name_chocolate">Chocolate</string>
@@ -399,7 +398,6 @@
     <string name="var_toolbar_direction">Direção da barra de ferramentas variável</string>
     <string name="auto_show_toolbar">Mostrar barra de ferramentas automáticamente</string>
     <string name="auto_show_toolbar_summary">Mostrar a barra de ferramentas se a escrita começar ou texto é selecionado</string>
-    <string name="about_wiki_link_description">A Wiki pode ser melhorada por qualquer utilizador do GitHub!</string>
     <string name="gnu_gpl">GNU General Public License v3.0</string>
     <string name="text_tap_languages">Toque o idioma para abrir as definições</string>
     <string name="hidden_features_text">armazenamento protegido pelo dispositivo</string>
@@ -460,8 +458,6 @@
     <string name="subtype_tok">Toki Pona</string>
     <string name="subtype_generic_4row">%s (4 filas)</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
-    <string name="about_community_links">Links da comunidade</string>
-    <string name="about_community_links_description">Temas, editor de layouts, discussões, …</string>
     <string name="space_swipe_toggle_dpad_entry">Ativar D-pad</string>
     <string name="space_swipe_touchpad_mode_entry">Modo touchpad</string>
     <string name="touchpad_sensitivity">Sensibilidade do touchpad</string>

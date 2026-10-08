@@ -393,8 +393,6 @@
     <string name="all_colors_warning">Ez a beállítás felfedi az összes belsőleg használt színt. A színek listája bármikor megváltozhat. Az alapértelmezett beállítás a normál színekből származik, és a színek nevei nem lesznek lefordítva.</string>
     <string name="get_colors_message">A színeket a következő helyen találja és oszthatja meg: %s.</string>
     <string name="get_layouts_message">Az elrendezéseket a következő helyen találja és oszthatja meg: %s.</string>
-    <string name="about_wiki_link">Ugrás a Wikire</string>
-    <string name="about_wiki_link_description">A Wikit bármely GitHub-felhasználó javíthatja!</string>
     <string name="settings_screen_toolbar">Eszköztár</string>
     <string name="label_enter_key" tools:keep="@string/label_enter_key">Enter</string>
     <string name="label_delete_key" tools:keep="@string/label_delete_key">Törlés</string>
@@ -473,8 +471,6 @@
     <string name="auto_correct_capitalized_suggestions">Nagybetűs javaslatok automatikus javítása</string>
     <string name="auto_correct_capitalized_suggestions_description">A javaslatok Shift gombbal történő nagybetűsítése után az automatikus javítás aktiválódik</string>
     <string name="prefs_hint_font_scale">Billentyűtippek betűméretének méretezése</string>
-    <string name="about_community_links">Közösségi hivatkozások</string>
-    <string name="about_community_links_description">Témák, elrendezésszerkesztő, beszélgetések, …</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
     <string name="space_swipe_toggle_dpad_entry">D-pad be/ki</string>

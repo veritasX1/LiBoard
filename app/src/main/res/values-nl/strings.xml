@@ -437,8 +437,6 @@
     <string name="space_swipe_hide_keyboard_entry">Toetsenbord verbergen</string>
     <string name="suggest_punctuation">Interpunctie-suggesties</string>
     <string name="suggest_punctuation_summary">Toon interpunctie wanneer er geen andere suggesties beschikbaar zijn</string>
-    <string name="about_wiki_link">Ga naar Wiki</string>
-    <string name="about_wiki_link_description">De Wiki kan door elke GitHub-gebruiker worden verbeterd!</string>
     <string name="search_field_placeholder">Zoeken</string>
     <string name="inline_emoji_search">Inline emoji zoeken</string>
     <string name="inline_emoji_search_summary">Alleen emoji\'s voorstellen als een woord wordt voorafgegaan door een dubbele punt</string>
@@ -482,8 +480,6 @@
     <string name="auto_correct_capitalized_suggestions">Gekapitaliseerde suggesties autom. corrigeren</string>
     <string name="auto_correct_capitalized_suggestions_description">Shift drukken voor kapitalisatie van suggesties, activeert autom. correctie</string>
     <string name="prefs_hint_font_scale">Lettertypeschaal voor toetsenhints</string>
-    <string name="about_community_links">Gemeenschapslinks</string>
-    <string name="about_community_links_description">Thema\'s, lay-outeditor, discussies, …</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
     <string name="space_swipe_toggle_dpad_entry">D-pad omschakelen</string>

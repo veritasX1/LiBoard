@@ -437,8 +437,6 @@
     <string name="suggest_punctuation">اقتراحات علامات الترقيم</string>
     <string name="suggest_punctuation_summary">أظهر علامات الترقيم عندما لا تتوفر اقتراحات أخرى</string>
     <string name="space_swipe_hide_keyboard_entry">أخفِ لوحة مفاتيح</string>
-    <string name="about_wiki_link">اذهب إلى Github</string>
-    <string name="about_wiki_link_description">يمكن تحسين الويكي من خلال أي مستخدم Github!</string>
     <string name="save_subtype_per_app">تذكر اللغة لكل تطبيق</string>
     <string name="subtype_khipro_bn">%s (خيبرو)</string>
     <string name="clipboard_history_pinned_first">أظهر العناصر المثبتة في الأعلى</string>
@@ -482,8 +480,6 @@
     <string name="auto_correct_capitalized_suggestions">اقتراحات التصحيح التلقائي للأحرف الكبيرة</string>
     <string name="auto_correct_capitalized_suggestions_description">بعد الضغط على مفتاح «Shift» لتحويل الاقتراحات إلى أحرف كبيرة، ستُفعَّل ميزة التصحيح التلقائي</string>
     <string name="prefs_hint_font_scale">مقياس خط التلميحات الرئيسية</string>
-    <string name="about_community_links">روابط المجتمع</string>
-    <string name="about_community_links_description">السمات، محرِّر التخطيط، المناقشات، …</string>
     <string name="subtype_tok">Toki Pona</string>
     <string name="layout_dpad" tools:keep="@string/layout_dpad">لوحة الاتجاهات</string>
     <string name="space_swipe_toggle_dpad_entry">بدّل لوحة الاتجاهات</string>
