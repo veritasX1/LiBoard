@@ -5,7 +5,6 @@
  "Funktionen": "Features",
  "Datenschutz": "Privacy",
  "Laden": "Download",
- "Neu: Version 0.1 Beta": "New: version 0.1 beta",
  "Tippen wie auf dem iPhone.<br><span class=\"gradient-text\">Auf Android.": "Type like on the iPhone.<br><span class=\"gradient-text\">On Android.",
  "Alle Funktionen": "All features",
  "Buchstaben, Zahlen und Zeichen liegen dort, wo du sie vom iPhone kennst. Unten immer dieselbe Reihe: 123 · Emoji · Leerzeichen · Aktion.": "Letters, numbers and symbols are where you know them from the iPhone. At the bottom always the same row: 123 · Emoji · space · action.",
@@ -74,5 +73,6 @@
  "Unter der Tastatur stehen keine Android-Knöpfe mehr. „Fertig“ oben rechts schließt die Tastatur, wie auf dem iPhone.": "There are no Android buttons below the keyboard. “Done” at the top right closes the keyboard, as on the iPhone.",
  "Eine Tastatur bekommt alles mit, was du tippst, auch Passwörter. Deshalb hat LiBoard keinen Internetzugang. Nichts davon kann dein Handy verlassen.": "A keyboard sees everything you type, passwords included. That’s why LiBoard has no internet access, so nothing you type can leave your phone.",
  "LiBoard ist ein Fork von <a href=\"https://github.com/HeliBorg/HeliBoard\">HeliBoard</a>, der freien Tastatur von Helium314 und vielen Mitwirkenden. Die Tipp-Erkennung stammt wie dort aus dem Android-Quelltext. LiBoard ändert Aussehen und Bedienung, lässt die freiwillige Spende von Gestendaten weg und bleibt freie Software unter der GPL-3.0.": "LiBoard is a fork of <a href=\"https://github.com/HeliBorg/HeliBoard\">HeliBoard</a>, the free keyboard by Helium314 and many contributors. Like HeliBoard, it uses the word prediction from Android’s source code. LiBoard changes the look and handling, leaves out the optional gesture data donation and remains free software under the GPL-3.0.",
- "Kostenlos, Version 0.1 Beta für Android 5 und neuer. LiBoard lässt sich neben HeliBoard installieren.": "Free, version 0.1 beta for Android 5 and later. LiBoard can be installed alongside HeliBoard."
+ "Neu: Version 0.1.1 Beta · mehr Privatsphäre": "New: version 0.1.1 beta · more privacy",
+ "Kostenlos, Version 0.1.1 Beta für Android 5 und neuer. LiBoard lässt sich neben HeliBoard installieren.": "Free, version 0.1.1 beta for Android 5 and later. LiBoard can be installed alongside HeliBoard."
 }
