@@ -858,6 +858,10 @@ public class LatinIME extends InputMethodService implements
             ScriptMode.setMode(ScriptMode.Mode.NONE);
             if (mSuggestionStripView != null) mSuggestionStripView.updateScriptButtons();
         }
+        // LiBoard: a language change in the settings only reloads the keyboard, without a subtype
+        // change callback – so "Done" follows the language every time the keyboard opens (f01ca689)
+        if (mSuggestionStripView != null)
+            mSuggestionStripView.setKeyboardLocale(mRichImm.getCurrentSubtype().getLocale());
 
         setGestureDataGatheringMode(editorInfo, restarting);
 
