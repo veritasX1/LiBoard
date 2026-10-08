@@ -6,6 +6,9 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.IntOffset
@@ -55,6 +58,13 @@ fun SettingsNavHost(
         if (!navController.popBackStack()) onClickBack()
     }
 
+    // LiBoard: back button labelled with the previous page, sub pages with the current one (iOS, LiMail)
+    val entry by navController.currentBackStackEntryAsState()
+    val previousRoute = remember(entry) { navController.previousBackStackEntry?.destination?.route }
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalBackTitle provides routeTitle(previousRoute),
+        LocalPageTitle provides routeTitle(entry?.destination?.route),
+    ) {
     NavHost(
         navController = navController,
         startDestination = startDestination ?: SettingsDestination.Settings,
@@ -104,6 +114,9 @@ fun SettingsNavHost(
         composable(SettingsDestination.Advanced) {
             AdvancedSettingsScreen(onClickBack = ::goBack)
         }
+        composable(SettingsDestination.Developer) {
+            AdvancedSettingsScreen(onClickBack = ::goBack, developer = true)
+        }
         composable(SettingsDestination.Debug) {
             DebugScreen(onClickBack = ::goBack)
         }
@@ -139,6 +152,7 @@ fun SettingsNavHost(
             SubtypeScreen(initialSubtype = it.arguments?.getString("subtype")!!.toSettingsSubtype(), onClickBack = ::goBack)
         }
     }
+    }
     if (target.value != SettingsDestination.Settings/* && target.value != navController.currentBackStackEntry?.destination?.route*/)
         navController.navigate(route = target.value)
 }
@@ -149,6 +163,7 @@ object SettingsDestination {
     const val TypingTest = "typing_test"   // LiBoard
     const val TextCorrection = "text_correction"
     const val TextCorrectionAdvanced = "text_correction_advanced" // LiBoard
+    const val Developer = "developer" // LiBoard
     const val Preferences = "preferences"
     const val Toolbar = "toolbar"
     const val GestureTyping = "gesture_typing"

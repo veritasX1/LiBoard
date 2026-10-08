@@ -3,7 +3,7 @@ package helium314.keyboard.settings.preferences
 
 import helium314.keyboard.settings.iosSwitchColors
 
-import androidx.compose.material3.Switch
+import helium314.keyboard.settings.IosSwitch as Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue

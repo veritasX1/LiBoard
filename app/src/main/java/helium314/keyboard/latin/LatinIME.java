@@ -758,6 +758,7 @@ public class LatinIME extends InputMethodService implements
     public void setInputView(final View view) {
         super.setInputView(view);
         mInputView = view;
+        keepKeysOutOfGestureZone(view);
         mInsetsUpdater = ViewOutlineProviderUtilsKt.setInsetsOutlineProvider(view);
         KtxKt.updateSoftInputWindowLayoutParameters(this, mInputView);
         updateSuggestionStripView(view);
@@ -1020,6 +1021,23 @@ public class LatinIME extends InputMethodService implements
             workaroundForHuaweiStatusBarIssue();
         }
         hideSystemImeNavigationBar();
+    }
+
+    /** LiBoard: with the system's strip hidden (Android 16) the space bar would reach into the bottom
+     *  gesture zone, and a trackpad swipe starting there switches apps instead of moving the cursor.
+     *  That zone cannot be taken from the system, so – like the iPhone's band above the home
+     *  indicator – exactly its height stays free below the keys (0 with three-button navigation). */
+    private void keepKeysOutOfGestureZone(final View view) {
+        if (Build.VERSION.SDK_INT < 36) return;
+        final View frame = view.findViewById(R.id.main_keyboard_frame);
+        if (frame == null) return;
+        frame.setOnApplyWindowInsetsListener((v, insets) -> {
+            final int bottom = insets.getInsets(android.view.WindowInsets.Type.mandatorySystemGestures()).bottom;
+            if (v.getPaddingBottom() != bottom)
+                v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), bottom);
+            return insets;
+        });
+        frame.requestApplyInsets();
     }
 
     /** LiBoard: no empty strip below the space bar. Android 16 lets a keyboard hide the system's

@@ -74,6 +74,7 @@ object SettingsWithoutKey {
     const val CORRECTION_ADVANCED = "correction_advanced" // LiBoard
     const val TYPING_TEST = "typing_test" // LiBoard
     const val TOOLBAR_SCREEN = "toolbar_screen" // LiBoard
+    const val DEVELOPER_SCREEN = "developer_screen" // LiBoard
     const val APP = "app"
     const val VERSION = "version"
     const val LICENSE = "license"

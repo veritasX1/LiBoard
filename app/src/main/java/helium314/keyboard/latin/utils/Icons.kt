@@ -2,6 +2,9 @@
 package helium314.keyboard.latin.utils
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.MaterialTheme
@@ -73,14 +76,20 @@ fun ExpandButton(enabled: Boolean = true, onClick: () -> Unit) {
 
 @Composable
 fun BackButton(onClick: () -> Unit) {
-    // LiBoard: iOS back chevron in the accent colour
-    IconButton(onClick = onClick) {
+    // LiBoard: iOS back chevron in the accent colour, with the previous page's title like the iPhone and LiMail
+    val back = helium314.keyboard.settings.LocalBackTitle.current
+    androidx.compose.foundation.layout.Row(
+        Modifier.clickable(onClick = onClick).padding(start = 4.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+    ) {
         Icon(
             painterResource(R.drawable.ic_arrow_left),
             stringResource(R.string.spoken_description_action_previous),
             Modifier.size(28.dp),
             tint = MaterialTheme.colorScheme.primary
         )
+        if (back != null)
+            androidx.compose.material3.Text(back, color = MaterialTheme.colorScheme.primary, fontSize = 17.sp, maxLines = 1)
     }
 }
 

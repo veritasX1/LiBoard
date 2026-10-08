@@ -221,9 +221,9 @@
     <!-- Units abbreviation for size (megabytes) -->
     <string name="abbreviation_unit_mb">%s MB</string>
     <!-- Preferences item for enabling swipe deletion -->
-    <string name="delete_swipe">Delete swipe</string>
+    <string name="delete_swipe">Swipe on Delete Key</string>
     <!-- Description for "delete_swipe" option. -->
-    <string name="delete_swipe_summary">Perform a swipe from the delete key to select and remove bigger portions of text at once</string>
+    <string name="delete_swipe_summary">Swiping selects several words and deletes them at once.</string>
     <!-- Preferences item and dialog title for backup and restore -->
     <string name="backup_restore_title">Backup and restore</string>
     <!-- Message for backup and restore dialog -->
@@ -247,9 +247,9 @@
     <!-- Clarification which locales are available for multilingual typing -->
     <string name="locales_with_dict">Languages with dictionaries</string>
     <!-- Preferences item for loading an external gesture typing library -->
-    <string name="load_gesture_library">Load gesture typing library</string>
+    <string name="load_gesture_library">Load Gesture Library</string>
     <!-- Description for "load_gesture_library" option -->
-    <string name="load_gesture_library_summary">Provide a native library to enable gesture typing</string>
+    <string name="load_gesture_library_summary">Load the library for Slide to Type from a file</string>
     <!-- Message in load gesture library dialog -->
     <string name="load_gesture_library_message">You will need the library for \'%s\'. Incompatible libraries may crash when using gesture typing.
         \n\nWarning: loading external code can be a security risk. Only use a library from a source you trust.</string>
@@ -274,19 +274,19 @@
     <!-- Description for "autospace_after_punctuation" setting -->
     <string name="shift_removes_autospace_summary">The shift key removes a pending automatic space</string>
     <!-- Preferences item for showing popup keys in long-press popup -->
-    <string name="show_popup_keys_title">Accented Characters on Long Press</string>
+    <string name="show_popup_keys_title">Accents</string>
     <!-- Option for showing only letters defined in the current language file in long-press popup -->
-    <string name="show_popup_keys_normal">Show variants defined in keyboard languages</string>
+    <string name="show_popup_keys_normal">Keyboard Language Only</string>
     <!-- Option for showing letters common in foreign word (previous default in many language files) -->
-    <string name="show_popup_keys_main">Add very common variants (default)</string>
+    <string name="show_popup_keys_main">Common (Default)</string>
     <!-- Option for showing letters defined in at least two locales -->
-    <string name="show_popup_keys_more">Add common variants</string>
+    <string name="show_popup_keys_more">More</string>
     <!-- Option for showing letters defined in any locale -->
-    <string name="show_popup_keys_all">Add all available variants</string>
+    <string name="show_popup_keys_all">All</string>
     <!-- Preferences item for enabling URL detection -->
-    <string name="url_detection_title">URL detection</string>
+    <string name="url_detection_title">Recognize Web Addresses</string>
     <!-- Description for "url_detection_title" option. -->
-    <string name="url_detection_summary">Try to detect URLs and similar as a single word</string>
+    <string name="url_detection_summary">Treat web addresses and similar as one word</string>
     <!-- Preferences item for disabling word learning -->
     <string name="incognito">Don’t Learn New Words</string>
     <!-- Description for "prefs_force_incognito_mode" option. -->
@@ -391,11 +391,11 @@
     <!-- Description of the remove_redundant_popups setting -->
     <string name="remove_redundant_popups_summary">Characters that are already on the keyboard don’t appear again on long press.</string>
     <!-- Title of the setting enabling long press on space key to change IME -->
-    <string name="prefs_long_press_keyboard_to_change_lang">Change input method with space key</string>
+    <string name="prefs_long_press_keyboard_to_change_lang">Switch Keyboards with Space Bar</string>
     <!-- Description of the settings to change IME indicating long press triggers change. -->
-    <string name="prefs_long_press_keyboard_to_change_lang_summary">Long pressing space key will prompt input method selection menu</string>
+    <string name="prefs_long_press_keyboard_to_change_lang_summary">Long-pressing the space bar shows the keyboard picker.</string>
     <!-- Title of the setting enabling long press on symbols key to switch to numpad -->
-    <string name="prefs_long_press_symbol_for_numpad">Long press symbols key for numpad</string>
+    <string name="prefs_long_press_symbol_for_numpad">Number Pad on Long Press of “123”</string>
     <!-- Title of the setting for reduced distance between keys, todo: not used any more -->
     <string name="prefs_narrow_key_gaps">Narrow Key Spacing</string>
     <!-- Title of the setting for setting distance between keys -->
@@ -546,7 +546,7 @@ language, hence "No language". -->
     <!-- Name for numpad layout in landscape mode -->
     <string name="layout_numpad_landscape" tools:keep="@string/layout_numpad_landscape">Numpad (landscape)</string>
     <!-- Name for D-pad layout -->
-    <string name="layout_dpad" tools:keep="@string/layout_dpad">D-pad</string>
+    <string name="layout_dpad" tools:keep="@string/layout_dpad">Arrow Keys</string>
     <!-- Name for number row layout -->
     <string name="layout_number_row" tools:keep="@string/layout_number_row">Number row</string>
     <!-- Name for number row basic layout -->
@@ -570,15 +570,15 @@ language, hence "No language". -->
     <!-- Info for customizing currencies -->
     <string name="customize_currencies_detail">Main symbol and up to 6 more, separated by spaces</string>
     <!-- Title setting / dialog for selecting when to switch to main keyboard -->
-    <string name="switch_keyboard_after">Switch to main keyboard after…</string>
+    <string name="switch_keyboard_after">Back to ABC After…</string>
     <!-- Switch to main keyboard after selecting emoji from emoji view -->
-    <string name="after_emoji">Selecting emoji in emoji view</string>
+    <string name="after_emoji">After Choosing an Emoji</string>
     <!-- Switch to main keyboard after selecting clipboard history entry -->
-    <string name="after_clip">Selecting clipboard history entry</string>
+    <string name="after_clip">After Choosing from Clipboard History</string>
     <!-- Switch to main keyboard after entering a symbol in symbols layout and then pressing space or enter -->
-    <string name="after_symbol_and_space">Pressing enter or space after other keys in symbols view</string>
+    <string name="after_symbol_and_space">After Space or Return on Symbols Page</string>
     <!-- Switch to main keyboard after entering something in numpad layout and then pressing space or enter -->
-    <string name="after_numpad_and_space">Pressing enter or space after other keys in numpad</string>
+    <string name="after_numpad_and_space">After Space or Return on Number Pad</string>
     <!-- Message for selecting day or night background image -->
     <string name="day_or_night_image">Set image for day or night mode?</string>
     <!-- Button for selecting day -->
@@ -594,9 +594,9 @@ language, hence "No language". -->
     <!-- Title of the setting for overriding Android SDK level for showing emojis -->
     <string name="prefs_key_emoji_max_sdk">Override Emoji version</string>
     <!-- Title of the setting for enabling Emoji palette triggered by the Alt key on physical keyboards -->
-    <string name="prefs_enable_emoji_alt_physical_key">Emoji for physical keyboard</string>
+    <string name="prefs_enable_emoji_alt_physical_key">Emojis on Hardware Keyboards</string>
     <!-- Description of the settings for enabling Emoji palette triggered by the Alt key on physical keyboards -->
-    <string name="prefs_enable_emoji_alt_physical_key_summary">Physical Alt key shows the emoji palette</string>
+    <string name="prefs_enable_emoji_alt_physical_key_summary">The Alt key opens the emoji picker.</string>
     <!-- Title of the button to revert to the default value of the device in the settings dialog. Preferably 10 characters or less. -->
     <string name="button_default">Default</string>
     <!-- Title of the setup wizard welcome screen. %s is the application name. -->
@@ -606,27 +606,27 @@ language, hence "No language". -->
     <!-- The label of the button that starts the setup wizard. -->
     <string name="setup_start_action">Continue</string>
     <!-- Title of the setup wizard. %s is the application name. -->
-    <string name="setup_steps_title">"Setting up %s"</string>
+    <string name="setup_steps_title">Set Up %s</string>
     <!-- Title of the 1st step in the setup wizard. %s is the application name. -->
-    <string name="setup_step1_title">"Enable %s"</string>
+    <string name="setup_step1_title">Turn On %s</string>
     <!-- Detailed instruction of the 1st step in the setup wizard. %s is the application name. -->
     <string name="setup_step1_instruction">Turn on “%s” in Settings under “On-screen keyboard”.</string>
     <!-- The label of the button that triggers the Languages & input settings in order to enable the keyboard. -->
-    <string name="setup_step1_action">Enable in Settings</string>
+    <string name="setup_step1_action">Open Settings</string>
     <!-- Title of the 2nd step in the setup wizard. %s is the application name. -->
     <string name="setup_step2_title">"Switch to %s"</string>
     <!-- Detailed instruction of the 2nd step in the setup wizard. %s is the application name. -->
     <string name="setup_step2_instruction">Now choose “%s” as your keyboard.</string>
     <!-- The label of the button that triggers the choose input method dialog in order to select the keyboard. -->
-    <string name="setup_step2_action">Switch input methods</string>
+    <string name="setup_step2_action">Choose Keyboard</string>
     <!-- Title of the 3rd step in the setup wizard. -->
     <string name="setup_step3_title">You’re All Set</string>
     <!-- Detailed instruction of the 3rd step in the setup wizard. %s is the application name. -->
     <string name="setup_step3_instruction">You can now use %s in any app.</string>
     <!-- The label of the button that triggers the settings screen for the keyboard. -->
-    <string name="setup_step3_action">Configure the keyboard</string>
+    <string name="setup_step3_action">Settings</string>
     <!-- The label of the button that finishes the setup wizard. -->
-    <string name="setup_finish_action">Finished</string>
+    <string name="setup_finish_action">Done</string>
     <!-- Option to show setup wizard icon. Legacy setting only displayed for Android 9 and older. -->
     <string name="show_setup_wizard_icon">Show app icon</string>
     <!-- Description for the option to show setup wizard application icon of this IME in the launcher. -->
@@ -710,9 +710,9 @@ New dictionary:
     <!-- Option for choosing whether we use a theme that provides borders to keys -->
     <string name="key_borders">Key borders</string>
     <!-- Option for choosing auto day/night theme switch -->
-    <string name="day_night_mode">Auto day/night mode</string>
+    <string name="day_night_mode">Automatic</string>
     <!-- Description for "day_night_mode" option. -->
-    <string name="day_night_mode_summary">Appearance will follow system settings</string>
+    <string name="day_night_mode_summary">Follows the system appearance.</string>
     <!-- Option for setting navbar to follow keyboard color -->
     <string name="theme_navbar">Color navigation bar</string>
     <!-- Theme name for light theme -->
@@ -787,7 +787,7 @@ New dictionary:
     <!-- Text to be used in get_colors_message and get_layouts_message -->
     <string name="discussion_section_link">"discussion section"</string>
     <!-- Settings screen title for about -->
-    <string name="settings_screen_about">About</string>
+    <string name="settings_screen_about">About LiBoard</string>
     <!-- version for about screen -->
     <string name="version">Version</string>
     <!-- github repo link for about screen -->
@@ -803,7 +803,7 @@ New dictionary:
     <!-- license link for about screen-->
     <string name="gnu_gpl">GNU General Public License v3.0</string>
     <!-- Button to close a dialog where neither "ok" nor "cancel" are suitable. Preferably 10 characters or less. -->
-    <string name="dialog_close">Close</string>
+    <string name="dialog_close">Done</string>
     <!-- Hint for users to tap the languages for settings -->
     <string name="text_tap_languages">Tap the language to open settings</string>
     <!-- Title of internal InputMethodPicker, strings should be same as the ones from Android system -->
@@ -813,7 +813,7 @@ New dictionary:
     <!-- Settings screen title for toolbar preferences -->
     <string name="settings_screen_toolbar">Toolbar</string>
     <!-- Hidden features title -->
-    <string name="hidden_features_title">Tips &amp; Tricks</string>
+    <string name="hidden_features_title">Help</string>
     <!-- Hidden features summary -->
     <string name="hidden_features_summary">What else LiBoard can do</string>
     <!-- Title of the link to the web page inserted into messages -->
@@ -905,9 +905,9 @@ New dictionary:
     <!-- Label for bin (delete) key, currently used only for showing the icon name -->
     <string name="label_bin" tools:keep="@string/label_bin">Bin</string>
     <!-- Title of the setting for horizontal spacebar swipe gesture -->
-    <string name="show_horizontal_space_swipe">Horizontal spacebar swipe gesture</string>
+    <string name="show_horizontal_space_swipe">Horizontal</string>
     <!-- Title of the setting for vertical spacebar swipe gesture -->
-    <string name="show_vertical_space_swipe">Vertical spacebar swipe gesture</string>
+    <string name="show_vertical_space_swipe">Vertical</string>
     <!-- Option for no action when (currently only used for swiping the spacebar) -->
     <string name="action_none">None</string>
     <!-- Option to move the cursor when swiping the spacebar -->
@@ -915,7 +915,7 @@ New dictionary:
     <!-- Option to toggle the numpad when swiping the spacebar -->
     <string name="space_swipe_toggle_numpad_entry">Toggle numpad</string>
     <!-- Option to toggle the D-pad when swiping the spacebar -->
-    <string name="space_swipe_toggle_dpad_entry">Toggle D-pad</string>
+    <string name="space_swipe_toggle_dpad_entry">Arrow Keys On/Off</string>
     <!-- Option to hide the keyboard when swiping the spacebar -->
     <string name="space_swipe_hide_keyboard_entry">Hide keyboard</string>
     <!-- Option to use touchpad when swiping the spacebar -->
@@ -1048,4 +1048,12 @@ New dictionary:
     <string name="liboard_advanced">Advanced</string>
     <string name="liboard_no_dictionary_message">There is no built-in dictionary for %s, so this language has no suggestions or corrections.</string>
     <string name="liboard_typing_stored_locally">Results are stored only on this device.</string>
+    <string name="liboard_developer">Developer</string>
+    <string name="liboard_abc_section">Back to ABC</string>
+    <string name="liboard_space_swipe_section">Swipe on Space Bar</string>
+    <string name="liboard_back">Back</string>
+    <string name="liboard_popup_keys_footer">Applies when you long-press a letter. Example: long-pressing e shows é è ê ë. “More” and “All” add characters from other languages.</string>
+    <string name="liboard_reset_to_default">Reset to Default</string>
+    <string name="liboard_space_swipe_footer">What swiping across the space bar does. Long-pressing the space bar always turns the keyboard into a trackpad.</string>
+    <string name="liboard_longpress_footer">How long a key must be held before more characters appear. Shorter reacts faster, longer avoids accidental triggers.</string>
 </resources>

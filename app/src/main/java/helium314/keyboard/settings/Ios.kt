@@ -22,6 +22,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.draw.alpha
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
@@ -193,4 +204,144 @@ fun IosCheck(selected: Boolean, onClick: (() -> Unit)? = null) {
         if (selected)
             Text("✓", color = MaterialTheme.colorScheme.primary, fontSize = 19.sp, fontWeight = FontWeight.SemiBold)
     }
+}
+
+/**
+ * The switch of all Li apps – same size, colours and motion as LiMail's SwitchRow (Olaf 08.10.: „Einheitlichkeit
+ * wie Apple“, card ec15db7a): track 51 × 31 dp, green when on, system fill when off, a white 27 dp knob with a
+ * shadow that only slides (never grows). Same call shape as Material's Switch so it can replace it everywhere;
+ * [colors] is ignored on purpose.
+ */
+@Composable
+fun IosSwitch(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    @Suppress("UNUSED_PARAMETER") colors: SwitchColors? = null,
+) {
+    val dark = isDarkSettings()
+    val knob by androidx.compose.animation.core.animateFloatAsState(if (checked) 1f else 0f, label = "switch")
+    val track = if (checked) (if (dark) Ios.greenDark else Ios.green)
+        else if (dark) Color(0x3D767680) else Color(0x1F767680) // = LiMail palette().fill
+    var m = modifier.size(width = 51.dp, height = 31.dp).clip(androidx.compose.foundation.shape.CircleShape).background(track)
+    if (onCheckedChange != null)
+        m = m.then(Modifier.toggleable(value = checked, enabled = enabled, role = androidx.compose.ui.semantics.Role.Switch,
+            onValueChange = onCheckedChange))
+    Box(m.then(if (enabled) Modifier else Modifier.alpha(0.5f))) {
+        Box(Modifier.padding(2.dp).offset(x = (20 * knob).dp).size(27.dp)
+            .shadow(2.dp, androidx.compose.foundation.shape.CircleShape)
+            .clip(androidx.compose.foundation.shape.CircleShape).background(Color.White))
+    }
+}
+
+/**
+ * A pushed settings page like on the iPhone (card 23328ec0): full screen, grouped background, „‹ Zurück“ on the
+ * left, the title in the middle – used instead of Android pop-up dialogs for choices and sliders.
+ */
+@Composable
+fun IosSubPage(title: String, onBack: () -> Unit, content: @Composable androidx.compose.foundation.layout.ColumnScope.() -> Unit) {
+    androidx.compose.ui.window.Dialog(
+        onDismissRequest = onBack,
+        properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false),
+    ) {
+        Column(
+            Modifier.fillMaxWidth().fillMaxHeight().background(MaterialTheme.colorScheme.background)
+                .windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets.Companion.safeDrawing)
+        ) {
+            Box(Modifier.fillMaxWidth().height(44.dp)) {
+                Text(
+                    "‹ " + (LocalPageTitle.current ?: androidx.compose.ui.res.stringResource(R.string.liboard_back)),
+                    color = MaterialTheme.colorScheme.primary, fontSize = 17.sp,
+                    modifier = Modifier.align(Alignment.CenterStart).clickable(onClick = onBack).padding(horizontal = 12.dp, vertical = 10.dp)
+                )
+                Text(title, fontSize = 17.sp, fontWeight = FontWeight.SemiBold, maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                    modifier = Modifier.align(Alignment.Center).padding(horizontal = 110.dp))
+            }
+            Column(Modifier.fillMaxWidth().verticalScroll(androidx.compose.foundation.rememberScrollState()), content = content)
+        }
+    }
+}
+
+/** One choice of an [IosSubPage]: text on the left, the check mark on the right (Apple HIG). */
+@Composable
+fun IosChoiceRow(text: String, selected: Boolean, onClick: () -> Unit) {
+    androidx.compose.foundation.layout.Row(
+        Modifier.fillMaxWidth().heightIn(min = 44.dp).clickable(onClick = onClick).padding(start = 16.dp, end = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text, fontSize = 17.sp, modifier = Modifier.weight(1f).padding(vertical = 11.dp))
+        IosCheck(selected)
+    }
+}
+
+/** LiBoard: title of the previous page for the back button („‹ Erweitert“) and of the current page for pushed
+ *  sub pages – as on the iPhone and in LiMail (card 23328ec0, LI-GESTALTUNG.md). */
+val LocalBackTitle = androidx.compose.runtime.compositionLocalOf<String?> { null }
+val LocalPageTitle = androidx.compose.runtime.compositionLocalOf<String?> { null }
+
+@Composable
+fun routeTitle(route: String?): String? {
+    val res = when {
+        route == null -> return null
+        route == "settings" -> R.string.english_ime_name
+        route == "about" -> R.string.settings_screen_about
+        route == "typing_test" -> R.string.liboard_typing_test
+        route == "text_correction" -> R.string.settings_screen_correction
+        route == "text_correction_advanced" -> R.string.liboard_advanced
+        route == "developer" -> R.string.liboard_developer
+        route == "preferences" -> R.string.settings_screen_preferences
+        route == "toolbar" -> R.string.settings_screen_toolbar
+        route == "gesture_typing" -> R.string.settings_screen_gesture
+        route == "advanced" -> R.string.settings_screen_advanced
+        route == "appearance" || route.startsWith("colors") -> R.string.settings_screen_appearance
+        route.startsWith("personal_dictionar") -> R.string.edit_personal_dictionary
+        route == "languages" || route.startsWith("subtype") || route == "layouts" -> R.string.language_and_layouts_title
+        route == "dictionaries" -> R.string.dictionary_settings_category
+        else -> R.string.liboard_back
+    }
+    return androidx.compose.ui.res.stringResource(res)
+}
+
+/** The slider of all Li apps (iOS look, card 23328ec0): thin 4 dp track, blue left of the knob, system fill right,
+ *  a white 28 dp knob with a shadow. */
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
+fun IosSlider(
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    valueRange: ClosedFloatingPointRange<Float>,
+    steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
+) {
+    val dark = isDarkSettings()
+    val blue = MaterialTheme.colorScheme.primary
+    val fill = if (dark) Color(0x3D767680) else Color(0x1F767680)
+    androidx.compose.material3.Slider(
+        value = value,
+        onValueChange = onValueChange,
+        valueRange = valueRange,
+        steps = steps,
+        onValueChangeFinished = onValueChangeFinished,
+        thumb = {
+            Box(Modifier.size(28.dp).shadow(3.dp, androidx.compose.foundation.shape.CircleShape)
+                .clip(androidx.compose.foundation.shape.CircleShape).background(Color.White))
+        },
+        track = { state ->
+            val span = state.valueRange.endInclusive - state.valueRange.start
+            val fraction = if (span == 0f) 0f else ((state.value - state.valueRange.start) / span).coerceIn(0f, 1f)
+            androidx.compose.foundation.layout.Row(Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp))) {
+                if (fraction > 0f) Box(Modifier.weight(fraction).fillMaxHeight().background(blue))
+                if (fraction < 1f) Box(Modifier.weight(1f - fraction).fillMaxHeight().background(fill))
+            }
+        },
+    )
+}
+
+/** A blue action row like iOS („Auf Standard zurücksetzen“). */
+@Composable
+fun IosActionRow(text: String, onClick: () -> Unit) {
+    Text(text, color = MaterialTheme.colorScheme.primary, fontSize = 17.sp,
+        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 16.dp, vertical = 11.dp))
 }

@@ -3,6 +3,8 @@ package helium314.keyboard.settings.preferences
 import android.content.SharedPreferences
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import helium314.keyboard.latin.R
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,30 +22,43 @@ fun <T: Any> ListPreference(
     items: List<Pair<String, T>>,
     default: T,
     onDefault: (() -> Unit)? = null,
+    footer: String? = null, // LiBoard: explanation with an example below the choices
     onChanged: (T) -> Unit = { }
 ) {
-    var showDialog by rememberSaveable { mutableStateOf(false) }
+    var showPage by rememberSaveable { mutableStateOf(false) }
     val prefs = LocalContext.current.prefs()
-    val selected = items.firstOrNull { it.second == getPrefOfType(prefs, setting.key, default) }
+    var current by remember { mutableStateOf(getPrefOfType(prefs, setting.key, default)) }
+    val selected = items.firstOrNull { it.second == current }
+    // LiBoard: like the iPhone – the chosen value in grey on the right, a page with check marks instead of an
+    // Android pop-up (card 23328ec0)
     Preference(
         name = setting.title,
-        description = selected?.first,
-        onClick = { showDialog = true }
-    )
-    if (showDialog) {
-        ListPickerDialog(
-            onDismissRequest = { showDialog = false },
-            items = items,
-            onItemSelected = {
-                if (it == selected) return@ListPickerDialog
-                putPrefOfType(prefs, setting.key, it.second)
-                onChanged(it.second)
-            },
-            selectedItem = selected,
-            title = { Text(setting.title) },
-            getItemName = { it.first },
-            onDefault = onDefault
-        )
+        description = selected?.first?.takeIf { it.length > 22 },
+        onClick = { showPage = true }
+    ) {
+        selected?.first?.takeIf { it.length <= 22 }?.let { Text(it) }
+        helium314.keyboard.latin.utils.NextScreenIcon()
+    }
+    if (showPage) {
+        helium314.keyboard.settings.IosSubPage(setting.title, onBack = { showPage = false }) {
+            helium314.keyboard.settings.IosGroup(footer = footer, items = items.map { item ->
+                @Composable {
+                    helium314.keyboard.settings.IosChoiceRow(item.first, item.second == current) {
+                        if (item.second != current) {
+                            putPrefOfType(prefs, setting.key, item.second)
+                            current = item.second
+                            onChanged(item.second)
+                        }
+                    }
+                }
+            })
+            if (onDefault != null)
+                helium314.keyboard.settings.IosGroup(items = listOf {
+                    helium314.keyboard.settings.IosActionRow(androidx.compose.ui.res.stringResource(R.string.liboard_reset_to_default)) {
+                        onDefault(); current = getPrefOfType(prefs, setting.key, default)
+                    }
+                })
+        }
     }
 }
 

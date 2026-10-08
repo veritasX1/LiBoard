@@ -2,6 +2,10 @@
 package helium314.keyboard.settings.preferences
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +32,7 @@ fun <T: Number> SliderPreference(
     range: ClosedFloatingPointRange<Float>,
     stepSize: Int? = null,
     onValueChanged: (Float?) -> Unit = { },
+    footer: String? = null, // LiBoard: what the value does, below the slider
     onConfirmed: (T) -> Unit = { },
 ) {
     val ctx = LocalContext.current
@@ -44,32 +49,38 @@ fun <T: Number> SliderPreference(
         name = name,
         onClick = { showDialog = true },
         modifier = modifier,
-        description = description(initialValue)
-    )
-    if (showDialog)
-        SliderDialog(
-            onDismissRequest = { showDialog = false },
-            onDone = {
-                if (default is Int) {
-                    prefs.edit { putInt(key, it.toInt()) }
-                    onConfirmed(it.toInt() as T)
-                } else {
-                    prefs.edit { putFloat(key, it) }
-                    onConfirmed(it as T)
+    ) {
+        // LiBoard: the value in grey on the right, like the lists (card 23328ec0)
+        androidx.compose.material3.Text(description(initialValue), maxLines = 1)
+        helium314.keyboard.latin.utils.NextScreenIcon()
+    }
+    // LiBoard: an iPhone-like page with the slider instead of an Android pop-up (card 23328ec0)
+    if (showDialog) {
+        var position by remember { mutableStateOf(initialValue.toFloat()) }
+        fun save(value: Float) {
+            if (default is Int) { prefs.edit { putInt(key, value.toInt()) }; onConfirmed(value.toInt() as T) }
+            else { prefs.edit { putFloat(key, value) }; onConfirmed(value as T) }
+        }
+        helium314.keyboard.settings.IosSubPage(name, onBack = { onValueChanged(null); showDialog = false }) {
+            @Suppress("UNCHECKED_CAST")
+            val shown = description((if (default is Int) position.toInt() else position) as T)
+            helium314.keyboard.settings.IosGroup(footer = footer, items = listOf {
+                androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(horizontal = 16.dp, vertical = 10.dp)) {
+                    androidx.compose.material3.Text(shown, fontSize = 17.sp)
+                    helium314.keyboard.settings.IosSlider(
+                        value = position,
+                        onValueChange = { position = it; onValueChanged(it) },
+                        onValueChangeFinished = { save(position) },
+                        valueRange = range,
+                        steps = stepSize?.let { ((range.endInclusive - range.start) / it - 1).toInt() } ?: 0,
+                    )
                 }
-            },
-            initialValue = initialValue.toFloat(),
-            range = range,
-            positionString = {
-                @Suppress("UNCHECKED_CAST")
-                description((if (default is Int) it.toInt() else it) as T)
-            },
-            onValueChanged = onValueChanged,
-            showDefault = true,
-            onDefault = { prefs.edit { remove(key) }; onConfirmed(default) },
-            intermediateSteps = stepSize?.let {
-                // this is not nice, but slider wants it like this...
-                ((range.endInclusive - range.start) / it - 1).toInt()
-            }
-        )
+            })
+            helium314.keyboard.settings.IosGroup(items = listOf {
+                helium314.keyboard.settings.IosActionRow(androidx.compose.ui.res.stringResource(helium314.keyboard.latin.R.string.liboard_reset_to_default)) {
+                    prefs.edit { remove(key) }; position = default.toFloat(); onValueChanged(null); onConfirmed(default)
+                }
+            })
+        }
+    }
 }

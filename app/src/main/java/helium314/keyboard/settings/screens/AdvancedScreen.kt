@@ -53,14 +53,34 @@ import helium314.keyboard.latin.utils.getActivity
 @Composable
 fun AdvancedSettingsScreen(
     onClickBack: () -> Unit,
+    developer: Boolean = false, // LiBoard
 ) {
     val prefs = LocalContext.current.prefs()
     val b = (LocalContext.current.getActivity() as? SettingsActivity)?.prefChanged?.collectAsState()
     if ((b?.value ?: 0) < 0)
         Log.v("irrelevant", "stupid way to trigger recomposition on preference change")
-    val items = listOf(
+    val debugVisible = BuildConfig.DEBUG || prefs.getBoolean(DebugSettings.PREF_SHOW_DEBUG_SETTINGS, Defaults.PREF_SHOW_DEBUG_SETTINGS)
+    // LiBoard: what most people never need (debug, experimental, hardware keyboard, timestamp key,
+    // gesture library) lives on its own page "Entwickler" – Tante Erna zuerst (card b1adb785)
+    val items = if (developer) listOf(
+        Settings.PREF_ENABLE_EMOJI_ALT_PHYSICAL_KEY,
+        Settings.PREF_TIMESTAMP_FORMAT,
+        if (debugVisible) SettingsWithoutKey.DEBUG_SETTINGS else null,
+        R.string.settings_category_experimental,
+        Settings.PREF_EMOJI_MAX_SDK,
+        Settings.PREF_URL_DETECTION,
+        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null,
+    ) else listOf(
         Settings.PREF_ALWAYS_INCOGNITO_MODE,
         Settings.PREF_KEY_LONGPRESS_TIMEOUT,
+        Settings.PREF_DELETE_SWIPE,
+        Settings.PREF_SPACE_TO_CHANGE_LANG,
+        Settings.PREFS_LONG_PRESS_SYMBOLS_FOR_NUMPAD,
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) Settings.PREF_SHOW_SETUP_WIZARD_ICON else null,
+        Settings.PREF_CUSTOM_CURRENCY_KEY,
+        Settings.PREF_MORE_POPUP_KEYS,
+        // LiBoard: grouped under section titles instead of four times the same title (Olaf/Michelle 08.10., card b1adb785)
+        R.string.liboard_space_swipe_section,
         Settings.PREF_SPACE_HORIZONTAL_SWIPE,
         Settings.PREF_SPACE_VERTICAL_SWIPE,
         if (Settings.readHorizontalSpaceSwipe(prefs) == KeyboardActionListener.SwipeAction.SWITCH_LANGUAGE
@@ -70,34 +90,21 @@ fun AdvancedSettingsScreen(
             Settings.PREF_TOUCHPAD_SENSITIVITY else null,
         if (Settings.readVerticalSpaceSwipe(prefs) == KeyboardActionListener.SwipeAction.TOUCHPAD_MODE)
             Settings.PREF_TOUCHPAD_EDGE_SCROLL else null,
-        Settings.PREF_DELETE_SWIPE,
-        Settings.PREF_SPACE_TO_CHANGE_LANG,
-        Settings.PREFS_LONG_PRESS_SYMBOLS_FOR_NUMPAD,
-        Settings.PREF_ENABLE_EMOJI_ALT_PHYSICAL_KEY,
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) Settings.PREF_SHOW_SETUP_WIZARD_ICON else null,
+        R.string.liboard_abc_section,
         Settings.PREF_ABC_AFTER_SYMBOL_SPACE,
         Settings.PREF_ABC_AFTER_NUMPAD_SPACE,
         Settings.PREF_ABC_AFTER_EMOJI,
         Settings.PREF_ABC_AFTER_CLIP,
-        Settings.PREF_CUSTOM_CURRENCY_KEY,
-        Settings.PREF_MORE_POPUP_KEYS,
-        Settings.PREF_TIMESTAMP_FORMAT,
+        R.string.liboard_more,
         SettingsWithoutKey.TOOLBAR_SCREEN, // LiBoard: moved here from the start page (card b1adb785)
         SettingsWithoutKey.BACKUP_RESTORE,
-        if (BuildConfig.DEBUG || prefs.getBoolean(DebugSettings.PREF_SHOW_DEBUG_SETTINGS, Defaults.PREF_SHOW_DEBUG_SETTINGS))
-            SettingsWithoutKey.DEBUG_SETTINGS else null,
-        R.string.settings_category_experimental,
-        // LiBoard: no use for most people – only where the debug settings are shown (card b1adb785)
-        if (BuildConfig.DEBUG || prefs.getBoolean(DebugSettings.PREF_SHOW_DEBUG_SETTINGS, Defaults.PREF_SHOW_DEBUG_SETTINGS))
-            Settings.PREF_EMOJI_MAX_SDK else null,
-        Settings.PREF_URL_DETECTION,
-        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null,
+        SettingsWithoutKey.DEVELOPER_SCREEN,
         R.string.liboard_typing_test, // LiBoard: last, as the iPhone has no such test (Olaf 08.10.)
         SettingsWithoutKey.TYPING_TEST,
     )
     SearchSettingsScreen(
         onClickBack = onClickBack,
-        title = stringResource(R.string.settings_screen_advanced),
+        title = stringResource(if (developer) R.string.liboard_developer else R.string.settings_screen_advanced),
         settings = items
     )
 }
@@ -115,7 +122,8 @@ fun createAdvancedSettings(context: Context) = listOf(
             key = setting.key,
             default = Defaults.PREF_KEY_LONGPRESS_TIMEOUT,
             range = 100f..700f,
-            description = { stringResource(R.string.abbreviation_unit_milliseconds, it.toString()) }
+            description = { stringResource(R.string.abbreviation_unit_milliseconds, it.toString()) },
+            footer = stringResource(R.string.liboard_longpress_footer),
         )
     },
     Setting(context, Settings.PREF_SPACE_HORIZONTAL_SWIPE, R.string.show_horizontal_space_swipe) {
@@ -126,7 +134,7 @@ fun createAdvancedSettings(context: Context) = listOf(
             stringResource(R.string.space_swipe_toggle_dpad_entry) to KeyboardActionListener.SwipeAction.TOGGLE_DPAD.name,
             stringResource(R.string.action_none) to KeyboardActionListener.SwipeAction.NONE.name,
         )
-        ListPreference(it, items, Defaults.PREF_SPACE_HORIZONTAL_SWIPE)
+        ListPreference(it, items, Defaults.PREF_SPACE_HORIZONTAL_SWIPE, footer = stringResource(R.string.liboard_space_swipe_footer))
     },
     Setting(context, Settings.PREF_SPACE_VERTICAL_SWIPE, R.string.show_vertical_space_swipe) {
         val items = listOf(
@@ -138,7 +146,7 @@ fun createAdvancedSettings(context: Context) = listOf(
             stringResource(R.string.space_swipe_touchpad_mode_entry) to KeyboardActionListener.SwipeAction.TOUCHPAD_MODE.name,
             stringResource(R.string.action_none) to KeyboardActionListener.SwipeAction.NONE.name,
         )
-        ListPreference(it, items, Defaults.PREF_SPACE_VERTICAL_SWIPE)
+        ListPreference(it, items, Defaults.PREF_SPACE_VERTICAL_SWIPE, footer = stringResource(R.string.liboard_space_swipe_footer))
     },
     Setting(context, Settings.PREF_LANGUAGE_SWIPE_DISTANCE, R.string.prefs_language_swipe_distance) { setting ->
         SliderPreference(
@@ -182,21 +190,19 @@ fun createAdvancedSettings(context: Context) = listOf(
         val ctx = LocalContext.current
         SwitchPreference(it, Defaults.PREF_SHOW_SETUP_WIZARD_ICON) { SystemBroadcastReceiver.toggleAppIcon(ctx) }
     },
-    Setting(context, Settings.PREF_ABC_AFTER_SYMBOL_SPACE,
-        R.string.switch_keyboard_after, R.string.after_symbol_and_space)
+    Setting(context, Settings.PREF_ABC_AFTER_SYMBOL_SPACE, R.string.after_symbol_and_space)
     {
         SwitchPreference(it, Defaults.PREF_ABC_AFTER_SYMBOL_SPACE)
     },
-    Setting(context, Settings.PREF_ABC_AFTER_NUMPAD_SPACE,
-        R.string.switch_keyboard_after, R.string.after_numpad_and_space)
+    Setting(context, Settings.PREF_ABC_AFTER_NUMPAD_SPACE, R.string.after_numpad_and_space)
     {
         SwitchPreference(it, Defaults.PREF_ABC_AFTER_NUMPAD_SPACE)
     },
-    Setting(context, Settings.PREF_ABC_AFTER_EMOJI, R.string.switch_keyboard_after, R.string.after_emoji) {
+    Setting(context, Settings.PREF_ABC_AFTER_EMOJI, R.string.after_emoji) {
         SwitchPreference(it, Defaults.PREF_ABC_AFTER_EMOJI)
     },
-    Setting(context, Settings.PREF_ABC_AFTER_CLIP, R.string.switch_keyboard_after, R.string.after_clip) {
-        SwitchPreference(it, Defaults.PREF_ABC_AFTER_EMOJI)
+    Setting(context, Settings.PREF_ABC_AFTER_CLIP, R.string.after_clip) {
+        SwitchPreference(it, Defaults.PREF_ABC_AFTER_CLIP) // LiBoard: was the emoji default
     },
     Setting(context, Settings.PREF_CUSTOM_CURRENCY_KEY, R.string.customize_currencies) { setting ->
         var showDialog by rememberSaveable { mutableStateOf(false) }
@@ -227,13 +233,21 @@ fun createAdvancedSettings(context: Context) = listOf(
         ).map { setting ->
             stringResource(LocaleKeyboardInfos.morePopupKeysResId(setting)) to setting
         }
-        ListPreference(it, items, Defaults.PREF_MORE_POPUP_KEYS) { KeyboardLayoutSet.onSystemLocaleChanged() }
+        ListPreference(it, items, Defaults.PREF_MORE_POPUP_KEYS, footer = stringResource(R.string.liboard_popup_keys_footer)) {
+            KeyboardLayoutSet.onSystemLocaleChanged()
+        }
     },
     Setting(context, SettingsWithoutKey.BACKUP_RESTORE, R.string.backup_restore_title) {
         BackupRestorePreference(it)
     },
     Setting(context, Settings.PREF_TIMESTAMP_FORMAT, R.string.timestamp_format_title) { setting ->
         TextInputPreference(setting, Defaults.PREF_TIMESTAMP_FORMAT, stringResource(R.string.timestamp_description)) { checkTimestampFormat(it) }
+    },
+    Setting(context, SettingsWithoutKey.DEVELOPER_SCREEN, R.string.liboard_developer) {
+        Preference(
+            name = it.title,
+            onClick = { SettingsDestination.navigateTo(SettingsDestination.Developer) }
+        ) { NextScreenIcon() }
     },
     Setting(context, SettingsWithoutKey.TOOLBAR_SCREEN, R.string.settings_screen_toolbar) {
         Preference(
@@ -302,7 +316,7 @@ private fun Preview() {
     SettingsActivity.settingsContainer = SettingsContainer(LocalContext.current)
     Theme(previewDark) {
         Surface {
-            AdvancedSettingsScreen { }
+            AdvancedSettingsScreen(onClickBack = { })
         }
     }
 }
