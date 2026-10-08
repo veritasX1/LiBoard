@@ -179,7 +179,9 @@ class ClipboardHistoryManager(
     }
 
     private fun isClipSensitive(inputType: Int): Boolean {
-        ClipboardManagerCompat.getClipSensitivity(clipboardManager.primaryClip?.description)?.let { return it }
+        // LiBoard: from API 24 getClipSensitivity is never null (false without the extra), so the password field was never
+        // checked (Richard 08.10.) – sensitive if the copying app says so OR the field in focus is a password field
+        if (ClipboardManagerCompat.getClipSensitivity(clipboardManager.primaryClip?.description) == true) return true
         return InputTypeUtils.isPasswordInputType(inputType)
     }
 

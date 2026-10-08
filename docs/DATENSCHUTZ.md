@@ -23,7 +23,7 @@ LiBoard ist eine Tastatur. Eine Tastatur bekommt alles mit, was du tippst, auch 
 | Zwischenablage-Vorschläge | zuletzt Kopiertes als Vorschlag | aus |
 | Namen aus deinen Kontakten | Namen als Vorschläge | aus, Android fragt beim Einschalten |
 | Namen installierter Apps | App-Namen als Vorschläge | aus |
-| Zwischenablage-Verlauf | Kopiertes erneut einfügen; Einträge verfallen nach der eingestellten Zeit (ab Werk 10 Minuten) und werden auch beim Start aufgeräumt. Was die kopierende App als vertraulich kennzeichnet oder was aus einem Passwortfeld stammt, wird nie gespeichert. | aus |
+| Zwischenablage-Verlauf | Kopiertes erneut einfügen; Einträge verfallen nach der eingestellten Zeit (ab Werk 10 Minuten) und werden auch beim Start aufgeräumt. Was die kopierende App als vertraulich kennzeichnet, wird nie gespeichert, ebenso nichts, während ein Passwortfeld aktiv ist. | aus |
 
 Getippter Text selbst wird nicht gespeichert, nur die Wörter, die LiBoard für Vorschläge lernt.
 
@@ -84,7 +84,7 @@ LiBoard is a keyboard. A keyboard sees everything you type, passwords included. 
 | Clipboard suggestions | recently copied text as a suggestion | off |
 | Names from your contacts | names as suggestions | off, Android asks when you turn it on |
 | Names of installed apps | app names as suggestions | off |
-| Clipboard history | paste copied items again; entries expire after the set time (10 minutes by default) and are also cleared at start. Anything the copying app marks as sensitive, or that comes from a password field, is never stored. | off |
+| Clipboard history | paste copied items again; entries expire after the set time (10 minutes by default) and are also cleared at start. Anything the copying app marks as sensitive is never stored, nor anything while a password field is active. | off |
 
 Typed text itself is not stored, only the words LiBoard learns for suggestions.
 
