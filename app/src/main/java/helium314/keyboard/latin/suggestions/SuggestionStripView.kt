@@ -142,6 +142,8 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
     private val defaultToolbarBackground: Drawable = toolbarExpandKey.background
     private val enabledToolKeyBackground = GradientDrawable()
     private var direction = 1 // 1 if LTR, -1 if RTL
+    private var doneKey: TextView? = null
+    private var doneLocale: java.util.Locale? = null
 
     private val toolbarKeyLayoutParams = LinearLayout.LayoutParams(
         resources.getDimensionPixelSize(R.dimen.config_suggestions_strip_edge_key_width),
@@ -192,6 +194,7 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         // Needed since the system's own hide button below the keyboard is gone (no empty strip).
         val done = android.widget.TextView(context).apply {
             text = context.getString(R.string.liboard_done)
+            doneKey = this
             setTextColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
             textSize = 16f
             typeface = android.graphics.Typeface.DEFAULT_BOLD
@@ -274,6 +277,17 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         listener = newListener
         moreSuggestionsView.listener = newListener
         moreSuggestionsView.mainKeyboardView = inputView.findViewById(R.id.keyboard_view)
+    }
+
+    // LiBoard: "Done" / "Fertig" / "OK" follows the keyboard's language like the space bar,
+    // not the phone's – an English keyboard on a German phone says "Done", as on the iPhone.
+    fun setKeyboardLocale(locale: java.util.Locale) {
+        if (locale == doneLocale) return
+        val conf = android.content.res.Configuration(resources.configuration).apply { setLocale(locale) }
+        val localized = context.createConfigurationContext(conf)
+        doneKey?.text = localized.getString(R.string.liboard_done)
+        doneKey?.contentDescription = localized.getString(R.string.liboard_done_description)
+        doneLocale = locale
     }
 
     fun setRtl(isRtlLanguage: Boolean) {

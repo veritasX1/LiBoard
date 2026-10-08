@@ -768,6 +768,7 @@ public class LatinIME extends InputMethodService implements
                         null : view.findViewById(R.id.suggestion_strip_view);
         if (hasSuggestionStripView()) {
             mSuggestionStripView.setRtl(mRichImm.getCurrentSubtype().isRtlSubtype());
+            mSuggestionStripView.setKeyboardLocale(mRichImm.getCurrentSubtype().getLocale());
             mSuggestionStripView.setListener(this, view);
         }
     }
@@ -826,6 +827,7 @@ public class LatinIME extends InputMethodService implements
         loadKeyboard();
         if (hasSuggestionStripView()) {
             mSuggestionStripView.setRtl(mRichImm.getCurrentSubtype().isRtlSubtype());
+            mSuggestionStripView.setKeyboardLocale(mRichImm.getCurrentSubtype().getLocale());
         }
         mSettings.saveSubtypeForApp(mRichImm.getCurrentSubtype(), getCurrentInputEditorInfo().packageName);
     }
