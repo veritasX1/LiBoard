@@ -193,8 +193,7 @@ class ClipboardHistoryManager(
     private fun isClipSensitive(inputType: Int): Boolean {
         // LiBoard: from API 24 getClipSensitivity is never null (false without the extra), so the password field was never
         // checked (Richard 08.10.) – sensitive if the copying app says so OR the field in focus is a password field
-        if (ClipboardManagerCompat.getClipSensitivity(clipboardManager.primaryClip?.description) == true) return true
-        return InputTypeUtils.isPasswordInputType(inputType)
+        return isSensitiveClip(ClipboardManagerCompat.getClipSensitivity(clipboardManager.primaryClip?.description), inputType)
     }
 
     fun getClipboardSuggestionView(editorInfo: EditorInfo?, parent: ViewGroup?): View? {
@@ -307,3 +306,8 @@ class ClipboardHistoryManager(
 
 /** Set once the clipboard history was switched off and emptied at the privacy update (card f248ea29). */
 private const val CLIPBOARD_PRIVACY_RESET = "liboard_clipboard_privacy_reset"
+
+/** Never stored in the history (card f248ea29): marked sensitive by the copying app (from API 24 the value is false,
+ *  never null, without the extra) or copied while a password field is in focus. */
+internal fun isSensitiveClip(markedSensitive: Boolean?, inputType: Int): Boolean =
+    markedSensitive == true || InputTypeUtils.isPasswordInputType(inputType)
