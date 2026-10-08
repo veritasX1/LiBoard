@@ -25,7 +25,7 @@ LiBoard ist eine Tastatur. Eine Tastatur bekommt alles mit, was du tippst, auch 
 | Namen installierter Apps | App-Namen als Vorschläge | aus |
 | Zwischenablage-Verlauf | Kopiertes erneut einfügen; Einträge verfallen nach der eingestellten Zeit (ab Werk 10 Minuten) und werden auch beim Start aufgeräumt. Was die kopierende App als vertraulich kennzeichnet, wird nie gespeichert, ebenso nichts, während ein Passwortfeld aktiv ist. | aus |
 
-Getippter Text selbst wird nicht gespeichert, nur die Wörter, die LiBoard für Vorschläge lernt.
+Getippter Text selbst wird nicht gespeichert, nur die Wörter, die LiBoard für Vorschläge lernt. Mit diesem Stand schaltet LiBoard den Zwischenablage-Verlauf einmalig aus und löscht alles, was dort lag, auch Angeheftetes. Früher war er ab Werk an, ohne dass jemand das gewählt hatte.
 
 **Absturzprotokolle:** Stürzt LiBoard ab, schreibt es einen Bericht in den eigenen Ordner der App auf dem Gerät. Beim nächsten Öffnen der Einstellungen fragt LiBoard, ob du ihn als Datei speichern oder löschen willst. Gesendet wird er nie.
 
@@ -86,7 +86,7 @@ LiBoard is a keyboard. A keyboard sees everything you type, passwords included. 
 | Names of installed apps | app names as suggestions | off |
 | Clipboard history | paste copied items again; entries expire after the set time (10 minutes by default) and are also cleared at start. Anything the copying app marks as sensitive is never stored, nor anything while a password field is active. | off |
 
-Typed text itself is not stored, only the words LiBoard learns for suggestions.
+Typed text itself is not stored, only the words LiBoard learns for suggestions. With this version LiBoard switches the clipboard history off once and deletes everything stored in it, pinned items too. It used to be on by default without anyone choosing it.
 
 **Crash reports:** if LiBoard crashes, it writes a report into the app's own folder on the device. The next time you open the settings, LiBoard asks whether to save it as a file or delete it. It is never sent.
 

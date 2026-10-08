@@ -51,6 +51,13 @@ class ClipboardHistoryManager(
         clipboardManager = latinIME.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager.addPrimaryClipChangedListener(this)
         clipboardDao = ClipboardDao.getInstance(latinIME)
+        // LiBoard, privacy first (Olaf 08.10.): the history used to be on by default, never a conscious choice – once, at the
+        // update, it goes off and everything stored is deleted, pinned entries too. Switching it on again later is the user's call.
+        val prefs = latinIME.prefs()
+        if (!prefs.getBoolean(CLIPBOARD_PRIVACY_RESET, false)) {
+            prefs.edit().putBoolean(Settings.PREF_ENABLE_CLIPBOARD_HISTORY, false).putBoolean(CLIPBOARD_PRIVACY_RESET, true).apply()
+            clipboardDao?.clear()
+        }
         // LiBoard: expired entries go at every start too, not only when something is copied or the history opens (Richard 08.10.)
         clipboardDao?.clearOldClips(true)
         if (latinIME.mSettings.current.mClipboardHistoryEnabled)
@@ -292,3 +299,6 @@ class ClipboardHistoryManager(
         }
     }
 }
+
+/** Set once the clipboard history was switched off and emptied at the privacy update (card f248ea29). */
+private const val CLIPBOARD_PRIVACY_RESET = "liboard_clipboard_privacy_reset"
