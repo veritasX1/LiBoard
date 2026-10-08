@@ -214,6 +214,8 @@ class ClipboardDao private constructor(private val db: Database) {
     }
 
     fun clear() {
+        // LiBoard: copied pictures go too – before only the rows were deleted, the files stayed (Richard 08.10.)
+        clipFilesDir.listFiles()?.forEach { it.delete() }
         if (count() == 0) return
         cache.clear()
         listener?.onClipsRemoved(0, count())

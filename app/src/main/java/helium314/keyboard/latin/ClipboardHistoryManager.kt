@@ -60,9 +60,12 @@ class ClipboardHistoryManager(
         }
         // LiBoard: expired entries go at every start too, not only when something is copied or the history opens (Richard 08.10.)
         clipboardDao?.clearOldClips(true)
-        if (latinIME.mSettings.current.mClipboardHistoryEnabled)
+        if (historyEnabled())
             fetchPrimaryClip()
     }
+
+    private fun historyEnabled() = latinIME.mSettings.current.mClipboardHistoryEnabled &&
+        latinIME.prefs().getBoolean(Settings.PREF_ENABLE_CLIPBOARD_HISTORY, Defaults.PREF_ENABLE_CLIPBOARD_HISTORY)
 
     fun onDestroy() {
         clipboardManager.removePrimaryClipChangedListener(this)
@@ -70,7 +73,9 @@ class ClipboardHistoryManager(
 
     override fun onPrimaryClipChanged() {
         // Make sure we read clipboard content only if history settings is set
-        if (latinIME.mSettings.current.mClipboardHistoryEnabled) {
+        // LiBoard: asked from the stored setting, not the loaded one – right after the privacy reset the loaded settings
+        // may still say "on" for this session (Richard 08.10.)
+        if (historyEnabled()) {
             fetchPrimaryClip()
             dontShowCurrentSuggestion = false
         }

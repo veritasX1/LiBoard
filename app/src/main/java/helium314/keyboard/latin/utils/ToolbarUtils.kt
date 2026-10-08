@@ -132,18 +132,18 @@ val toolbarKeyStrings = entries.associateWithTo(EnumMap(ToolbarKey::class.java))
 
 val defaultToolbarPref by lazy {
     val default = listOf(SETTINGS, VOICE, CLIPBOARD, UNDO, REDO, SELECT_WORD, COPY, PASTE, LEFT, RIGHT)
-    val others = entries.filterNot { it in default || it == CLOSE_HISTORY }
+    val others = entries.filterNot { it in default || it == CLOSE_HISTORY || it == BACKGROUND_GATHERING }
     default.joinToString(Separators.ENTRY) { it.name + Separators.KV + true } + Separators.ENTRY +
             others.joinToString(Separators.ENTRY) { it.name + Separators.KV + false }
 }
 
-val defaultPinnedToolbarPref = entries.filterNot { it == CLOSE_HISTORY }.joinToString(Separators.ENTRY) {
+val defaultPinnedToolbarPref = entries.filterNot { it == CLOSE_HISTORY || it == BACKGROUND_GATHERING }.joinToString(Separators.ENTRY) {
     it.name + Separators.KV + false
 }
 
 val defaultClipboardToolbarPref by lazy {
     val default = listOf(CLEAR_CLIPBOARD, UP, DOWN, LEFT, RIGHT, UNDO, CUT, COPY, PASTE, SELECT_WORD, CLOSE_HISTORY)
-    val others = entries.filterNot { it in default }
+    val others = entries.filterNot { it in default || it == BACKGROUND_GATHERING }   // LiBoard: no gesture data gathering (Richard 08.10.)
     default.joinToString(Separators.ENTRY) { it.name + Separators.KV + true } + Separators.ENTRY +
             others.joinToString(Separators.ENTRY) { it.name + Separators.KV + false }
 }
