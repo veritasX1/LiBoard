@@ -94,8 +94,7 @@ fun TextCorrectionScreen(
         Settings.PREF_USE_APPS,
         if (prefs.getBoolean(Settings.PREF_KEY_USE_PERSONALIZED_DICTS, Defaults.PREF_KEY_USE_PERSONALIZED_DICTS))
             Settings.PREF_ADD_TO_PERSONAL_DICTIONARY else null,
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-            Settings.PREF_SPELLCHECK_SUGGEST else null,
+        // LiBoard: no spell checker service, so no setting for it (card 1feb0603)
     )
     SearchSettingsScreen(
         onClickBack = onClickBack,
