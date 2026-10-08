@@ -114,6 +114,7 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
     }
 
     private val scriptButtons = mutableListOf<ImageButton>()
+    private val scriptButtonSurfaces = HashMap<ImageButton, android.graphics.drawable.Drawable?>() // LiBoard: rest state like the words
 
     /** Plain symbol when off; active: system blue with a white symbol – the state is always
      *  visible, as Apple's HIG asks for toggles. */
@@ -126,8 +127,9 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         for (button in scriptButtons) {
             button.visibility = if (shown) VISIBLE else GONE
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
-            // Quiet like iOS toolbar symbols: no surface when off, system blue underlay when on.
-            button.background = if (!active) null else GradientDrawable().apply {
+            // Quiet like iOS toolbar symbols: the suggestion words' surface when off (no darker box behind it,
+            // card 12b51a3c), system blue underlay when on.
+            button.background = if (!active) scriptButtonSurfaces[button] else GradientDrawable().apply {
                 setColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
                 cornerRadius = 6 * resources.displayMetrics.density
             }
@@ -197,7 +199,9 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
         }
         // LiBoard: "Fertig" at the right end, as above the iPhone keyboard – hides the keyboard.
         // Needed since the system's own hide button below the keyboard is gone (no empty strip).
-        val done = android.widget.TextView(context).apply {
+        // built like the suggestion words (same style = same see-through state background), otherwise a
+        // plain view with a colour filter shows as a darker box behind "Fertig" (card 12b51a3c)
+        val done = TextView(context, null, R.attr.suggestionWordStyle).apply {
             text = context.getString(R.string.liboard_done)
             doneKey = this
             setTextColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
@@ -206,10 +210,12 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             gravity = android.view.Gravity.CENTER
             val side = (12 * resources.displayMetrics.density).toInt()
             setPadding(side, 0, side, 0)
+            minWidth = 0; minimumWidth = 0 // the word style has a minimum width for suggestions
             contentDescription = context.getString(R.string.liboard_done_description)
             isHapticFeedbackEnabled = false
             setOnClickListener { (listener as? helium314.keyboard.latin.LatinIME)?.requestHideSelf(0) }
         }
+        colors.setBackground(done, ColorType.STRIP_BACKGROUND)
         // LiBoard: switches for raised / lowered characters (see ScriptMode) – real buttons with a
         // surface and a symbol, so they do not look like letters you would type.
         for ((icon, target, description) in listOf(
@@ -217,7 +223,8 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             Triple(R.drawable.ic_liboard_sub, helium314.keyboard.latin.ScriptMode.Mode.SUB, R.string.liboard_subscript),
         )) {
             val density = resources.displayMetrics.density
-            val button = ImageButton(context).apply {
+            val button = ImageButton(context, null, R.attr.suggestionWordStyle).apply {
+                minimumWidth = 0
                 setImageResource(icon)
                 scaleType = android.widget.ImageView.ScaleType.CENTER_INSIDE
                 val inner = (4 * density).toInt()
@@ -231,6 +238,8 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
                     updateScriptButtons()
                 }
             }
+            colors.setBackground(button, ColorType.STRIP_BACKGROUND)
+            scriptButtonSurfaces[button] = button.background
             scriptButtons.add(button)
             val params = LinearLayout.LayoutParams((44 * density).toInt(), (34 * density).toInt()).apply {
                 gravity = android.view.Gravity.CENTER_VERTICAL
