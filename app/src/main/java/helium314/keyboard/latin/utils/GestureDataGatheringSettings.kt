@@ -53,15 +53,6 @@ object GestureDataGatheringSettings {
         // LiBoard: gesture data gathering is shut off for good – no switch, no key may turn it on (privacy first, Richard 08.10.)
         if (prefs.getBoolean(PREF_BACKGROUND_GATHERING_ENABLED, false)) prefs.edit { putBoolean(PREF_BACKGROUND_GATHERING_ENABLED, false) }
         return false
-        @Suppress("UNREACHABLE_CODE")
-        if (!prefs.getBoolean(PREF_BACKGROUND_GATHERING_ENABLED, false)) return false
-        val disabledBefore = prefs.getLong(PREF_BACKGROUND_DISABLED_BEFORE_TIME_MILLIS, 0L)
-        if (disabledBefore > SystemClock.elapsedRealtime() + 5 * 60 * 1000L) {
-            // elapsedRealtime decreased -> phone was rebooted -> reset
-            prefs.edit { remove(PREF_BACKGROUND_DISABLED_BEFORE_TIME_MILLIS) }
-            return true
-        }
-        return SystemClock.elapsedRealtime() > disabledBefore
     }
 
     fun setBackgroundGatheringEnabled(prefs: SharedPreferences, enabled: Boolean) = prefs.edit {
