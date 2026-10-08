@@ -95,11 +95,7 @@ fun MainSettingsScreen(
                             icon = R.drawable.ic_settings_gesture
                         ) { NextScreenIcon() } }
                     // LiBoard: privacy first – no gesture data gathering, not even opt-in (onClickDataGathering unused)
-                    add @Composable { Preference(
-                        name = stringResource(R.string.settings_screen_toolbar),
-                        onClick = onClickToolbar,
-                        icon = R.drawable.ic_settings_toolbar
-                    ) { NextScreenIcon() } }
+                    // LiBoard: the toolbar is off by default (d3ded07c), its page lives under "Erweitert" (card b1adb785)
                 })
                 IosGroup(inset = 59, items = listOf(
                     { Preference(

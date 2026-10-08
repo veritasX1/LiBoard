@@ -73,6 +73,7 @@ object SettingsWithoutKey {
     const val SYSTEM_SPELL_CHECKER = "system_spell_checker" // LiBoard
     const val CORRECTION_ADVANCED = "correction_advanced" // LiBoard
     const val TYPING_TEST = "typing_test" // LiBoard
+    const val TOOLBAR_SCREEN = "toolbar_screen" // LiBoard
     const val APP = "app"
     const val VERSION = "version"
     const val LICENSE = "license"

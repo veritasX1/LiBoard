@@ -82,11 +82,14 @@ fun AdvancedSettingsScreen(
         Settings.PREF_CUSTOM_CURRENCY_KEY,
         Settings.PREF_MORE_POPUP_KEYS,
         Settings.PREF_TIMESTAMP_FORMAT,
+        SettingsWithoutKey.TOOLBAR_SCREEN, // LiBoard: moved here from the start page (card b1adb785)
         SettingsWithoutKey.BACKUP_RESTORE,
         if (BuildConfig.DEBUG || prefs.getBoolean(DebugSettings.PREF_SHOW_DEBUG_SETTINGS, Defaults.PREF_SHOW_DEBUG_SETTINGS))
             SettingsWithoutKey.DEBUG_SETTINGS else null,
         R.string.settings_category_experimental,
-        Settings.PREF_EMOJI_MAX_SDK,
+        // LiBoard: no use for most people – only where the debug settings are shown (card b1adb785)
+        if (BuildConfig.DEBUG || prefs.getBoolean(DebugSettings.PREF_SHOW_DEBUG_SETTINGS, Defaults.PREF_SHOW_DEBUG_SETTINGS))
+            Settings.PREF_EMOJI_MAX_SDK else null,
         Settings.PREF_URL_DETECTION,
         if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null,
         R.string.liboard_typing_test, // LiBoard: last, as the iPhone has no such test (Olaf 08.10.)
@@ -231,6 +234,12 @@ fun createAdvancedSettings(context: Context) = listOf(
     },
     Setting(context, Settings.PREF_TIMESTAMP_FORMAT, R.string.timestamp_format_title) { setting ->
         TextInputPreference(setting, Defaults.PREF_TIMESTAMP_FORMAT, stringResource(R.string.timestamp_description)) { checkTimestampFormat(it) }
+    },
+    Setting(context, SettingsWithoutKey.TOOLBAR_SCREEN, R.string.settings_screen_toolbar) {
+        Preference(
+            name = it.title,
+            onClick = { SettingsDestination.navigateTo(SettingsDestination.Toolbar) }
+        ) { NextScreenIcon() }
     },
     Setting(context, SettingsWithoutKey.TYPING_TEST, R.string.liboard_typing_test) {
         Preference(
