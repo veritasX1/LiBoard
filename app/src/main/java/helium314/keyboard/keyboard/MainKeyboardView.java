@@ -817,7 +817,7 @@ public final class MainKeyboardView extends KeyboardView implements DrawingProxy
         if (!customText.isEmpty()) {
             spaceText = customText;
         } else if (true) {
-            spaceText = getContext().getString(R.string.liboard_space);   // LiBoard: like iOS
+            spaceText = spaceLabel(keyboard.mId.getSubtype().getLocale());   // LiBoard: like iOS, in the keyboard's language
         } else if (DebugFlags.DEBUG_ENABLED) {
             final String l = KeyboardSwitcher.getInstance().getLocaleAndConfidenceInfo();
             spaceText = l != null ? l : layoutLanguageOnSpacebar(paint, keyboard.mId.getSubtype(), width);
@@ -850,5 +850,20 @@ public final class MainKeyboardView extends KeyboardView implements DrawingProxy
     public void deallocateMemory() {
         super.deallocateMemory();
         mDrawingPreviewPlacerView.deallocateMemory();
+    }
+
+    // LiBoard: "space" / "Leerzeichen" / "espace" follows the keyboard's language (as the return key does),
+    // not the phone's – an English keyboard on a German phone says "space", as on the iPhone.
+    private java.util.Locale mSpaceLabelLocale;
+    private String mSpaceLabel;
+
+    private String spaceLabel(final java.util.Locale locale) {
+        if (mSpaceLabel == null || !locale.equals(mSpaceLabelLocale)) {
+            final android.content.res.Configuration conf = new android.content.res.Configuration(getResources().getConfiguration());
+            conf.setLocale(locale);
+            mSpaceLabel = getContext().createConfigurationContext(conf).getString(R.string.liboard_space);
+            mSpaceLabelLocale = locale;
+        }
+        return mSpaceLabel;
     }
 }
