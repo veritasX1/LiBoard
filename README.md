@@ -19,7 +19,7 @@ der iPhone-Tastatur. Die App hat keinen Internetzugang und braucht kein Konto.
 
 - **Die vertraute Anordnung:** Buchstaben, Zahlen und Zeichen liegen dort, wo du sie vom iPhone kennst, mit 123- und #+=-Seite und den Varianten beim langen Drücken. Helle und dunkle Darstellung.
 - **Leertaste als Trackpad:** Halte die Leertaste gedrückt, dann schiebt dein Finger den Cursor durch den Text, auch über mehrere Zeilen.
-- **Ohne Systemleiste:** Unter der Tastatur stehen keine Android-Knöpfe mehr. „Fertig“ oben rechts blendet sie aus.
+- **Ohne Systemleiste:** Unter der Tastatur stehen keine Android-Knöpfe mehr. „Fertig“ oben rechts schließt die Tastatur.
 - **Hoch- und Tiefstellen:** Auf Wunsch zeigt die Vorschlagsleiste Schalter für x² und x₂. Einschalten in den Einstellungen unter „Hoch- & tiefgestellte Zeichen“.
 - **Deutsch und Englisch** gleichzeitig, ohne Umschalten.
 - **Emoji mit Suche:** Alle Kategorien in einem Band, Hautfarben per langem Druck. Eine eigene Emoji-Schrift lässt sich einstellen.
@@ -28,9 +28,9 @@ der iPhone-Tastatur. Die App hat keinen Internetzugang und braucht kein Konto.
 
 ## Datenschutz
 
-Eine Tastatur bekommt alles mit, was du tippst, auch Passwörter. LiBoard hat deshalb **keine
-Berechtigung fürs Internet**, nichts davon kann dein Handy verlassen. Die freiwillige
-Gestendaten-Sammlung von HeliBoard ist entfernt. Wörterbücher, Lernen und Tipp-Test
+Eine Tastatur bekommt alles mit, was du tippst, auch Passwörter. LiBoard hat deshalb **keinen
+Internetzugang**. Nichts davon kann dein Handy verlassen. Die freiwillige Spende von Gestendaten
+aus HeliBoard ist weggelassen. Wörterbücher, Lernen und Tipp-Test
 bleiben auf dem Gerät.
 
 ## Installation
