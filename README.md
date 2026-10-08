@@ -5,39 +5,38 @@
 <h1 align="center">LiBoard</h1>
 
 <p align="center">
-  <b>Eine Android-Tastatur im Stil der iPhone-Tastatur – offline, privat, quelloffen.</b><br>
+  <b>Eine Android-Tastatur im Stil der iPhone-Tastatur.</b><br>
   Version 0.1.0 Beta · aufgebaut auf <a href="https://github.com/HeliBorg/HeliBoard">HeliBoard</a> · GPL-3.0<br>
-  <a href="https://lisoft.goip.de/liboard/">lisoft.goip.de/liboard</a>
+  <a href="https://lisoftware.de/liboard/">lisoftware.de/liboard</a>
 </p>
 
 ## Idee
 
-Wer vom iPhone zu Android wechselt, vermisst oft die Tastatur: ruhige Tasten, klare Sondertasten,
-viele Varianten beim langen Drücken, die Leertaste als Trackpad. LiBoard bringt dieses Gefühl auf
-Android – ohne Konto, ohne Cloud und ohne Internetberechtigung.
+Wer vom iPhone kommt, vermisst oft die Tastatur am meisten. LiBoard übernimmt Aufbau und Bedienung
+der iPhone-Tastatur. Die App hat keinen Internetzugang und braucht kein Konto.
 
 ## Funktionen (Auswahl)
 
-- **Aussehen nach Apple HIG:** iOS-Proportionen, helle und dunkle Variante, Umriss-Shift, Aktionstaste mit Text
-- **123- und #+=-Seite wie auf dem iPhone**, Varianten beim langen Drücken nach deutschem iOS-Vorbild
-- **Leertaste lang drücken = Trackpad:** Cursor frei und zeilenweise bewegen
-- **Kein Leerstreifen** unter der Tastatur, **„Fertig“** zum Ausblenden
-- **Hoch-/Tiefstellen** (x² / x₂) für Formeln: H₂O, SO₄²⁻, x²
-- **Deutsch und Englisch gleichzeitig** ohne Umschalten
-- **Emoji-Ansicht** mit Suche und Kategorien; wahlweise System-Emojis oder eine selbst geladene Emoji-Schrift
-- **Tipp-Test:** Fehlerquote, Korrekturen und Tempo messen – nur auf dem Gerät gespeichert
-- **Einstellungen nach Apple HIG**
+- **Die vertraute Anordnung:** Buchstaben, Zahlen und Zeichen liegen dort, wo du sie vom iPhone kennst, mit 123- und #+=-Seite und den Varianten beim langen Drücken. Helle und dunkle Darstellung.
+- **Leertaste als Trackpad:** Halte die Leertaste gedrückt, dann schiebt dein Finger den Cursor durch den Text, auch über mehrere Zeilen.
+- **Ohne Systemleiste:** Unter der Tastatur stehen keine Android-Knöpfe mehr. „Fertig“ oben rechts blendet sie aus.
+- **Hoch- und Tiefstellen:** Auf Wunsch zeigt die Vorschlagsleiste Schalter für x² und x₂. Einschalten in den Einstellungen unter „Hoch- & tiefgestellte Zeichen“.
+- **Deutsch und Englisch** gleichzeitig, ohne Umschalten.
+- **Emoji mit Suche:** Alle Kategorien in einem Band, Hautfarben per langem Druck. Eine eigene Emoji-Schrift lässt sich einstellen.
+- **Tipp-Test:** Misst Fehlerquote, Korrekturen und Tempo. Die Ergebnisse bleiben auf dem Handy.
+- **Einstellungen** mit gruppierten Listen und großen Titeln wie in den iPhone-Einstellungen.
 
 ## Datenschutz
 
-LiBoard hat **keine Internetberechtigung** – technisch kann die Tastatur nichts senden. Die
-(freiwillige) Gestendaten-Sammlung von HeliBoard ist entfernt. Wörterbücher, Lernen und Tipp-Test
+Eine Tastatur bekommt alles mit, was du tippst, auch Passwörter. LiBoard hat deshalb **keine
+Berechtigung fürs Internet**, nichts davon kann dein Handy verlassen. Die freiwillige
+Gestendaten-Sammlung von HeliBoard ist entfernt. Wörterbücher, Lernen und Tipp-Test
 bleiben auf dem Gerät.
 
 ## Installation
 
 - **F-Droid:** Paketquelle `https://volkskamera.goip.de/fdroid/repo` hinzufügen (Anleitung und QR-Code auf
-  [lisoft.goip.de/liboard](https://lisoft.goip.de/liboard/)) – dann kommen Updates automatisch.
+  [lisoftware.de/liboard](https://lisoftware.de/liboard/)). Updates kommen dann automatisch.
 - **APK:** unter [Releases](https://github.com/veritasX1/LiBoard/releases) oder auf der Homepage.
 
 Danach: Einstellungen → System → Tastatur → LiBoard aktivieren.
@@ -46,7 +45,7 @@ Danach: Einstellungen → System → Tastatur → LiBoard aktivieren.
 
 LiBoard ist ein Fork von **[HeliBoard](https://github.com/HeliBorg/HeliBoard)** (Helium314 und
 Mitwirkende), das wiederum auf OpenBoard und der AOSP-Tastatur aufbaut. Ohne diese Arbeit gäbe es
-LiBoard nicht – danke! Das ursprüngliche README liegt unter
+LiBoard nicht. Danke! Das ursprüngliche README liegt unter
 [docs/HELIBOARD-README.md](docs/HELIBOARD-README.md).
 
 Lizenz: **GNU General Public License v3.0** (siehe [LICENSE](LICENSE)). Einzelne Teile stehen unter
