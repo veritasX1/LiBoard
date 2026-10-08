@@ -22,8 +22,8 @@ android {
         applicationId = "io.github.veritasx1.liboard"
         minSdk = 21
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.1.0"
+        versionCode = 3
+        versionName = "0.1.1"
         ndk {
             abiFilters.clear()
             abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
