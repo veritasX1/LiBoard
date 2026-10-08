@@ -129,6 +129,9 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
             // Quiet like iOS toolbar symbols: the suggestion words' surface when off (no darker box behind it,
             // card 12b51a3c), system blue underlay when on.
+            // The rest surface was swapped out while the finger was still down, so it may still be
+            // "pressed" (= grey box): reset its state before it comes back (card 12b51a3c)
+            if (!active) { button.isPressed = false; scriptButtonSurfaces[button]?.apply { state = intArrayOf(); jumpToCurrentState() } }
             button.background = if (!active) scriptButtonSurfaces[button] else GradientDrawable().apply {
                 setColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
                 cornerRadius = 6 * resources.displayMetrics.density
