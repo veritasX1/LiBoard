@@ -1241,7 +1241,11 @@ public class LatinIME extends InputMethodService implements
             return;
         }
         final int stripHeight = mKeyboardSwitcher.isShowingStripContainer() ? mKeyboardSwitcher.getStripContainer().getHeight() : 0;
-        int visibleTopY = inputHeight - visibleKeyboardView.getHeight() - stripHeight;
+        // LiBoard: the space kept free above the gesture zone (keepKeysOutOfGestureZone) belongs to the keyboard too,
+        // otherwise the app and the touchable region start that much too low and the strip covers the text field
+        final View keyboardFrame = mInputView.findViewById(R.id.main_keyboard_frame);
+        final int gestureZonePadding = keyboardFrame == null ? 0 : keyboardFrame.getPaddingBottom();
+        int visibleTopY = inputHeight - visibleKeyboardView.getHeight() - stripHeight - gestureZonePadding;
         if (Settings.getValues().mIsFloatingKeyboard)
             visibleTopY = getResources().getDisplayMetrics().heightPixels;
 
