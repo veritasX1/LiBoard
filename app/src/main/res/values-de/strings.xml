@@ -592,4 +592,6 @@
         <item>Thanks, see you tomorrow at the meeting.</item>
         <item>Das Feature ist im neuen Release enthalten.</item>
     </string-array>
+    <string name="liboard_script_buttons">Hoch- &amp; tiefgestellte Zeichen</string>
+    <string name="liboard_script_buttons_summary">Zwei Schalter neben „Fertig“ für Hochstellen (x²) und Tiefstellen (H₂O)</string>
 </resources>

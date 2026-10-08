@@ -119,7 +119,12 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
      *  visible, as Apple's HIG asks for toggles. */
     fun updateScriptButtons() {
         val colors = Settings.getValues().mColors
+        // LiBoard: off by default – the iPhone has nothing there (Olaf 08.10.)
+        val shown = context.prefs().getBoolean(Settings.PREF_LIBOARD_SCRIPT_BUTTONS, Defaults.PREF_LIBOARD_SCRIPT_BUTTONS)
+        if (!shown && helium314.keyboard.latin.ScriptMode.mode != helium314.keyboard.latin.ScriptMode.Mode.NONE)
+            helium314.keyboard.latin.ScriptMode.mode = helium314.keyboard.latin.ScriptMode.Mode.NONE
         for (button in scriptButtons) {
+            button.visibility = if (shown) VISIBLE else GONE
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
             // Quiet like iOS toolbar symbols: no surface when off, system blue underlay when on.
             button.background = if (!active) null else GradientDrawable().apply {

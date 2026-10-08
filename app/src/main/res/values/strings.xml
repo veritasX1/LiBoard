@@ -1353,4 +1353,6 @@ New dictionary:
         <item>Danke, bis morgen beim Meeting.</item>
         <item>The feature is part of the new release.</item>
     </string-array>
+    <string name="liboard_script_buttons">Raised &amp; lowered characters</string>
+    <string name="liboard_script_buttons_summary">Two switches next to “Done” for superscript (x²) and subscript (H₂O)</string>
 </resources>

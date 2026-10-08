@@ -75,6 +75,7 @@ fun PreferencesScreen(
         Settings.PREF_LANGUAGE_SWITCH_KEY,
         Settings.PREF_SHOW_EMOJI_KEY,
         Settings.PREF_REMOVE_REDUNDANT_POPUPS,
+        Settings.PREF_LIBOARD_SCRIPT_BUTTONS,
         R.string.settings_category_clipboard_history,
         Settings.PREF_ENABLE_CLIPBOARD_HISTORY,
         if (clipboardHistoryEnabled) Settings.PREF_CLIPBOARD_HISTORY_RETENTION_TIME else null,
@@ -93,6 +94,11 @@ fun PreferencesScreen(
 fun createPreferencesSettings(context: Context) = listOf(
     Setting(context, Settings.PREF_SAVE_SUBTYPE_PER_APP, R.string.save_subtype_per_app) {
         SwitchPreference(it, Defaults.PREF_SAVE_SUBTYPE_PER_APP)
+    },
+    Setting(context, Settings.PREF_LIBOARD_SCRIPT_BUTTONS,
+        R.string.liboard_script_buttons, R.string.liboard_script_buttons_summary
+    ) {
+        SwitchPreference(it, Defaults.PREF_LIBOARD_SCRIPT_BUTTONS) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
     },
     Setting(context, Settings.PREF_SHOW_HINTS, R.string.show_hints, R.string.show_hints_summary) {
         SwitchPreference(it, Defaults.PREF_SHOW_HINTS) { KeyboardSwitcher.getInstance().reloadKeyboard() }

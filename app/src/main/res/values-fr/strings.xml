@@ -597,4 +597,6 @@ Nouveau dictionnaire:
         <item>Thanks, see you tomorrow at the meeting.</item>
         <item>La fonctionnalité fait partie de la nouvelle version.</item>
     </string-array>
+    <string name="liboard_script_buttons">Exposant et indice</string>
+    <string name="liboard_script_buttons_summary">Deux boutons à côté de « OK » pour l’exposant (x²) et l’indice (H₂O)</string>
 </resources>
