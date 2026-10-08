@@ -57,15 +57,8 @@ fun MainSettingsScreen(
             Column(
                 Modifier.verticalScroll(rememberScrollState()).then(Modifier.padding(innerPadding))
             ) {
-                // LiBoard: grouped like the iOS Settings app (Apple HIG)
-                IosGroup(inset = 59, items = listOf(
-                    { Preference(
-                        name = stringResource(R.string.liboard_typing_test),
-                        description = stringResource(R.string.liboard_typing_test_desc),
-                        onClick = onClickTypingTest,
-                        icon = R.drawable.ic_settings_typing_test,
-                    ) { NextScreenIcon() } },
-                ))
+                // LiBoard: grouped like the iOS Settings app (Apple HIG); the typing test is not an
+                // iPhone setting, so it lives at the end of "Erweitert" (Olaf 08.10.)
                 IosGroup(inset = 59, items = listOf(
                     { Preference(
                         name = stringResource(R.string.language_and_layouts_title),

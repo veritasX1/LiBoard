@@ -484,16 +484,16 @@ Nouveau dictionnaire:
     <string name="layout_dpad" tools:keep="@string/layout_dpad">Pavé directionnel</string>
     <string name="space_swipe_toggle_dpad_entry">Basculer vers le pavé directionnel</string>
     <string name="liboard_typing_test">Test de frappe</string>
-    <string name="liboard_typing_test_desc">Tapes-tu proprement ? Compare FUTO et LiBoard</string>
+    <string name="liboard_typing_test_desc">Mesurer la précision et la vitesse</string>
     <string name="liboard_typing_sentence_of" formatted="true">Phrase %1$d sur %2$d · clavier : %3$s</string>
-    <string name="liboard_typing_footer">Les fautes que tu corriges toi-même comptent comme corrections ; ce qui reste faux à la fin compte comme erreur.</string>
-    <string name="liboard_typing_placeholder">Tape ici – naturellement, comme au quotidien</string>
+    <string name="liboard_typing_footer">Ce que vous corrigez vous-même compte comme correction. Ce qui reste faux à la fin compte comme erreur.</string>
+    <string name="liboard_typing_placeholder">Saisissez la phrase ici</string>
     <string name="liboard_typing_next">Suivant</string>
     <string name="liboard_typing_restart">Recommencer</string>
-    <string name="liboard_typing_finished">Terminé ! Le résultat est en bas.</string>
-    <string name="liboard_typing_again">Encore une manche</string>
-    <string name="liboard_typing_runs">Manches précédentes (sur ce téléphone uniquement)</string>
-    <string name="liboard_typing_no_runs">Aucune pour l’instant – tape une manche avec FUTO et une avec LiBoard pour comparer.</string>
+    <string name="liboard_typing_finished">Test terminé. Votre résultat figure ci-dessous.</string>
+    <string name="liboard_typing_again">Refaire le test</string>
+    <string name="liboard_typing_runs">Derniers résultats</string>
+    <string name="liboard_typing_no_runs">Aucun résultat pour l’instant.</string>
     <string name="liboard_typing_result" formatted="true">%1$.1f %% d’erreurs · %2$d corrections · %3$.0f mots/min</string>
     <string name="liboard_done">OK</string>
     <string name="liboard_done_description">Masquer le clavier</string>
@@ -544,5 +544,6 @@ Nouveau dictionnaire:
     <string name="liboard_all_keyboards">Tous les claviers</string>
     <string name="liboard_learn_from">Apprentissage et suggestions</string>
     <string name="liboard_advanced">Avancé</string>
-    <string name="liboard_no_dictionary_message">Aucun dictionnaire intégré pour %s : cette langue n\'a donc ni suggestions ni corrections.</string>
+    <string name="liboard_no_dictionary_message">Aucun dictionnaire intégré pour %s : cette langue n’a donc ni suggestions ni corrections.</string>
+    <string name="liboard_typing_stored_locally">Les résultats sont enregistrés uniquement sur cet appareil.</string>
 </resources>

@@ -88,7 +88,9 @@ fun AdvancedSettingsScreen(
         R.string.settings_category_experimental,
         Settings.PREF_EMOJI_MAX_SDK,
         Settings.PREF_URL_DETECTION,
-        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null
+        if (BuildConfig.BUILD_TYPE != "nouserlib") SettingsWithoutKey.LOAD_GESTURE_LIB else null,
+        R.string.liboard_typing_test, // LiBoard: last, as the iPhone has no such test (Olaf 08.10.)
+        SettingsWithoutKey.TYPING_TEST,
     )
     SearchSettingsScreen(
         onClickBack = onClickBack,
@@ -229,6 +231,13 @@ fun createAdvancedSettings(context: Context) = listOf(
     },
     Setting(context, Settings.PREF_TIMESTAMP_FORMAT, R.string.timestamp_format_title) { setting ->
         TextInputPreference(setting, Defaults.PREF_TIMESTAMP_FORMAT, stringResource(R.string.timestamp_description)) { checkTimestampFormat(it) }
+    },
+    Setting(context, SettingsWithoutKey.TYPING_TEST, R.string.liboard_typing_test) {
+        Preference(
+            name = it.title,
+            description = stringResource(R.string.liboard_typing_test_desc),
+            onClick = { SettingsDestination.navigateTo(SettingsDestination.TypingTest) }
+        ) { NextScreenIcon() }
     },
     Setting(context, SettingsWithoutKey.DEBUG_SETTINGS, R.string.debug_settings_title) {
         Preference(

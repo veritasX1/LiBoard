@@ -51,7 +51,7 @@ import java.util.Locale
 
 /**
  * LiBoard: typing test – measures how cleanly one types, so every change to the typing engine can
- * be checked instead of guessed. Works with any keyboard (compare FUTO and LiBoard in the same way).
+ * be checked instead of guessed. Works with any keyboard, so the active one is named in the result.
  * Everything stays on the phone (shared preferences), nothing is sent anywhere.
  */
 private const val RUNS_KEY = "liboard_typing_runs"
@@ -182,9 +182,10 @@ fun TypingTestScreen(onClickBack: () -> Unit) {
             val header = stringResource(R.string.liboard_typing_runs)
             if (runs.length() == 0) {
                 IosHeader(header)
-                IosFooter(stringResource(R.string.liboard_typing_no_runs))
+                IosFooter(stringResource(R.string.liboard_typing_no_runs) + " " + stringResource(R.string.liboard_typing_stored_locally))
             } else IosGroup(
                 header = header,
+                footer = stringResource(R.string.liboard_typing_stored_locally), // like Apple: where data lives, as a footer
                 items = (runs.length() - 1 downTo 0).map { i ->
                     val run = runs.getJSONObject(i)
                     val row: @Composable () -> Unit = {
