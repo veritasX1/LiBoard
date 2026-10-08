@@ -114,7 +114,6 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
     }
 
     private val scriptButtons = mutableListOf<ImageButton>()
-    private val scriptButtonSurfaces = HashMap<ImageButton, android.graphics.drawable.Drawable?>() // LiBoard: rest state like the words
 
     /** Plain symbol when off; active: system blue with a white symbol – the state is always
      *  visible, as Apple's HIG asks for toggles. */
@@ -129,10 +128,10 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
             val active = button.tag == helium314.keyboard.latin.ScriptMode.mode
             // Quiet like iOS toolbar symbols: the suggestion words' surface when off (no darker box behind it,
             // card 12b51a3c), system blue underlay when on.
-            // The rest surface was swapped out while the finger was still down, so it may still be
-            // "pressed" (= grey box): reset its state before it comes back (card 12b51a3c)
-            if (!active) { button.isPressed = false; scriptButtonSurfaces[button]?.apply { state = intArrayOf(); jumpToCurrentState() } }
-            button.background = if (!active) scriptButtonSurfaces[button] else GradientDrawable().apply {
+            // Off = no surface of its own at all, the strip shows through: a stateful surface kept coming back
+            // "pressed" or focused after a relayout (= grey box, card 12b51a3c, again after dc93da61).
+            button.isPressed = false
+            button.background = if (!active) null else GradientDrawable().apply {
                 setColor(colors.get(ColorType.ACTION_KEY_BACKGROUND))
                 cornerRadius = 6 * resources.displayMetrics.density
             }
@@ -241,8 +240,15 @@ class SuggestionStripView(context: Context, attrs: AttributeSet?, defStyle: Int)
                     updateScriptButtons()
                 }
             }
-            colors.setBackground(button, ColorType.STRIP_BACKGROUND)
-            scriptButtonSurfaces[button] = button.background
+            button.background = null
+            // Pressed feedback like iOS symbols: dim while the finger is down, no box
+            button.setOnTouchListener { v, event ->
+                when (event.actionMasked) {
+                    android.view.MotionEvent.ACTION_DOWN -> v.alpha = 0.4f
+                    android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> v.alpha = 1f
+                }
+                false
+            }
             scriptButtons.add(button)
             val params = LinearLayout.LayoutParams((44 * density).toInt(), (34 * density).toInt()).apply {
                 gravity = android.view.Gravity.CENTER_VERTICAL
