@@ -89,15 +89,15 @@
     <!-- The text that represents an unlimited delay -->
     <string name="settings_no_limit">No limit</string>
     <!-- Option name for enabling or disabling the use of names of people in Contacts for suggestion and correction -->
-    <string name="use_contacts_dict">Look up contact names</string>
+    <string name="use_contacts_dict">Names from Contacts</string>
     <!-- Description for option enabling or disabling the use of names of people in Contacts for suggestion and correction -->
-    <string name="use_contacts_dict_summary">Use names from Contacts for suggestions and corrections</string>
+    <string name="use_contacts_dict_summary">Suggest names from your contacts</string>
     <!-- Option name for enabling or disabling the use of installed app names for suggestion and correction -->
-    <string name="use_apps_dict">Look up app names</string>
+    <string name="use_apps_dict">App Names</string>
     <!-- Description for option enabling or disabling the use of installed app names for suggestion and correction -->
-    <string name="use_apps_dict_summary">Use names of installed apps for suggestions and corrections</string>
+    <string name="use_apps_dict_summary">Suggest names of installed apps</string>
     <!-- Option name for enabling the use by the keyboards of sent/received messages, e-mail and typing history to improve suggestion accuracy -->
-    <string name="use_personalized_dicts">Personalized suggestions</string>
+    <string name="use_personalized_dicts">Learn from My Typing</string>
     <!-- Dialog message informing that dictionaries will be deleted on changing the setting -->
     <string name="disable_personalized_dicts_message">Warning: Disabling this setting will clear learned data</string>
     <!-- Option name for adding learned words to personal dictionary -->
@@ -105,21 +105,21 @@
     <!-- Description for option to add learned words to system-wide user dictionary -->
     <string name="add_to_personal_dictionary_summary">Use device personal dictionary to store learned words</string>
     <!-- Option name for enabling or disabling the double-space period feature that lets double tap on spacebar insert a period followed by a space -->
-    <string name="use_double_space_period">Double-space period</string>
+    <string name="use_double_space_period">“.” Shortcut</string>
     <!-- Description for option enabling or disabling the double-space period feature that lets double tap on spacebar insert a period followed by a space -->
-    <string name="use_double_space_period_summary">Double tap on spacebar inserts a period followed by a space</string>
+    <string name="use_double_space_period_summary">Double-tapping the space bar inserts a period followed by a space</string>
     <!-- Option to enable auto capitalization of sentences -->
-    <string name="auto_cap">Auto-capitalization</string>
+    <string name="auto_cap">Auto-Capitalization</string>
     <!-- Description for option to enable auto capitalization of sentences -->
-    <string name="auto_cap_summary">Capitalize the first word of each sentence</string>
+    <string name="auto_cap_summary">Capitalize the start of sentences</string>
     <!-- Option to edit personal dictionary.-->
-    <string name="edit_personal_dictionary">Personal dictionary</string>
+    <string name="edit_personal_dictionary">Words &amp; Text Replacement</string>
     <!-- Name of the main dictionary, as opposed to auxiliary dictionaries (medical/entertainment/sports...) -->
     <string name="main_dictionary">Main dictionary</string>
     <!-- Option to enable showing suggestions -->
-    <string name="prefs_show_suggestions">Show correction suggestions</string>
+    <string name="prefs_show_suggestions">Predictive</string>
     <!-- Description for show suggestions -->
-    <string name="prefs_show_suggestions_summary">Display suggested words while typing</string>
+    <string name="prefs_show_suggestions_summary">Suggest words in the bar above the keyboard</string>
     <!-- Option to override app flag to not show suggestions -->
     <string name="prefs_always_show_suggestions">Always show suggestions</string>
     <!-- Description for override app flag to not show suggestions -->
@@ -135,39 +135,39 @@
     <!-- Option to enable auto correction -->
     <string name="autocorrect">Auto-correction</string>
     <!-- Description for auto correction -->
-    <string name="auto_correction_summary">Spacebar and punctuation automatically correct mistyped words</string>
+    <string name="auto_correction_summary">Fix typos as you type</string>
     <!-- Option to enable auto correction for many fields that do not request auto correction -->
-    <string name="more_autocorrect">More auto-correction</string>
+    <string name="more_autocorrect">Correct Everywhere</string>
     <!-- Description for more_autocorrect -->
-    <string name="more_autocorrect_summary">Auto-correct even when not explicitly requested by the input field</string>
+    <string name="more_autocorrect_summary">Also where the app does not ask for correction</string>
     <!-- Option to change the confidence level of the auto correction -->
-    <string name="auto_correction_confidence">Auto-correction confidence</string>
+    <string name="auto_correction_confidence">Auto-Correction Strength</string>
     <!-- Option to enable auto correction for shortcuts (will correct shortcut to the actual word) -->
-    <string name="auto_correct_shortcuts">Auto-correct shortcuts</string>
+    <string name="auto_correct_shortcuts">Use Text Replacements</string>
     <!-- Description for auto_correct_shortcuts -->
-    <string name="auto_correct_shortcuts_summary">When enabled shortcuts might be expanded by autocorrect</string>
+    <string name="auto_correct_shortcuts_summary">Replace shortcuts from “Words &amp; Text Replacement” as you type</string>
     <!-- Option to enable auto correction for for capitalized suggestions (by pressing shift) -->
-    <string name="auto_correct_capitalized_suggestions">Auto-correct capitalized suggestions</string>
+    <string name="auto_correct_capitalized_suggestions">Correct After ⇧ Too</string>
     <!-- Description for auto_correct_capitalized_suggestions -->
-    <string name="auto_correct_capitalized_suggestions_description">After pressing shift to capitalize suggestions, auto-correct will trigger</string>
+    <string name="auto_correct_capitalized_suggestions_description">Correct words started with the shift key</string>
     <!-- Option to undo auto correction with backspace -->
-    <string name="backspace_reverts_autocorrect">Backspace reverts autocorrect</string>
+    <string name="backspace_reverts_autocorrect">Delete Key Undoes Correction</string>
     <!-- Option to disable auto correction. -->
     <string name="auto_correction_threshold_mode_off">Off</string> <!-- todo: use it or remove it -->
     <!-- Option to suggest auto correction suggestions modestly. Auto-corrects only to a word which has small edit distance from typed word. -->
-    <string name="auto_correction_threshold_mode_modest">Modest</string>
+    <string name="auto_correction_threshold_mode_modest">Gentle</string>
     <!-- Option to suggest auto correction suggestions aggressively. Auto-corrects to a word which has even large edit distance from typed word. -->
-    <string name="auto_correction_threshold_mode_aggressive">Aggressive</string>
+    <string name="auto_correction_threshold_mode_aggressive">Balanced</string>
     <!-- Option to suggest auto correction suggestions very aggressively. Auto-corrects to a word which has even large edit distance from typed word. -->
-    <string name="auto_correction_threshold_mode_very_aggressive">Very aggressive</string>
+    <string name="auto_correction_threshold_mode_very_aggressive">Strong</string>
     <!-- Option to show the text to be entered as the middle middle suggestion -->
     <string name="center_suggestion_text_to_enter">Always use middle suggestion</string>
     <!-- Description for the center text to enter setting -->
     <string name="center_suggestion_text_to_enter_summary">On pressing space or punctuation, the middle suggestion will be entered</string>
     <!-- Option to enable using next word suggestions. After the user types a space, with this option on, the keyboard will try to predict the next word. -->
-    <string name="bigram_prediction">Next-word suggestions</string>
+    <string name="bigram_prediction">Suggest Next Word</string>
     <!-- Description for "next word suggestion" option. This displays suggestions even when there is no input, based on the previous word. -->
-    <string name="bigram_prediction_summary">Use the previous word in making suggestions</string>
+    <string name="bigram_prediction_summary">Based on the previous word</string>
     <!-- Option to enable using punctuation suggestions. -->
     <string name="suggest_punctuation">Punctuation suggestions</string>
     <!-- Description for "suggest_punctuation" option. -->
@@ -175,9 +175,9 @@
     <!-- Option to customize punctuation suggestions. -->
     <string name="custom_punctuation_suggestions">Set punctuation suggestions</string>
     <!-- Option to enable the suggestion of clipboard content. -->
-    <string name="suggest_clipboard_content">Suggest clipboard content</string>
+    <string name="suggest_clipboard_content">Suggest Clipboard</string>
     <!-- Description for the "suggest clipboard content" option. This makes the primary clipboard content visible in the suggestion strip view. -->
-    <string name="suggest_clipboard_content_summary">Show recently copied clipboard content as a suggestion</string>
+    <string name="suggest_clipboard_content_summary">Offer what you copied last in the bar</string>
     <!-- Option to enable gesture input. The user can input a word by tracing the letters of a word without releasing the finger from the screen.-->
     <string name="gesture_input">Enable gesture typing</string>
     <!-- Description for "gesture_input" option. The user can input a word by tracing the letters of a word without releasing the finger from the screen.-->
@@ -859,7 +859,7 @@ New dictionary:
 \n► In the event of an application crash, you will be prompted whether you want the crash logs when you open the Settings. &lt;br&gt; &lt;br&gt;
 \n► When using multilingual typing, space bar will show an confidence value used for determining the currently used language. &lt;br&gt; &lt;br&gt;
 \n► Suggestions will have some tiny numbers on top showing some internal score and source dictionary (can be disabled).</string>
-    <string name="use_personalized_dicts_summary">Learn from your communications and typed data to improve suggestions</string>
+    <string name="use_personalized_dicts_summary">Remember new words – stays on this device</string>
     <!-- Label for soft enter key when it performs GO action.  Must be short to fit on key. 5 chars or less is preferable. -->
     <string name="label_go_key">Go</string>
     <!-- Label for soft enter key when it performs NEXT action.  Must be short to fit on key. 5 chars or less is preferable. -->
@@ -1353,6 +1353,15 @@ New dictionary:
         <item>Danke, bis morgen beim Meeting.</item>
         <item>The feature is part of the new release.</item>
     </string-array>
+    <string name="liboard_reset_category">Reset</string>
+    <string name="liboard_reset_dictionary">Reset Keyboard Dictionary</string>
+    <string name="liboard_reset_dictionary_message">All words the keyboard has learned while you typed will be deleted. Your own words and text replacements stay.</string>
+    <string name="liboard_reset_dictionary_confirm">Reset</string>
+    <string name="liboard_system_spell_checker">System spell checker is on</string>
+    <string name="liboard_system_spell_checker_summary">It underlines words in red and opens an Android menu when tapped. LiBoard shows corrections in the suggestion bar instead, like the iPhone. Tap to switch it off in the system settings.</string>
     <string name="liboard_script_buttons">Raised &amp; lowered characters</string>
     <string name="liboard_script_buttons_summary">Two switches next to “Done” for superscript (x²) and subscript (H₂O)</string>
+    <string name="liboard_all_keyboards">All Keyboards</string>
+    <string name="liboard_learn_from">Learning &amp; Suggestions</string>
+    <string name="liboard_advanced">Advanced</string>
 </resources>

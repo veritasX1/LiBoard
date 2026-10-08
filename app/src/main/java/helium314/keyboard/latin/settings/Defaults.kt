@@ -114,7 +114,7 @@ object Defaults {
     const val PREF_ALWAYS_INCOGNITO_MODE = false
     const val PREF_BIGRAM_PREDICTIONS = true
     const val PREF_SUGGEST_PUNCTUATION = false
-    const val PREF_SUGGEST_CLIPBOARD_CONTENT = true
+    const val PREF_SUGGEST_CLIPBOARD_CONTENT = false // LiBoard: privacy first – the iPhone does not offer this (Olaf 08.10.)
     const val PREF_GESTURE_INPUT = true
     const val PREF_VIBRATION_DURATION_SETTINGS = -1
     const val PREF_KEYPRESS_SOUND_VOLUME = -0.01f

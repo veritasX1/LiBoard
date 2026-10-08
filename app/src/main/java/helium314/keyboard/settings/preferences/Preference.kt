@@ -52,6 +52,7 @@ fun Preference(
     modifier: Modifier = Modifier,
     description: String? = null,
     @DrawableRes icon: Int? = null,
+    destructive: Boolean = false, // LiBoard: red name like iOS for actions that delete something
     value: @Composable (RowScope.() -> Unit)? = null,
 ) {
     Row(
@@ -66,7 +67,8 @@ fun Preference(
         if (icon != null)
             IosIconTile(icon)
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = name, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
+            Text(text = name, style = MaterialTheme.typography.bodyLarge,
+                color = if (destructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
             if (description != null) {
                 CompositionLocalProvider(
                     LocalTextStyle provides MaterialTheme.typography.bodyMedium,

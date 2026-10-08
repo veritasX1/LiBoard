@@ -49,8 +49,10 @@ import helium314.keyboard.settings.preferences.TextInputPreference
 @Composable
 fun TextCorrectionScreen(
     onClickBack: () -> Unit,
+    advanced: Boolean = false, // LiBoard: expert options live on their own page "Erweitert" (card 115c26bc)
 ) {
     val prefs = LocalContext.current.prefs()
+    val ctx = LocalContext.current
     val b = (LocalContext.current.getActivity() as? SettingsActivity)?.prefChanged?.collectAsState()
     if ((b?.value ?: 0) < 0)
         Log.v("irrelevant", "stupid way to trigger recomposition on preference change")
@@ -58,47 +60,59 @@ fun TextCorrectionScreen(
     val suggestionsVisible = Settings.readToolbarMode(prefs).let { it == ToolbarMode.SUGGESTION_STRIP || it == ToolbarMode.EXPANDABLE }
     val suggestionsEnabled = suggestionsVisible && prefs.getBoolean(Settings.PREF_SHOW_SUGGESTIONS, Defaults.PREF_SHOW_SUGGESTIONS)
     val gestureEnabled = JniUtils.sHaveGestureLib && prefs.getBoolean(Settings.PREF_GESTURE_INPUT, Defaults.PREF_GESTURE_INPUT)
-    val items = listOf(
+    // LiBoard: the main page follows iPhone Settings > General > Keyboard – a few plain switches,
+    // what the keyboard may learn from, and reset; everything else is under "Erweitert" (card 115c26bc)
+    val items = if (!advanced) listOf(
         SettingsWithoutKey.EDIT_PERSONAL_DICTIONARY,
-        R.string.settings_category_correction,
-        Settings.PREF_BLOCK_POTENTIALLY_OFFENSIVE,
+        R.string.liboard_all_keyboards,
+        Settings.PREF_AUTO_CAP,
         Settings.PREF_AUTO_CORRECTION,
-        if (autocorrectEnabled) Settings.PREF_MORE_AUTO_CORRECTION else null,
-        if (autocorrectEnabled) Settings.PREF_AUTOCORRECT_SHORTCUTS else null,
-        if (autocorrectEnabled) Settings.PREF_AUTOCORRECT_CAPITALIZED_SUGGESTION else null,
+        if (suggestionsVisible) Settings.PREF_SHOW_SUGGESTIONS else null,
+        Settings.PREF_KEY_USE_DOUBLE_SPACE_PERIOD,
+        if (suggestionsEnabled || autocorrectEnabled) Settings.PREF_SUGGEST_EMOJIS else null,
+        R.string.liboard_learn_from,
+        Settings.PREF_KEY_USE_PERSONALIZED_DICTS,
+        Settings.PREF_SUGGEST_CLIPBOARD_CONTENT,
+        Settings.PREF_USE_CONTACTS,
+        Settings.PREF_USE_APPS,
+        // LiBoard: no spell checker service, so no setting for it (card 1feb0603)
+        // LiBoard: like iOS – corrections only in the suggestion strip; the system's red underlines
+        // bring Android's own menu, so we point to where it can be switched off (card 943fc7c2)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && systemSpellCheckerOn(ctx))
+            SettingsWithoutKey.SYSTEM_SPELL_CHECKER else null,
+        SettingsWithoutKey.CORRECTION_ADVANCED,
+        R.string.liboard_reset_category,
+        SettingsWithoutKey.RESET_KEYBOARD_DICTIONARY,
+    ) else listOf(
+        R.string.settings_category_correction,
         if (autocorrectEnabled) Settings.PREF_AUTO_CORRECT_CONFIDENCE else null,
         if (autocorrectEnabled) Settings.PREF_BACKSPACE_REVERTS_AUTOCORRECT else null,
-        Settings.PREF_AUTO_CAP,
+        if (autocorrectEnabled) Settings.PREF_AUTOCORRECT_SHORTCUTS else null,
+        if (autocorrectEnabled) Settings.PREF_MORE_AUTO_CORRECTION else null,
+        if (autocorrectEnabled) Settings.PREF_AUTOCORRECT_CAPITALIZED_SUGGESTION else null,
+        Settings.PREF_BLOCK_POTENTIALLY_OFFENSIVE,
         R.string.settings_category_space,
-        Settings.PREF_KEY_USE_DOUBLE_SPACE_PERIOD,
         Settings.PREF_AUTOSPACE_AFTER_PUNCTUATION,
         Settings.PREF_AUTOSPACE_AFTER_SUGGESTION,
         if (gestureEnabled) Settings.PREF_AUTOSPACE_BEFORE_GESTURE_TYPING else null,
         if (gestureEnabled) Settings.PREF_AUTOSPACE_AFTER_GESTURE_TYPING else null,
         Settings.PREF_SHIFT_REMOVES_AUTOSPACE,
         R.string.settings_category_suggestions,
-        if (suggestionsVisible) Settings.PREF_SHOW_SUGGESTIONS else null,
-        if (suggestionsEnabled) Settings.PREF_ALWAYS_SHOW_SUGGESTIONS else null,
-        if (suggestionsEnabled && prefs.getBoolean(Settings.PREF_ALWAYS_SHOW_SUGGESTIONS, Defaults.PREF_ALWAYS_SHOW_SUGGESTIONS))
-            Settings.PREF_ALWAYS_SHOW_SUGGESTIONS_EXCEPT_WEB_TEXT else null,
-        if (suggestionsEnabled) Settings.PREF_CENTER_SUGGESTION_TEXT_TO_ENTER else null,
-        if (suggestionsEnabled || autocorrectEnabled) Settings.PREF_SUGGEST_EMOJIS else null,
-        if (suggestionsEnabled || autocorrectEnabled) Settings.PREF_INLINE_EMOJI_SEARCH else null,
-        Settings.PREF_KEY_USE_PERSONALIZED_DICTS,
         Settings.PREF_BIGRAM_PREDICTIONS,
+        if (suggestionsEnabled) Settings.PREF_CENTER_SUGGESTION_TEXT_TO_ENTER else null,
+        if (suggestionsEnabled || autocorrectEnabled) Settings.PREF_INLINE_EMOJI_SEARCH else null,
         Settings.PREF_SUGGEST_PUNCTUATION,
         if (prefs.getBoolean(Settings.PREF_SUGGEST_PUNCTUATION, Defaults.PREF_SUGGEST_PUNCTUATION))
             Settings.PREF_PUNCTUATION_SUGGESTIONS else null,
-        Settings.PREF_SUGGEST_CLIPBOARD_CONTENT,
-        Settings.PREF_USE_CONTACTS,
-        Settings.PREF_USE_APPS,
+        if (suggestionsEnabled) Settings.PREF_ALWAYS_SHOW_SUGGESTIONS else null,
+        if (suggestionsEnabled && prefs.getBoolean(Settings.PREF_ALWAYS_SHOW_SUGGESTIONS, Defaults.PREF_ALWAYS_SHOW_SUGGESTIONS))
+            Settings.PREF_ALWAYS_SHOW_SUGGESTIONS_EXCEPT_WEB_TEXT else null,
         if (prefs.getBoolean(Settings.PREF_KEY_USE_PERSONALIZED_DICTS, Defaults.PREF_KEY_USE_PERSONALIZED_DICTS))
             Settings.PREF_ADD_TO_PERSONAL_DICTIONARY else null,
-        // LiBoard: no spell checker service, so no setting for it (card 1feb0603)
     )
     SearchSettingsScreen(
         onClickBack = onClickBack,
-        title = stringResource(R.string.settings_screen_correction),
+        title = stringResource(if (advanced) R.string.liboard_advanced else R.string.settings_screen_correction),
         settings = items
     )
 }
@@ -147,7 +161,7 @@ fun createCorrectionSettings(context: Context) = listOf(
                     in 0f..0.80f -> stringResource(R.string.auto_correction_threshold_mode_aggressive)
                     else -> stringResource(R.string.auto_correction_threshold_mode_very_aggressive)
                 }
-                "${(it * 1000).toInt().toFloat() / 1000} ($text)"
+                text // LiBoard: no raw number, as in iOS (card 115c26bc)
             }
         )
     },
@@ -285,7 +299,62 @@ fun createCorrectionSettings(context: Context) = listOf(
     ) {
         SwitchPreference(it, Defaults.PREF_SPELLCHECK_SUGGEST)
     },
+    // LiBoard: the system's spell checker underlines words in red and opens Android's menu on tap –
+    // a keyboard cannot change that, so we only explain it and open the system setting (card 943fc7c2)
+    Setting(context, SettingsWithoutKey.SYSTEM_SPELL_CHECKER, R.string.liboard_system_spell_checker) {
+        val ctx = LocalContext.current
+        Preference(
+            name = it.title,
+            description = stringResource(R.string.liboard_system_spell_checker_summary),
+            onClick = { openSpellCheckerSettings(ctx) },
+        ) { NextScreenIcon() }
+    },
+    Setting(context, SettingsWithoutKey.CORRECTION_ADVANCED, R.string.liboard_advanced) {
+        Preference(
+            name = it.title,
+            onClick = { SettingsDestination.navigateTo(SettingsDestination.TextCorrectionAdvanced) },
+        ) { NextScreenIcon() }
+    },
+    // LiBoard: like iOS "Reset Keyboard Dictionary" – removes only learned words, not own words
+    // or text replacements (card 943fc7c2)
+    Setting(context, SettingsWithoutKey.RESET_KEYBOARD_DICTIONARY, R.string.liboard_reset_dictionary) {
+        val ctx = LocalContext.current
+        var showConfirmDialog by rememberSaveable { mutableStateOf(false) }
+        Preference(name = it.title, destructive = true, onClick = { showConfirmDialog = true })
+        if (showConfirmDialog) {
+            ConfirmationDialog(
+                onDismissRequest = { showConfirmDialog = false },
+                onConfirmed = { resetKeyboardDictionary(ctx) },
+                title = { Text(stringResource(R.string.liboard_reset_dictionary)) },
+                content = { Text(stringResource(R.string.liboard_reset_dictionary_message)) },
+                confirmButtonText = stringResource(R.string.liboard_reset_dictionary_confirm),
+            )
+        }
+    },
 )
+
+private fun systemSpellCheckerOn(context: Context): Boolean =
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+        context.getSystemService(android.view.textservice.TextServicesManager::class.java)?.isSpellCheckerEnabled == true
+
+private fun openSpellCheckerSettings(context: Context) {
+    // no public action for this page; fall back to the language & input settings
+    val direct = android.content.Intent().setClassName("com.android.settings", "com.android.settings.Settings\$SpellCheckersSettingsActivity")
+    val fallback = android.content.Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS)
+    for (intent in listOf(direct, fallback)) {
+        try {
+            context.startActivity(intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK))
+            return
+        } catch (_: android.content.ActivityNotFoundException) { }
+    }
+}
+
+private fun resetKeyboardDictionary(context: Context) {
+    helium314.keyboard.latin.personalization.PersonalizationHelper.removeAllUserHistoryDictionaries(context)
+    // the keyboard reloads its dictionaries and starts with an empty history
+    context.sendBroadcast(android.content.Intent(helium314.keyboard.dictionarypack.DictionaryPackConstants.NEW_DICTIONARY_INTENT_ACTION)
+        .setPackage(context.packageName))
+}
 
 @Preview
 @Composable
@@ -293,7 +362,7 @@ private fun PreferencePreview() {
     initPreview(LocalContext.current)
     Theme(previewDark) {
         Surface {
-            TextCorrectionScreen {  }
+            TextCorrectionScreen(onClickBack = {  })
         }
     }
 }

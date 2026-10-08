@@ -69,6 +69,9 @@ private fun createSettings(context: Context) = createAboutSettings(context) + cr
 
 object SettingsWithoutKey {
     const val EDIT_PERSONAL_DICTIONARY = "edit_personal_dictionary"
+    const val RESET_KEYBOARD_DICTIONARY = "reset_keyboard_dictionary" // LiBoard
+    const val SYSTEM_SPELL_CHECKER = "system_spell_checker" // LiBoard
+    const val CORRECTION_ADVANCED = "correction_advanced" // LiBoard
     const val APP = "app"
     const val VERSION = "version"
     const val LICENSE = "license"

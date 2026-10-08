@@ -91,6 +91,9 @@ fun SettingsNavHost(
         composable(SettingsDestination.TextCorrection) {
             TextCorrectionScreen(onClickBack = ::goBack)
         }
+        composable(SettingsDestination.TextCorrectionAdvanced) {
+            TextCorrectionScreen(onClickBack = ::goBack, advanced = true)
+        }
         composable(SettingsDestination.Preferences) {
             PreferencesScreen(onClickBack = ::goBack)
         }
@@ -153,6 +156,7 @@ object SettingsDestination {
     const val About = "about"
     const val TypingTest = "typing_test"   // LiBoard
     const val TextCorrection = "text_correction"
+    const val TextCorrectionAdvanced = "text_correction_advanced" // LiBoard
     const val Preferences = "preferences"
     const val Toolbar = "toolbar"
     const val GestureTyping = "gesture_typing"
