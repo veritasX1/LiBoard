@@ -51,7 +51,7 @@ In den Einstellungen gibt es „Sichern und Wiederherstellen“. Damit schreibst
 
 ## Herkunft
 
-LiBoard ist ein Fork von [HeliBoard](https://github.com/HeliBorg/HeliBoard). Die freiwillige Spende von Gestendaten, die es in HeliBoard gibt, ist in LiBoard entfernt.
+LiBoard ist ein Fork von [HeliBoard](https://github.com/HeliBorg/HeliBoard). Die freiwillige Spende von Gestendaten, die es in HeliBoard gibt, ist in LiBoard entfernt. Die Datenbanktabelle dafür stammt noch aus HeliBoard; einschalten lässt sich die Sammlung in LiBoard nicht, die Tabelle bleibt leer.
 
 ## Wer dahintersteht
 
@@ -112,7 +112,7 @@ The settings offer “Backup and restore”. It writes your settings and diction
 
 ## Origin
 
-LiBoard is a fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard). HeliBoard's optional gesture data donation has been removed from LiBoard.
+LiBoard is a fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard). HeliBoard's optional gesture data donation has been removed from LiBoard. The database table for it still comes from HeliBoard; the collection cannot be turned on in LiBoard, so the table stays empty.
 
 ## Who is behind it
 
