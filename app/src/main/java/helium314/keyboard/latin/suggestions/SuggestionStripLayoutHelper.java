@@ -406,7 +406,9 @@ final class SuggestionStripLayoutHelper {
     private TextView layoutWord(final Context context, final int positionInStrip, final int width) {
         final TextView wordView = mWordViews.get(positionInStrip);
         final CharSequence word = wordView.getText();
-        if (positionInStrip == mCenterPositionInStrip && mMoreSuggestionsAvailable) {
+        // LiBoard: no "…" hint under the middle suggestion – the iPhone has none; more suggestions stay
+        // reachable by swiping up / long press (card 02c98bb3)
+        if (SHOW_MORE_SUGGESTIONS_HINT && positionInStrip == mCenterPositionInStrip && mMoreSuggestionsAvailable) {
             // TODO: This "more suggestions hint" should have a nicely designed icon.
             wordView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, mMoreSuggestionsHint);
             // HACK: Align with other TextViews that have no compound drawables.
@@ -437,6 +439,7 @@ final class SuggestionStripLayoutHelper {
         return wordView;
     }
 
+    private static final boolean SHOW_MORE_SUGGESTIONS_HINT = false; // LiBoard
     private static final float MIN_FONT_SCALE = 0.85f; // LiBoard: stays readable, as on the iPhone (card 88674485)
     private float mBaseTextSizePx = 0f; // LiBoard: unshrunk suggestion font size
 
