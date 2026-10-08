@@ -566,7 +566,7 @@ language, hence "No language". -->
     <!-- Description for customize_background_image_landscape -->
     <string name="summary_customize_background_image_landscape">If not set, portrait image will be used</string>
     <!-- Title for customizing currencies -->
-    <string name="customize_currencies">Customize currencies</string>
+    <string name="customize_currencies">Currencies</string>
     <!-- Info for customizing currencies -->
     <string name="customize_currencies_detail">Main symbol and up to 6 more, separated by spaces</string>
     <!-- Title setting / dialog for selecting when to switch to main keyboard -->
@@ -1056,4 +1056,8 @@ New dictionary:
     <string name="liboard_reset_to_default">Reset to Default</string>
     <string name="liboard_space_swipe_footer">What swiping across the space bar does. Long-pressing the space bar always turns the keyboard into a trackpad.</string>
     <string name="liboard_longpress_footer">How long a key must be held before more characters appear. Shorter reacts faster, longer avoids accidental triggers.</string>
+    <string name="liboard_popup_order_footer">Sets which characters appear when you long-press a key, and in which order. To move an entry, touch and hold ≡ and drag. “Language (priority)” always comes first, “Language” where it is placed here.</string>
+    <string name="liboard_hint_order_footer">Sets which character is shown as a small hint on a key. The topmost entry that is on applies. To move an entry, touch and hold ≡ and drag.</string>
+    <string name="liboard_currency_placeholder">Default of the keyboard language (e.g. € $ £ ¥ ¢)</string>
+    <string name="liboard_order_short">Order</string>
 </resources>

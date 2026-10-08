@@ -314,7 +314,7 @@
     <string name="layout_functional_keys_symbols_shifted" tools:keep="@string/layout_functional_keys_symbols_shifted">Funktionstasten (Mehr Symbole)</string>
     <string name="gesture_fast_typing_cooldown">Pause nach schnellem Tippen</string>
     <string name="gesture_fast_typing_cooldown_instant">Immer direkt starten</string>
-    <string name="customize_currencies">Währungen anpassen</string>
+    <string name="customize_currencies">Währungen</string>
     <string name="customize_currencies_detail">Hauptsymbol und bis zu 6 weitere Währungssymbole, durch Leerzeichen getrennt</string>
     <string name="load">Laden</string>
     <string name="button_save_file">In Datei speichern</string>
@@ -545,4 +545,8 @@
     <string name="liboard_reset_to_default">Auf Standard zurücksetzen</string>
     <string name="liboard_space_swipe_footer">Was ein Wischen über die Leertaste bewirkt. Langes Drücken der Leertaste macht die Tastatur unabhängig davon zum Trackpad.</string>
     <string name="liboard_longpress_footer">So lange muss eine Taste gedrückt bleiben, bis weitere Zeichen erscheinen. Kürzer reagiert schneller, länger verhindert versehentliches Auslösen.</string>
+    <string name="liboard_popup_order_footer">Bestimmt, welche Zeichen beim langen Drücken einer Taste erscheinen und in welcher Reihenfolge. Zum Verschieben lange auf ≡ drücken und ziehen. „Sprache (Priorität)“ steht immer ganz vorn, „Sprache“ an der Stelle, an der es hier steht.</string>
+    <string name="liboard_hint_order_footer">Bestimmt, welches Zeichen als kleiner Hinweis oben auf einer Taste steht. Es gilt der oberste eingeschaltete Eintrag. Zum Verschieben lange auf ≡ drücken und ziehen.</string>
+    <string name="liboard_currency_placeholder">Standard der Tastatursprache (z. B. € $ £ ¥ ¢)</string>
+    <string name="liboard_order_short">Reihenfolge</string>
 </resources>

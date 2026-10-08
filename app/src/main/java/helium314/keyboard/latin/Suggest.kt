@@ -373,7 +373,9 @@ class Suggest(private val mDictionaryFacilitator: DictionaryFacilitator) {
         // Close to -2**31
         private const val SUPPRESS_SUGGEST_THRESHOLD = -2000000000
 
-        private const val MAXIMUM_AUTO_CORRECT_LENGTH_FOR_GERMAN = 12
+        // LiBoard: German compounds are never split by auto-correction („umbrechen“ must not become „um brechen“, card fe79280c);
+        // as on the iPhone the split stays only a suggestion in the bar.
+        private const val MAXIMUM_AUTO_CORRECT_LENGTH_FOR_GERMAN = 0
         // TODO: should we add Finnish here?
         private val sLanguageToMaximumAutoCorrectionWithSpaceLength = hashMapOf(Locale.GERMAN.language to MAXIMUM_AUTO_CORRECT_LENGTH_FOR_GERMAN)
 

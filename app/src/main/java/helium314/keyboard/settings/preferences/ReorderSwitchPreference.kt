@@ -23,17 +23,16 @@ import helium314.keyboard.latin.common.Constants.Separators
 import helium314.keyboard.latin.utils.getStringResourceOrName
 import helium314.keyboard.latin.utils.prefs
 import helium314.keyboard.settings.Setting
-import helium314.keyboard.settings.dialogs.ReorderDialog
+import helium314.keyboard.settings.dialogs.ReorderPage
 import helium314.keyboard.settings.GetIconOrEmpty
 
 @Composable
-fun ReorderSwitchPreference(setting: Setting, default: String) {
+fun ReorderSwitchPreference(setting: Setting, default: String, footer: String? = null, pageTitle: String? = null) {
     var showDialog by rememberSaveable { mutableStateOf(false) }
     Preference(
         name = setting.title,
-        description = setting.description,
         onClick = { showDialog = true },
-    )
+    ) { helium314.keyboard.latin.utils.NextScreenIcon() }
     if (showDialog) {
         val ctx = LocalContext.current
         val prefs = ctx.prefs()
@@ -41,27 +40,27 @@ fun ReorderSwitchPreference(setting: Setting, default: String) {
             val both = it.split(Separators.KV)
             KeyAndState(both.first(), both.last().toBoolean())
         }
-        ReorderDialog(
+        ReorderPage(
+            title = pageTitle ?: setting.title, // LiBoard: short page title like iOS
+            onBack = { showDialog = false },
             onConfirmed = { reorderedItems ->
                 val value = reorderedItems.joinToString(Separators.ENTRY) { it.name + Separators.KV + it.state }
                 prefs.edit { putString(setting.key, value) }
                 KeyboardSwitcher.getInstance().setThemeNeedsReload()
             },
-            onDismissRequest = { showDialog = false },
-            onNeutral = { prefs.edit { remove(setting.key)} },
-            neutralButtonText = if (prefs.contains(setting.key)) stringResource(R.string.button_default) else null,
+            footer = footer ?: setting.description,
+            onDefault = if (prefs.contains(setting.key)) { { prefs.edit { remove(setting.key) }; KeyboardSwitcher.getInstance().setThemeNeedsReload() } } else null,
             items = items,
-            title = { Text(setting.title) },
             displayItem = { item ->
                 var checked by rememberSaveable { mutableStateOf(item.state) }
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    KeyboardIconsSet.instance.GetIconOrEmpty(item.name)
+                    // LiBoard: an icon only where there is one – no empty 40 dp box in front of the text
+                    if (KeyboardIconsSet.instance.iconIds[item.name.lowercase()] != null) KeyboardIconsSet.instance.GetIconOrEmpty(item.name)
                     val text = item.name.lowercase().getStringResourceOrName("", ctx)
                     val actualText = if (text != item.name.lowercase()) text
                         else item.name.lowercase().getStringResourceOrName("popup_keys_", ctx)
                     Text(actualText, Modifier.weight(1f))
                     Switch(
-                        colors = iosSwitchColors(),
                         checked = checked,
                         onCheckedChange = { item.state = it; checked = it }
                     )

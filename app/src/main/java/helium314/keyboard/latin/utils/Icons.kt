@@ -2,6 +2,7 @@
 package helium314.keyboard.latin.utils
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
@@ -75,9 +76,10 @@ fun ExpandButton(enabled: Boolean = true, onClick: () -> Unit) {
 }
 
 @Composable
-fun BackButton(onClick: () -> Unit) {
+fun BackButton(label: String? = helium314.keyboard.settings.LocalBackTitle.current, onClick: () -> Unit) {
     // LiBoard: iOS back chevron in the accent colour, with the previous page's title like the iPhone and LiMail
-    val back = helium314.keyboard.settings.LocalBackTitle.current
+    // (LiMail NavBar: 24 dp symbol, 17 sp text – LI-GESTALTUNG.md)
+    val back = label
     androidx.compose.foundation.layout.Row(
         Modifier.clickable(onClick = onClick).padding(start = 4.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
         verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
@@ -85,11 +87,12 @@ fun BackButton(onClick: () -> Unit) {
         Icon(
             painterResource(R.drawable.ic_arrow_left),
             stringResource(R.string.spoken_description_action_previous),
-            Modifier.size(28.dp),
+            Modifier.size(24.dp),
             tint = MaterialTheme.colorScheme.primary
         )
         if (back != null)
-            androidx.compose.material3.Text(back, color = MaterialTheme.colorScheme.primary, fontSize = 17.sp, maxLines = 1)
+            androidx.compose.material3.Text(back, color = MaterialTheme.colorScheme.primary, fontSize = 17.sp, maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, modifier = Modifier.widthIn(max = 110.dp))
     }
 }
 

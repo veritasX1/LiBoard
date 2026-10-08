@@ -104,10 +104,10 @@ fun createPreferencesSettings(context: Context) = listOf(
         SwitchPreference(it, Defaults.PREF_SHOW_HINTS) { KeyboardSwitcher.getInstance().reloadKeyboard() }
     },
     Setting(context, Settings.PREF_POPUP_KEYS_HINT_ORDER, R.string.hint_source) {
-        ReorderSwitchPreference(it, Defaults.PREF_POPUP_KEYS_HINT_ORDER)
+        ReorderSwitchPreference(it, Defaults.PREF_POPUP_KEYS_HINT_ORDER, stringResource(R.string.liboard_hint_order_footer))
     },
     Setting(context, Settings.PREF_POPUP_KEYS_ORDER, R.string.popup_order) {
-        ReorderSwitchPreference(it, Defaults.PREF_POPUP_KEYS_ORDER)
+        ReorderSwitchPreference(it, Defaults.PREF_POPUP_KEYS_ORDER, stringResource(R.string.liboard_popup_order_footer), stringResource(R.string.liboard_order_short))
     },
     Setting(
         context, Settings.PREF_SHOW_TLD_POPUP_KEYS, R.string.show_tld_popup_keys,

@@ -32,6 +32,7 @@ import helium314.keyboard.latin.utils.NextScreenIcon
 import helium314.keyboard.settings.SettingsContainer
 import helium314.keyboard.settings.preferences.ListPreference
 import helium314.keyboard.settings.SettingsWithoutKey
+import helium314.keyboard.settings.IosTextPage
 import helium314.keyboard.settings.Setting
 import helium314.keyboard.settings.preferences.Preference
 import helium314.keyboard.settings.SearchSettingsScreen
@@ -206,21 +207,19 @@ fun createAdvancedSettings(context: Context) = listOf(
     },
     Setting(context, Settings.PREF_CUSTOM_CURRENCY_KEY, R.string.customize_currencies) { setting ->
         var showDialog by rememberSaveable { mutableStateOf(false) }
-        Preference(
-            name = setting.title,
-            onClick = { showDialog = true }
-        )
+        val prefs = LocalContext.current.prefs()
+        // LiBoard: chevron and an iPhone-like page instead of a pop-up (card 23328ec0)
+        Preference(name = setting.title, onClick = { showDialog = true }) { NextScreenIcon() }
         if (showDialog) {
-            val prefs = LocalContext.current.prefs()
-            TextInputDialog(
-                onDismissRequest = { showDialog = false },
-                textInputLabel = { Text(stringResource(R.string.customize_currencies_detail)) },
-                initialText = prefs.getString(setting.key, Defaults.PREF_CUSTOM_CURRENCY_KEY)!!,
-                onConfirmed = { prefs.edit { putString(setting.key, it) }; KeyboardLayoutSet.onSystemLocaleChanged() },
-                title = { Text(stringResource(R.string.customize_currencies)) },
-                neutralButtonText = if (prefs.contains(setting.key)) stringResource(R.string.button_default) else null,
-                onNeutral = { prefs.edit { remove(setting.key)}; KeyboardLayoutSet.onSystemLocaleChanged() },
-                checkTextValid = { text -> text.splitOnWhitespace().none { it.length > 8 } }
+            IosTextPage(
+                title = setting.title,
+                initial = prefs.getString(setting.key, Defaults.PREF_CUSTOM_CURRENCY_KEY)!!,
+                onBack = { showDialog = false },
+                onSave = { prefs.edit { putString(setting.key, it) }; KeyboardLayoutSet.onSystemLocaleChanged() },
+                footer = stringResource(R.string.customize_currencies_detail),
+                onDefault = { prefs.edit { remove(setting.key) }; KeyboardLayoutSet.onSystemLocaleChanged() },
+                isValid = { text -> text.splitOnWhitespace().none { it.length > 8 } },
+                placeholder = stringResource(R.string.liboard_currency_placeholder),
             )
         }
     },

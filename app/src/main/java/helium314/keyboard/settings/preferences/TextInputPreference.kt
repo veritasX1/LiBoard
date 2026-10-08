@@ -20,24 +20,25 @@ import helium314.keyboard.latin.R
 fun TextInputPreference(setting: Setting, default: String, info: String? = null, checkTextValid: (String) -> Boolean = { true }) {
     var showDialog by rememberSaveable { mutableStateOf(false) }
     val prefs = LocalContext.current.prefs()
+    // LiBoard: value grey on the right and an iPhone-like page instead of a pop-up (card 23328ec0)
+    val value = prefs.getString(setting.key, default)?.takeIf { it.isNotEmpty() }
     Preference(
         name = setting.title,
         onClick = { showDialog = true },
-        description = prefs.getString(setting.key, default)?.takeIf { it.isNotEmpty() }
-    )
+        description = value?.takeIf { it.length > 16 },
+    ) {
+        value?.takeIf { it.length <= 16 }?.let { Text(it, maxLines = 1) }
+        helium314.keyboard.latin.utils.NextScreenIcon()
+    }
     if (showDialog) {
-        TextInputDialog(
-            onDismissRequest = { showDialog = false },
-            onConfirmed = {
-                prefs.edit { putString(setting.key, it) }
-                KeyboardSwitcher.getInstance().setThemeNeedsReload()
-            },
-            initialText = prefs.getString(setting.key, default) ?: "",
-            title = { Text(setting.title) },
-            description = if (info == null) null else { { Text(info) } },
-            checkTextValid = checkTextValid,
-            onNeutral = { prefs.edit { remove(setting.key) }; showDialog = false },
-            neutralButtonText = stringResource(R.string.button_default)
+        helium314.keyboard.settings.IosTextPage(
+            title = setting.title,
+            initial = prefs.getString(setting.key, default) ?: "",
+            onBack = { showDialog = false },
+            onSave = { prefs.edit { putString(setting.key, it) }; KeyboardSwitcher.getInstance().setThemeNeedsReload() },
+            footer = info,
+            onDefault = { prefs.edit { remove(setting.key) }; KeyboardSwitcher.getInstance().setThemeNeedsReload() },
+            isValid = checkTextValid,
         )
     }
 }

@@ -319,7 +319,7 @@ Nouveau dictionnaire:
     <string name="emoji" tools:keep="@string/emoji">Émoji</string>
     <string name="gesture_fast_typing_cooldown">Pause après une saisie rapide</string>
     <string name="gesture_fast_typing_cooldown_instant">Commencer toujours instantanément</string>
-    <string name="customize_currencies">Personnaliser les devises</string>
+    <string name="customize_currencies">Devises</string>
     <string name="customize_currencies_detail">Symbole principal et jusqu’à 6 autres, séparés par des espaces</string>
     <string name="load">Charger</string>
     <string name="button_save_file">Sauvegarder dans un fichier</string>
@@ -550,4 +550,8 @@ Nouveau dictionnaire:
     <string name="liboard_reset_to_default">Rétablir la valeur par défaut</string>
     <string name="liboard_space_swipe_footer">Ce que fait un balayage sur la barre d’espace. Un appui long sur la barre d’espace transforme toujours le clavier en trackpad.</string>
     <string name="liboard_longpress_footer">Durée pendant laquelle une touche doit rester enfoncée avant que d’autres caractères n’apparaissent. Plus court réagit plus vite, plus long évite les déclenchements involontaires.</string>
+    <string name="liboard_popup_order_footer">Définit les caractères qui apparaissent par appui long sur une touche, et dans quel ordre. Pour déplacer une entrée, maintenez ≡ et faites glisser. « Langue (priorité) » vient toujours en premier, « Langue » à l’endroit indiqué ici.</string>
+    <string name="liboard_hint_order_footer">Définit le caractère affiché comme petite indication sur une touche. La première entrée activée s’applique. Pour déplacer une entrée, maintenez ≡ et faites glisser.</string>
+    <string name="liboard_currency_placeholder">Par défaut de la langue du clavier (p. ex. € $ £ ¥ ¢)</string>
+    <string name="liboard_order_short">Ordre</string>
 </resources>

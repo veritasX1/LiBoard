@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -33,6 +34,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
@@ -126,7 +128,7 @@ fun IosGroup(
         Column(
             Modifier
                 .padding(horizontal = 16.dp)
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(12.dp)) // LI-GESTALTUNG.md: 12 dp like LiMail
                 .background(iosCellColor())
         ) {
             items.forEachIndexed { index, item ->
@@ -240,7 +242,7 @@ fun IosSwitch(
  * left, the title in the middle – used instead of Android pop-up dialogs for choices and sliders.
  */
 @Composable
-fun IosSubPage(title: String, onBack: () -> Unit, content: @Composable androidx.compose.foundation.layout.ColumnScope.() -> Unit) {
+fun IosSubPage(title: String, onBack: () -> Unit, scroll: Boolean = true, content: @Composable androidx.compose.foundation.layout.ColumnScope.() -> Unit) {
     androidx.compose.ui.window.Dialog(
         onDismissRequest = onBack,
         properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false),
@@ -249,17 +251,19 @@ fun IosSubPage(title: String, onBack: () -> Unit, content: @Composable androidx.
             Modifier.fillMaxWidth().fillMaxHeight().background(MaterialTheme.colorScheme.background)
                 .windowInsetsPadding(androidx.compose.foundation.layout.WindowInsets.Companion.safeDrawing)
         ) {
+            // the title stays centred: as much room on each side as the back button takes (iOS) – shortened only when needed
+            var backWidth by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(0) }
+            val density = androidx.compose.ui.platform.LocalDensity.current
             Box(Modifier.fillMaxWidth().height(44.dp)) {
-                Text(
-                    "‹ " + (LocalPageTitle.current ?: androidx.compose.ui.res.stringResource(R.string.liboard_back)),
-                    color = MaterialTheme.colorScheme.primary, fontSize = 17.sp,
-                    modifier = Modifier.align(Alignment.CenterStart).clickable(onClick = onBack).padding(horizontal = 12.dp, vertical = 10.dp)
-                )
+                Box(Modifier.align(Alignment.CenterStart).onGloballyPositioned { backWidth = it.size.width }) {
+                    helium314.keyboard.latin.utils.BackButton(
+                        LocalPageTitle.current ?: androidx.compose.ui.res.stringResource(R.string.liboard_back), onBack)
+                }
                 Text(title, fontSize = 17.sp, fontWeight = FontWeight.SemiBold, maxLines = 1,
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-                    modifier = Modifier.align(Alignment.Center).padding(horizontal = 110.dp))
+                    modifier = Modifier.align(Alignment.Center).padding(horizontal = with(density) { backWidth.toDp() } + 8.dp))
             }
-            Column(Modifier.fillMaxWidth().verticalScroll(androidx.compose.foundation.rememberScrollState()), content = content)
+            Column(Modifier.fillMaxWidth().then(if (scroll) Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState()) else Modifier.weight(1f)), content = content)
         }
     }
 }
@@ -344,4 +348,40 @@ fun IosSlider(
 fun IosActionRow(text: String, onClick: () -> Unit) {
     Text(text, color = MaterialTheme.colorScheme.primary, fontSize = 17.sp,
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 16.dp, vertical = 11.dp))
+}
+
+/**
+ * Text entry as an iPhone-like page (card 23328ec0): one field in a group, an explanation below, „Auf Standard
+ * zurücksetzen“ in blue. The text is kept when going back, if valid.
+ */
+@Composable
+fun IosTextPage(
+    title: String, initial: String, onBack: () -> Unit, onSave: (String) -> Unit,
+    footer: String? = null, onDefault: (() -> Unit)? = null, isValid: (String) -> Boolean = { true },
+    placeholder: String? = null, // shown while empty, e.g. what applies by default
+) {
+    var text by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(initial) }
+    val valid = isValid(text)
+    IosSubPage(title, onBack = { if (valid && text != initial) onSave(text); onBack() }) {
+        IosGroup(footer = footer, items = listOf {
+            androidx.compose.foundation.text.BasicTextField(
+                value = text, onValueChange = { text = it }, singleLine = true,
+                textStyle = androidx.compose.ui.text.TextStyle(fontSize = 17.sp,
+                    color = if (valid) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error),
+                cursorBrush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.primary),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                decorationBox = { field ->
+                    Box {
+                        if (text.isEmpty() && placeholder != null)
+                            Text(placeholder, fontSize = 17.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        field()
+                    }
+                },
+            )
+        })
+        if (onDefault != null)
+            IosGroup(items = listOf {
+                IosActionRow(androidx.compose.ui.res.stringResource(R.string.liboard_reset_to_default)) { onDefault(); onBack() }
+            })
+    }
 }
